@@ -297,7 +297,7 @@ div.info {
 }
 
 #title-name {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     font-stretch: 1px;
     text-transform: capitalize;
@@ -305,7 +305,7 @@ div.info {
 }
 
 #desc-firmname {
-    font-size: 14px;
+    font-size: 16px;
     text-transform: initial;
     font-weight: normal;
     text-align: center;
