@@ -1,0 +1,316 @@
+/*
+Author:         #
+Author URI:     #
+Description:    #
+Version:        1.0
+License:        GNU General Public License v3
+License URI:    https://www.gnu.org/licenses/gpl-3.0.de.html
+Color1:         rgb(214,34,39) rot #d62227
+Color2:         rgb(58,55,57) dunkelgrau #3a3739
+Color3:         rgb(255,255,255) weiß #ffffff
+*/
+
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# General
+	## Generic styles
+	## Buttons and links
+# Forms
+# Typography
+# Footer
+# Responsive
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Import
+--------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Generic Styles
+--------------------------------------------------------------*/
+
+*{
+    font-family: 'Roboto', sans-serif;
+    color : #ffffff;
+}
+
+body {
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body.be-different {
+    background-image: url(../images/bg/be-different.jpg);
+}
+
+body.chapter {
+    background-image: url(../images/bg/chapter.jpg);
+}
+
+body.decisions {
+    background-image: url(../images/bg/decisions.jpg);
+}
+
+body.faith {
+    background-image: url(../images/bg/faith.jpg);
+}
+
+body.success {
+    background-image: url(../images/bg/success.jpg);
+}
+
+body.way {
+    background-image: url(../images/bg/way.jpg);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+div.tab-head {
+    height: 140px;
+}
+
+/* TAB MENU */
+
+#login-container {
+    position: relative;
+    top: 50px;
+}
+
+#login-container div.tab-head {
+    background: rgba(58,55,57,0.9);
+}
+
+#tab-wrapper {
+    background:rgba(58,55,57,.6);
+    padding: 70px 70px 30px 70px;
+    text-transform:uppercase;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+    margin-top: 50px;
+}
+
+#tab-wrapper input[type="radio"] {
+    display: none;
+}
+
+#tab-wrapper .tab {
+    cursor: pointer;
+    font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 40px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+    color: #FFFFFF;
+}
+
+#tab-wrapper [id^="tab"]:checked + label {
+    border-bottom: 2px solid red;
+}
+
+#tab-wrapper .tab-content {
+    display: none;
+}
+
+#tap-wrapper .group .input,
+#tap-wrapper .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+
+#tab-1:checked ~ #sign-in-content,
+#tab-2:checked ~ #sign-up-content,
+#tab-3:checked ~ #forgot-password-content{
+    display: block;
+}
+
+.tab-content .group{
+	margin-bottom: 20px;
+}
+
+.tab-content .group .label,
+.tab-content .group .input,
+.tab-content .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+
+.tab-content .group .input,
+.tab-content .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+
+.tab-content .group .label{
+	color: rgba(255,255,255,.8);
+	font-size: 13px;
+}
+
+.tab-content .group input[type=email]:focus,
+.tab-content .group input[type=password]:focus{
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
+    box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
+}
+
+.tab-content .group .button{
+	background: rgba(214,34,39,0.9);
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.tab-content .group .button:hover {
+    background: rgba(214,34,39,0.75);
+}
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.checkbox input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.control_ind {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: rgba(255,255,255,.1);
+}
+
+.checkbox:hover input ~ .control_ind,
+.checkbox:focus input ~ .control_ind {
+    background: rgba(214,34,39,0.9);
+}
+
+.checkbox input:checked ~ .control_ind {
+    background: rgba(214,34,39,0.9);
+}
+
+.control_ind:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.checkbox input:focus ~ .control_ind:after {
+    display: block;
+}
+
+.checkbox input:checked ~ .control_ind:after {
+    display: block;
+}
+
+.checkbox input:checked label {
+    color: green;
+}
+
+.checkbox .control_ind:after {
+    left: 8px;
+    top: 3px;
+    width: 5px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.hr {
+    height: 2px;
+    margin: 20px 0;
+    background: rgba(255,255,255,.2);
+}
+
+#tab-wrapper div.footer{
+	text-align: center;
+    font-size: 16px;
+}
+
+#tab-wrapper div.footer label:hover {
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* Tab Header + Profil */
+#time {
+    margin-bottom: 70px;
+    padding-top: 15px;
+    text-align: center;
+
+}
+
+#time p {
+    padding: 0;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+#time p.datum {
+    font-size: 75%;
+}
+
+div.avatar {
+    width: 120px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin-left: -60px;
+    z-index: 3;
+}
+
+.image-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    border: 3px solid rgb(214,34,39);
+}
+
+div.info {
+    margin-bottom: 25px;
+}
+
+#title-name {
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: 1px;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+#desc-firmname {
+    font-size: 14px;
+    text-transform: initial;
+    font-weight: normal;
+    text-align: center;
+}
+
+#desc-firmname small {
+    font-size: 80%;
+}
