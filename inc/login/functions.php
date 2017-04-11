@@ -350,13 +350,13 @@ function login($email, $password, $mysqli) {
     */
 
     // Prepared Statements zum Verhindern von SQL-Injektionen
-    if($stmt = $mysqli->prepare("SELECT idUsers, username, password, salt, profilepic, status FROM users WHERE email = ? LIMIT 1")) {
+    if($stmt = $mysqli->prepare("SELECT idUsers, username, password, salt, profilepic, status, forename, surname FROM users WHERE email = ? LIMIT 1")) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
 
         // Holt Variablen vom result
-        $stmt->bind_result($usersid, $username, $dbPassword, $salt, $profilepic, $status);
+        $stmt->bind_result($usersid, $username, $dbPassword, $salt, $profilepic, $status, $vorname, $nachname);
         $stmt->fetch();
 
         // Überprüft die Aktivierung des Kontos
@@ -395,6 +395,22 @@ function login($email, $password, $mysqli) {
                         $time = time();
                         $mysqli->query("INSERT INTO log_login(id_users, time) VALUES ('$usersid', '$time')");
                         logLogin($usersid, $mysqli);
+
+                        $cookie_name = "$email";
+                        $pointpos = strrpos ($email , '.');
+                        $substremail = substr ($email , 0, $pointpos );
+                        $cookie_name = "$substremail";
+
+                        $usersinfo = array(
+                            "email" => $email,
+                            "profilepic" => $profilepic,
+                            "username" => $username,
+                            "vorname" => $vorname,
+                            "nachname" => $nachname);
+
+                        $cookie_value = json_encode($usersinfo);
+                        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+                        setcookie("user", $email, time() + (86400 * 30), "/");
 
                         // Login erfolgreich
                         return true;

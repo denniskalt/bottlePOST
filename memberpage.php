@@ -1,11 +1,11 @@
 <?php
     // Bei abgelegtem User direkt an den geschützten Bereich weiterleiten
-    /*if(isset($_SESSION['user'])!="") {
+    if(isset($_SESSION['user'])!="") {
         header("Location: SAFEAREA");
     }
 
     include_once 'inc/config.php';
-    include_once 'inc/login/functions.php';*/
+    include_once 'inc/login/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -66,8 +66,14 @@
 
     $length = count($quote);
     $choice = (rand(1,$length))-1;
+    $user = $_COOKIE["user"];
+    $pointpos = strrpos ($user , '.');
+    $substremail = substr ($user , 0, $pointpos );
+    $data = json_decode($_COOKIE[$substremail], true);
+
+
 ?>
-<body onload="window.setInterval('updateTime()',100)" class="<?php echo $quote[$choice]['img'];?>">
+<body onload="window.setInterval('updateTime()',100);" class="<?php echo $quote[$choice]['img'];?>">
     <div class="container-fluid">
         <div class="row-fluid" id="login-container">
             <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
@@ -85,6 +91,7 @@
             <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
                 <div class="info">
                     <?php
+
                         $time = time();
                         $time = date("G", $time);
                         switch(TRUE) {
@@ -102,6 +109,11 @@
                                 break;
                         }
 
+                        $email = $data["email"];
+                        $profilepic = $data["profilepic"];
+                        $username = $data["username"];
+                        $vorname = $data["vorname"];
+                        $nachname = $data["nachname"];
                     ?>
                     <div id="desc-firmname" class="desc">"<?php echo $quote[$choice]['text'];?>" <small>- <?php echo $quote[$choice]['author']?></small></div>
                 </div>
@@ -113,7 +125,7 @@
                 </form>
                     <div class="group">
                         <label for="email" class="label">E-Mail-Adresse</label>
-                        <input id="email" name="email" type="email" class="input" form="login" onkeyup="loadLocalStorage();">
+                        <input id="email" name="email" type="email" class="input" form="login">
                     </div>
 				    <div class="group">
                         <label for="password" class="label">Passwort</label>
@@ -147,6 +159,9 @@
                     <div class="progress">
 				        <div id="complexity-bar" class="progress-bar" role="progressbar"><h1 id="complexity" class="pull-right">Ihr Passwort ist zu <span class="complexity-value">0%</span> sicher!</h1></div>
 				    </div>
+                    <p>
+
+					</p>
 				    <div class="group">
 					   <input type="submit" class="button" name="signupbtn"  value="Registrieren" form="signup">
 				    </div>
@@ -197,6 +212,9 @@
 	});
 
 })(jQuery);
+</script>
+<script type="text/javascript">
+    saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
 </script>
 </body>
 </html>
