@@ -123,11 +123,11 @@
                             <input type="checkbox" checked name="remember" id="check" form="login">
                             <div class="control_ind"></div>
                         </label>
-                    </div>
+                    </div>-->
 				    <div class="group">
                         <input type="submit" class="button" name="loginbtn" value="Login" form="login">
                     </div>
-
+                    <!--
 				    <div class="hr"></div>
 				    <div class="footer">
 					   <label for="tab-3">Passwort vergessen?</label>
