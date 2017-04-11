@@ -26,7 +26,7 @@ function loadLocalStorage() {
             var vorname = Storage[2];
             var nachname = Storage[3];
             $("#avatar").attr("src", 'images/'+profilepic);
-            document.getElementById("title-name").innerHTML = vorname + ' ' + nachname;
+            document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';
         }
         else {
             $("#avatar").attr("src", 'images/user.jpg');
