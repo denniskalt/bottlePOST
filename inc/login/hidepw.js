@@ -1,5 +1,6 @@
 /**
     Copyright 2017 by cloudfour
+    https://github.com/cloudfour/hideShowPassword
 */
 (function (factory) {
 
