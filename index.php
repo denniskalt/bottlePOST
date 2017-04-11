@@ -154,10 +154,10 @@
                 <form id="pw" action="inc/login/form-direct.php" method="post" name="pw">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
-					   <input id="email" type="email" name="email" class="input" form="signup">
+					   <input id="email" type="email" name="email" class="input" form="pw">
 				    </div>
 				    <div class="group">
-					   <input type="submit" class="button" name="signupbtn"  value="Passwort zurücksetzen" form="signup">
+					   <input type="submit" class="button" name="pwbtn"  value="Passwort zurücksetzen" form="pw">
 				    </div>
                 </form>
                 </div>
