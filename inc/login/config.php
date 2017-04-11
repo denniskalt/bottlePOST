@@ -8,6 +8,6 @@
     $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
     //App-Konfigurationen
-    define('MEMBERPAGE', 'memberpage.php');
+    define('MEMBERPAGE', 'dashboard.php');
 
 ?>

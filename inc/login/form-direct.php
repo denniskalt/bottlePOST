@@ -23,7 +23,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         // Login erfolgreich
         if(login($email, $password, $mysqli) == true) {
             // Ausgabe gesicherte Seite
-            header('Location: ../../memberpage.php');
+            header('Location: ../../'.MEMBERPAGE);
         }
         // Login fehlgeschlagen
         else {
@@ -37,7 +37,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         // Registrierung erfolgreich
         if(signup($email, $password, $mysqli) == true) {
             // Ausgabe gesicherte Seite
-            header('Location: welcome.php');
+            header('Location: ../../'.MEMBERPAGE);
         }
         // Registrierung fehlgeschlagen
         else {
