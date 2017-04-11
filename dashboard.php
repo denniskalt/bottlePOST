@@ -1,11 +1,8 @@
 <?php
     // Bei abgelegtem User direkt an den geschützten Bereich weiterleiten
-    if(isset($_SESSION['user'])!="") {
-        header("Location: SAFEAREA");
+    if(!isset($_COOKIE['user'])) {
+        header("Location: index.php");
     }
-
-    include_once 'inc/config.php';
-    include_once 'inc/login/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,45 +32,71 @@
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <?php
-    $daytime[0] = "Guten Morgen!";
-    $daytime[1] = "Guten Tag!";
-    $daytime[2] = "Guten Abend!";
-    $daytime[3] = "Gute Nacht!";
-
-    $quote[0]['text']="Wir sind niemals am Ziel, sondern immer auf dem Weg.";
-    $quote[0]['author']="Vinzenz von Paul";
-    $quote[0]['img']="way";
-
-    $quote[1]['text']="Wäre ich den Weg gegangen, den alle gegangen sind, wäre ich auch nur dort angekommen, wo alle angekommen sind.";
-    $quote[1]['author']="Monika Majic";
-    $quote[1]['img']="be-different";
-
-    $quote[2]['text']="Die großen Augenblicke sind die, in denen wir getan haben, was wir uns nie zugetraut hätten.";
-    $quote[2]['author']="Marie Freifrau von Ebner-Eschenbach";
-    $quote[2]['img']="success";
-
-    $quote[3]['text']="Positives Denken und der Glaube an sich selbst, sind der Weg zum Erfolg";
-    $quote[3]['author']="Josef Dlask";
-    $quote[3]['img']="faith";
-
-    $quote[4]['text']="Es sind nicht unsere Fähigkeiten, die zeigen wer wir sind, sondern unsere Entscheidungen.";
-    $quote[4]['author']="aus Harry Potter, Dumbledore (J.K.Rowling)";
-    $quote[4]['img']="decisions";
-
-    $quote[5]['text']="Move on. It´s a chapter in your life. Don´t close the book, just turn the page for a new chapter.";
-    $quote[5]['author']="Brooklyn Copeland";
-    $quote[5]['img']="chapter";
-
-    $length = count($quote);
-    $choice = (rand(1,$length))-1;
     $user = $_COOKIE["user"];
     $pointpos = strrpos ($user , '.');
     $substremail = substr ($user , 0, $pointpos );
     $data = json_decode($_COOKIE[$substremail], true);
 
-
+    $email = $data["email"];
+    $profilepic = $data["profilepic"];
+    $username = $data["username"];
+    $vorname = $data["vorname"];
+    $nachname = $data["nachname"];
 ?>
-<body onload="window.setInterval('updateTime()',100);" class="<?php echo $quote[$choice]['img'];?>">
+<body class="way">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     <div class="container-fluid">
         <div class="row-fluid" id="login-container">
             <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
@@ -90,32 +113,7 @@
         <div class="row-fluid">
             <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
                 <div class="info">
-                    <?php
-
-                        $time = time();
-                        $time = date("G", $time);
-                        switch(TRUE) {
-                            case ($time <= 12 AND $time >= 5):
-                                echo '<div id="title-name" class="title">'.$daytime[0].'</div>';
-                                break;
-                            case ($time <= 17 AND $time > 12):
-                                echo '<div id="title-name" class="title">'.$daytime[1].'</div>';
-                                break;
-                            case ($time <= 20 AND $time > 17):
-                                echo '<div id="title-name" class="title">'.$daytime[2].'</div>';
-                                break;
-                            case ($time <= 24 AND $time > 20 OR $time >= 0 AND $time < 5):
-                                echo '<div id="title-name" class="title">'.$daytime[3].'</div>';
-                                break;
-                        }
-
-                        $email = $data["email"];
-                        $profilepic = $data["profilepic"];
-                        $username = $data["username"];
-                        $vorname = $data["vorname"];
-                        $nachname = $data["nachname"];
-                    ?>
-                    <div id="desc-firmname" class="desc">"<?php echo $quote[$choice]['text'];?>" <small>- <?php echo $quote[$choice]['author']?></small></div>
+                    <div id="desc-firmname" class="desc">Hallo</div>
                 </div>
                 <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Register</label>
@@ -131,20 +129,13 @@
                         <label for="password" class="label">Passwort</label>
                         <input id="passwordlogin" name="password" type="password" class="input" data-type="password" form="login">
                     </div>
-                    <!--<div class="group">
-                        <label for="check" class="checkbox"> Remember Me
-                            <input type="checkbox" checked name="remember" id="check" form="login">
-                            <div class="control_ind"></div>
-                        </label>
-                    </div>-->
 				    <div class="group">
                         <input type="submit" class="button" name="loginbtn" value="Login" form="login">
                     </div>
-                    <!--
 				    <div class="hr"></div>
 				    <div class="footer">
 					   <label for="tab-3">Passwort vergessen?</label>
-				    </div>-->
+				    </div>
                 </div>
                 <div id="sign-up-content" class="tab-content">
                 <form id="signup" action="inc/login/form-direct.php" method="post" name="signup">
@@ -190,29 +181,7 @@
 
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
-<script src="inc/clock.js" type="application/javascript"></script>
 <script src="inc/localstorage.js" type="application/javascript"></script>
-<script src="inc/login/hidepw.js"></script>
-<script>
-    $('#passwordlogin').hidePassword(true);
-    $('#passwordsignup').hidePassword(true);
-</script>
-<script type="text/javascript" src="inc/login/jquery.complexify.js"></script>
-<script type="text/javascript">
-  (function($) {
-
-	$('#passwordsignup').complexify({}, function (valid, complexity) {
-		var progressBar = $('#complexity-bar');
-
-		progressBar.toggleClass('progress-bar-success', valid);
-		progressBar.toggleClass('progress-bar-danger', !valid);
-		progressBar.css({'width': complexity + '%'});
-
-		$('.complexity-value').text(Math.round(complexity) + '%');
-	});
-
-})(jQuery);
-</script>
 <script type="text/javascript">
     saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
 </script>

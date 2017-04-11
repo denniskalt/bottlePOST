@@ -122,11 +122,10 @@
 				    <div class="group">
                         <input type="submit" class="button" name="loginbtn" value="Login" form="login">
                     </div>
-                    <!--
 				    <div class="hr"></div>
 				    <div class="footer">
 					   <label for="tab-3">Passwort vergessen?</label>
-				    </div>-->
+				    </div>
                 </div>
                 <div id="sign-up-content" class="tab-content">
                 <form id="signup" action="inc/login/form-direct.php" method="post" name="signup">
@@ -151,18 +150,17 @@
 				    </div>
                 </div>
                 <div id="forgot-password-content" class="tab-content">
-                <form id="pw" action="inc/login/form-direct.php" method="post" name="pw">
                 </form>
+                <form id="pw" action="inc/login/form-direct.php" method="post" name="pw">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
-					   <input id="email" name="email" type="email" class="input">
+					   <input id="email" type="email" name="email" class="input" form="signup">
 				    </div>
 				    <div class="group">
-					   <input type="submit" name="pwbtn" class="button" value="Passwort zurücksetzen">
+					   <input type="submit" class="button" name="signupbtn"  value="Passwort zurücksetzen" form="signup">
 				    </div>
-
+                </form>
                 </div>
-
             </div>
         </div>
     </div>
