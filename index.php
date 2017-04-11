@@ -67,7 +67,7 @@
     $length = count($quote);
     $choice = (rand(1,$length))-1;
 ?>
-<body onload="window.setInterval('updateTime()',1000)" class="<?php echo $quote[$choice]['img'];?>">
+<body onload="window.setInterval('updateTime()',100)" class="<?php echo $quote[$choice]['img'];?>">
     <div class="container-fluid">
         <div class="row-fluid" id="login-container">
             <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
@@ -123,7 +123,7 @@
                             <input type="checkbox" checked name="remember" id="check" form="login">
                             <div class="control_ind"></div>
                         </label>
-                    </div>-->
+                    </div>
 				    <div class="group">
                         <input type="submit" class="button" name="loginbtn" value="Login" form="login">
                     </div>
@@ -131,7 +131,7 @@
 				    <div class="hr"></div>
 				    <div class="footer">
 					   <label for="tab-3">Passwort vergessen?</label>
-				    </div>
+				    </div>-->
                 </div>
                 <div id="sign-up-content" class="tab-content">
                 <form id="signup" action="inc/login/form-direct.php" method="post" name="signup">
@@ -143,6 +143,12 @@
 					   <label for="password" class="label">Passwort</label>
 					   <input id="passwordsignup" type="password" name="password" class="input" data-type="password" form="signup">
                     </div>
+                    <div class="progress">
+				        <div id="complexity-bar" class="progress-bar" role="progressbar"></div>
+				    </div>
+                    <p>
+					   <h1 id="complexity" class="pull-right">Ihr Passwort ist zu <span class="complexity-value">0%</span> sicher!</h1>
+					</p>
 				    <div class="group">
 					   <input type="submit" class="button" name="signupbtn"  value="Registrieren" form="signup">
 				    </div>
@@ -169,8 +175,6 @@
         </div>
     </div>
 
-
-
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 <script src="inc/clock.js" type="application/javascript"></script>
@@ -179,6 +183,22 @@
 <script>
     $('#passwordlogin').hidePassword(true);
     $('#passwordsignup').hidePassword(true);
+</script>
+<script type="text/javascript" src="inc/login/jquery.complexify.js"></script>
+<script type="text/javascript">
+  (function($) {
+
+	$('#passwordsignup').complexify({}, function (valid, complexity) {
+		var progressBar = $('#complexity-bar');
+
+		progressBar.toggleClass('progress-bar-success', valid);
+		progressBar.toggleClass('progress-bar-danger', !valid);
+		progressBar.css({'width': complexity + '%'});
+
+		$('.complexity-value').text(Math.round(complexity) + '%');
+	});
+
+})(jQuery);
 </script>
 </body>
 </html>
