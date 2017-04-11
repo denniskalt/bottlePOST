@@ -119,12 +119,6 @@
                         <label for="password" class="label">Passwort</label>
                         <input id="passwordlogin" name="password" type="password" class="input" data-type="password" form="login">
                     </div>
-                    <!--<div class="group">
-                        <label for="check" class="checkbox"> Remember Me
-                            <input type="checkbox" checked name="remember" id="check" form="login">
-                            <div class="control_ind"></div>
-                        </label>
-                    </div>-->
 				    <div class="group">
                         <input type="submit" class="button" name="loginbtn" value="Login" form="login">
                     </div>
