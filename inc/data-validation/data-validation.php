@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Strips HTML tags
+ * Strips HTML tags and converts predefined characters to HTML entities
  * 
  * @param string $input         Input-String
  * @param string $allowedTags   Optional string containing all allowed tags
@@ -9,6 +9,7 @@
  * 
  */
 function filterHtml($input, $allowable_tags) {
+    $input = htmlspecialchars($input);
     $output = strip_tags($input, $allowable_tags);
     return $output;
 }
@@ -100,20 +101,6 @@ function filterUpperCase($input) {
 
 /**
  *
- * Converts predefined characters to HTML entities
- *
- * @param string $input         Input-String
- * @return string
- *
- */
-function filterHtml($input) {
-    $output = htmlspecialchars($input);
-    return $output;
-}
-
-
-/**
- *
  * Check for minimal length
  *
  * @param string $input         Input-String
@@ -158,7 +145,7 @@ function MaxLength($input, $length) {
  *
  */
 function ExactLength($input, $length) {
-    if(!strlen($input)=$length) {
+    if(!strlen($input)===$length) {
         return false;
     }
     else {

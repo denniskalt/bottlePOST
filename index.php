@@ -108,7 +108,7 @@
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Register</label>
                 <input id="tab-3" type="radio" name="tab" class="forgot-password"><label for="tab-3" class="tab" style="display: none;">Forgot?</label>
                 <div id="sign-in-content" class="tab-content">
-                <form id="login" action="includes/process_login-signup.php" method="post" name="login">
+                <form id="login" action="inc/login/form-direct.php" method="post" name="login">
                 </form>
                     <div class="group">
                         <label for="email" class="label">E-Mail-Adresse</label>
@@ -134,7 +134,7 @@
 				    </div>
                 </div>
                 <div id="sign-up-content" class="tab-content">
-                <form id="signup" action="includes/process_login-signup.php" method="post" name="signup">
+                <form id="signup" action="inc/login/form-direct.php" method="post" name="signup">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
 					   <input id="email" type="email" name="email" class="input" form="signup">
@@ -153,7 +153,7 @@
 				    </div>
                 </div>
                 <div id="forgot-password-content" class="tab-content">
-                <form id="pw" action="includes/process_login-signup.php" method="post" name="pw">
+                <form id="pw" action="inc/login/form-direct.php" method="post" name="pw">
                 </form>
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
