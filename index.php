@@ -116,7 +116,7 @@
                     </div>
 				    <div class="group">
                         <label for="password" class="label">Passwort</label>
-                        <input id="password" name="password" type="password" class="input" data-type="password" form="login">
+                        <input id="passwordlogin" name="password" type="password" class="input" data-type="password" form="login">
                     </div>
                     <!--<div class="group">
                         <label for="check" class="checkbox"> Remember Me
@@ -141,7 +141,7 @@
 				    </div>
 				    <div class="group">
 					   <label for="password" class="label">Passwort</label>
-					   <input id="password" type="password" name="password" class="input" data-type="password" form="signup">
+					   <input id="passwordsignup" type="password" name="password" class="input" data-type="password" form="signup">
                     </div>
 				    <div class="group">
 					   <input type="submit" class="button" name="signupbtn"  value="Registrieren" form="signup">
@@ -175,5 +175,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 <script src="inc/clock.js" type="application/javascript"></script>
 <script src="inc/localstorage.js" type="application/javascript"></script>
+<script src="inc/login/hidepw.js"></script>
+<script>
+    $('#passwordlogin').hidePassword(true);
+    $('#passwordsignup').hidePassword(true);
+</script>
 </body>
 </html>
