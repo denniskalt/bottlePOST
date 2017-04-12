@@ -34,10 +34,12 @@ if (isset($_POST['email'], $_POST['password'])) {
 
 // Signup-Bereich
     else if(isset($_POST['signupbtn'])) {
+        $vorname = $_POST['vorname'];
+        $nachname = $_POST['nachname'];
         // Registrierung erfolgreich
-        if(signup($email, $password, $mysqli) == true) {
+        if(signup($email, $password, $vorname, $nachname, $mysqli) == true) {
             // Ausgabe gesicherte Seite
-            header('Location: ../../'.MEMBERPAGE);
+            header('Location: ../../index.php?register=1');
         }
         // Registrierung fehlgeschlagen
         else {

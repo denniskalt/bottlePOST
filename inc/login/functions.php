@@ -254,6 +254,11 @@ function getUserDesign($email, $mysqli) {
 /*
 
 */
+
+
+/*
+
+*/
 function setStatus($usersid, $statusCode, $mysqli) {
     if(mysqli_query($mysqli, "UPDATE users, confirmcode SET users.status='2' WHERE users.email='$email' AND confirmcode.idConfirmCode='$confirmCode' AND users.status='1'")) {
         return true;
@@ -372,13 +377,15 @@ function createConfirmCode($mysqli) {
     5. Speichern in DB
     6. Bestätigungsmail erstellen und versenden
 */
-function signup($email, $password, $mysqli) {
+function signup($email, $password, $vorname, $nachname, $mysqli) {
 
     /**
         Übergabewerte validieren
     */
     $email = mask($email);
     $password = mask($password);
+    $vorname = mask($vorname);
+    $nachname = mask($nachname);
 
     /**
         Prüfung, ob Nutzer bereits vorhanden
@@ -427,7 +434,7 @@ function signup($email, $password, $mysqli) {
             $status = 1;
 
             // Speichern der Daten in der Datenbank
-            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, status) VALUES ('$email', '$password', '$salt', '$status')");
+            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, status, forename, surname) VALUES ('$email', '$password', '$salt', '$status', '$vorname', '$nachname')");
             $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
             $row = $result->fetch_assoc();
             $idUsers = $row['idUsers'];

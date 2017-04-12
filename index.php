@@ -105,12 +105,35 @@
                     ?>
                     <div id="desc-firmname" class="desc">"<?php echo $quote[$choice]['text'];?>" <small>- <?php echo $quote[$choice]['author']?></small></div>
                 </div>
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
+                <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" href="inc/login/activation-link.php">Close</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab"><?php if(!isset($_GET["register"])) { echo "Login"; } else { echo "Aktivierung"; } ?></label>
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Register</label>
                 <input id="tab-3" type="radio" name="tab" class="forgot-password"><label for="tab-3" class="tab" style="display: none;">Forgot?</label>
                 <div id="sign-in-content" class="tab-content">
                 <form id="login" action="inc/login/form-direct.php" method="post" name="login">
                 </form>
+                    <?php
+                        if(!isset($_GET["register"])) {
+                    ?>
                     <div class="group">
                         <label for="email" class="label">E-Mail-Adresse</label>
                         <input id="email" name="email" type="email" class="input" form="login" onkeyup="loadLocalStorage();">
@@ -120,7 +143,10 @@
                         <input id="passwordlogin" name="password" type="password" class="input" data-type="password" form="login">
                     </div>
 				    <div class="group">
-                        <input type="submit" class="button" name="loginbtn" value="Login" form="login">
+                        <input type="submit" class="button" name="loginbtn" value="Login" form="login"> <?php } else { ?>
+                    <div class="group">
+                        <input type="submit" class="btn btn-info btn-lg button" data-toggle="modal" data-target="#myModal" value="Aktivierung durchführen" />
+                    <?php } ?>
                     </div>
 				    <div class="hr"></div>
 				    <div class="footer">
@@ -133,6 +159,14 @@
 					   <label for="email" class="label">E-Mail-Adresse</label>
 					   <input id="email" type="email" name="email" class="input" form="signup">
 				    </div>
+                    <div class="group">
+					   <label for="vorname" class="label">Vorname</label>
+					   <input id="vorname" type="text" name="vorname" class="input" form="signup">
+				    </div>
+                    <div class="group">
+					   <label for="nachname" class="label">Nachname</label>
+					   <input id="nachname" type="text" name="nachname" class="input" form="signup">
+				    </div>
 				    <div class="group">
 					   <label for="password" class="label">Passwort</label>
 					   <input id="passwordsignup" type="password" name="password" class="input" data-type="password" form="signup">
@@ -140,6 +174,7 @@
                     <div class="progress">
 				        <div id="complexity-bar" class="progress-bar" role="progressbar"><h1 id="complexity" class="pull-right">Ihr Passwort ist zu <span class="complexity-value">0%</span> sicher!</h1></div>
 				    </div>
+
 				    <div class="group">
 					   <input type="submit" class="button" name="signupbtn"  value="Registrieren" form="signup">
 				    </div>
@@ -167,6 +202,7 @@
 
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="inc/clock.js" type="application/javascript"></script>
 <script src="inc/localstorage.js" type="application/javascript"></script>
 <script src="inc/login/hidepw.js"></script>
