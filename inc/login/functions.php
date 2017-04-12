@@ -484,15 +484,16 @@ function signup($email, $password, $vorname, $nachname, $mysqli) {
         Speichern in DB
     */
             // Definieren des Status
-            $status = 1;
+            $status = 'inaktiv';
 
             // Speichern der Daten in der Datenbank
-            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, status, forename, surname) VALUES ('$email', '$password', '$salt', '$status', '$vorname', '$nachname')");
+            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, forename, surname) VALUES ('$email', '$password', '$salt', '$vorname', '$nachname')");
             $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
             $row = $result->fetch_assoc();
             $idUsers = $row['idUsers'];
+            setStatus($email, $status, $mysqli);
             $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
-
+            sendConfirmationMail($email, $confirmCode);
             return true;
 
 
