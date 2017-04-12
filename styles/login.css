@@ -99,82 +99,45 @@ div.tab-head {
     margin-top: 50px;
 }
 
-#tab-wrapper input[type="radio"] {
-    display: none;
-}
-
-#tab-wrapper .tab {
-    cursor: pointer;
-    font-size:22px;
-	margin-right:15px;
-	padding-bottom:5px;
-	margin:0 15px 40px 0;
-	display:inline-block;
-	border-bottom:2px solid transparent;
-    color: #FFFFFF;
-}
-
-#tab-wrapper [id^="tab"]:checked + label {
-    border-bottom: 2px solid red;
-}
-
-#tab-wrapper .tab-content {
-    display: none;
-}
-
-#tap-wrapper .group .input,
-#tap-wrapper .group .button{
-	border:none;
-	padding:15px 20px;
-	border-radius:25px;
-	background:rgba(255,255,255,.1);
-}
-
-#tab-1:checked ~ #sign-in-content,
-#tab-2:checked ~ #sign-up-content,
-#tab-3:checked ~ #forgot-password-content{
-    display: block;
-}
-
-.tab-content .group{
+.group{
 	margin-bottom: 20px;
 }
 
-.tab-content .group .label,
-.tab-content .group .input,
-.tab-content .group .button{
+.group .label,
+.group .input,
+.group .button{
 	width:100%;
 	color:#fff;
 	display:block;
 }
 
-.tab-content .group .input,
-.tab-content .group .button{
+.group .input,
+.group .button{
 	border:none;
 	padding:15px 20px;
 	border-radius:25px;
 	background:rgba(255,255,255,.1);
 }
 
-.tab-content .group .label{
+.group .label{
 	color: rgba(255,255,255,.8);
 	font-size: 13px;
 }
 
-.tab-content .group input[type=email]:focus,
-.tab-content .group input[type=password]:focus{
+.group input[type=email]:focus,
+.group input[type=password]:focus{
     -webkit-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     -moz-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
 }
 
-.tab-content .group .button{
+.group .button{
 	background: rgba(214,34,39,0.9);
     font-size: 16px;
     letter-spacing: 2px;
 }
 
-.tab-content .group .button:hover {
+.group .button:hover {
     background: rgba(214,34,39,0.75);
 }
 

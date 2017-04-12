@@ -1,0 +1,1 @@
+11.04.2017, 22:53:04;4;::1;POST;/php-praktikum/inc/login/form-direct.php;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0;http://localhost/php-praktikum/index.php?error=login

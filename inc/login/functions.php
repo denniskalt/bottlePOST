@@ -204,17 +204,51 @@ function checkbrute($usersid, $mysqli) {
 
 */
 function getUser($email, $mysqli) {
-        $stmt = $mysqli->prepare("SELECT idUsers, username, password, salt, regDate, profilepic, status FROM users WHERE email = ? LIMIT 1");
+        $stmt = $mysqli->prepare("SELECT idUsers, username, email, password, salt, regDate, status.beschreibung, profilepic, forename, surname, birthDate, postcode, usersTypesId, url FROM users INNER JOIN status ON status.idStatus=users.status WHERE email = ? LIMIT 1");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
 
         // Holt Variablen vom result
-        $stmt->bind_result($usersid, $username, $dbPassword, $salt, $regDate, $profilepic, $status);
+        $stmt->bind_result($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url);
         $stmt->fetch();
         $rows = $stmt->num_rows;
 
-        return array($idUsers, $username, $email, $password, $salt, $regDate, $profilepic, $status, $rows);
+        return array($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url);
+}
+
+/*
+
+*/
+function getConfirmCode($email, $mysqli) {
+        $stmt = $mysqli->prepare("SELECT idUsers, confirmcodes.idConfirmcodes FROM users INNER JOIN confirmcodes ON users.idUsers=confirmcodes.usersId WHERE email = ? LIMIT 1");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        // Holt Variablen vom result
+        $stmt->bind_result($usersid, $confirmcode);
+        $stmt->fetch();
+        $rows = $stmt->num_rows;
+
+        return array($usersid, $confirmcode);
+}
+
+/*
+
+*/
+function getUserDesign($email, $mysqli) {
+        $stmt = $mysqli->prepare("SELECT bg, design FROM options INNER JOIN users ON users.idUsers=options.usersId WHERE email = ? LIMIT 1");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        // Holt Variablen vom result
+        $stmt->bind_result($bg, $design);
+        $stmt->fetch();
+        $rows = $stmt->num_rows;
+
+        return array($bg, $design);
 }
 
 /*
@@ -233,7 +267,7 @@ function setStatus($usersid, $statusCode, $mysqli) {
 
 */
 function logLogin($usersid, $mysqli) {
-    $logfile = fopen("../logs/logLogin.txt", "a");
+    $logfile = fopen("../../logs/logLogin.txt", "a");
     $eintrag = date("d.m.Y, H:i:s", time()) .
                     ";" . $usersid .
                     ";" . $_SERVER['REMOTE_ADDR'] .
@@ -245,6 +279,79 @@ function logLogin($usersid, $mysqli) {
     fputs($logfile, $eintrag);
     fclose($logfile);
     return true;
+}
+
+/**
+    Überprüfen des Bestätigungscode
+
+    @author Dennis Kalt
+    @return boolean true: nicht vorhanden false: vorhanden
+    @version 1.0
+
+    Überprüft, ob der Bestätigungscode in der DB vorhanden ist
+*/
+function checkConfirmCode($confirmCode, $mysqli) {
+    if($stmt = $mysqli->prepare("SELECT usersid FROM confirmCode WHERE idConfirmCode = ? LIMIT 1")) {
+        $stmt->bind_param('s', $confirmCode);
+        $stmt->execute();
+        $stmt->store_result();
+
+        $stmt->bind_result($usersid);
+        $stmt->fetch();
+    }
+    // Es gibt diesen Bestätigungscode bereits
+    if($stmt->num_rows == 1) {
+        return false;
+    }
+    // Der Bestätigungscode ist nicht vorhanden
+    else {
+        return true;
+    }
+}
+
+/**
+    Generieren eines Bestätigungscodes
+
+    @author Dennis Kalt
+    @return string $confirmCode  Bestätigungscode
+    @version 1.0
+
+    Der Bestätigungscode besteht aus vorher definierten Buchstaben und Zahlen. Hierbei wurden ähnliche Buchstaben und Zahlen entfernt, um Irritationen zu vermeiden.
+*/
+function generateConfirmCode() {
+    $laenge = 12;
+
+    //Mögliche Zeichen für den String
+    $zeichen = '23456789';
+    $zeichen .= 'abcdefghkmnopqrstuvwxyz';
+    $zeichen .= 'ABCDEFGHKMNPQRSTUVWXYZ';
+
+    //String wird generiert
+    $confirmCode = '';
+    $anzahl = strlen($zeichen);
+    for ($i=0; $i<$laenge; $i++) {
+        $confirmCode .= $zeichen[rand(0,$anzahl-1)];
+    }
+    // Generate a 12 character hash
+    $confirmCode = md5($confirmCode);
+    return $confirmCode;
+}
+
+/**
+    Erstellen des nutzbaren Bestätigungscodes
+
+    @author Dennis Kalt
+    @return string $confirmCode  Bestätigungscode
+    @version 1.0
+
+    Der Bestätigungscode besteht aus vorher definierten Buchstaben und Zahlen. Hierbei wurden ähnliche Buchstaben und Zahlen entfernt, um Irritationen zu vermeiden.
+*/
+function createConfirmCode($mysqli) {
+    do {
+        $confirmCode = generateConfirmCode();
+    } while (checkConfirmCode($confirmCode, $mysqli) == false);
+
+    return $confirmCode;
 }
 
 /**
@@ -310,6 +417,8 @@ function signup($email, $password, $mysqli) {
     */
             $password = password_hash($password, PASSWORD_BCRYPT, $options);
 
+            // Erzeugen des Bestätigungscodes
+            $confirmCode = createConfirmCode($mysqli);
 
     /**
         Speichern in DB
@@ -322,6 +431,7 @@ function signup($email, $password, $mysqli) {
             $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
             $row = $result->fetch_assoc();
             $idUsers = $row['idUsers'];
+            $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
 
             return true;
 
@@ -350,7 +460,7 @@ function login($email, $password, $mysqli) {
     */
 
     // Prepared Statements zum Verhindern von SQL-Injektionen
-    if($stmt = $mysqli->prepare("SELECT idUsers, username, password, salt, profilepic, status, forename, surname FROM users WHERE email = ? LIMIT 1")) {
+    if($stmt = $mysqli->prepare("SELECT idUsers, username, password, salt, profilepic, status.beschreibung, forename, surname FROM users INNER JOIN status ON status.idStatus=users.status WHERE email = ? LIMIT 1")) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
@@ -360,7 +470,7 @@ function login($email, $password, $mysqli) {
         $stmt->fetch();
 
         // Überprüft die Aktivierung des Kontos
-        if($status == 2) {
+        if($status == 'aktiv') {
             // Legt die Options für Hash fest
             $options = array(
                 'salt' => $salt,
@@ -392,13 +502,11 @@ function login($email, $password, $mysqli) {
                         $_SESSION['login_string'] = hash('sha512', $email . $user_browser);
 
                         // Login-Log
-                        $time = time();
-                        $mysqli->query("INSERT INTO log_login(id_users, time) VALUES ('$usersid', '$time')");
                         logLogin($usersid, $mysqli);
 
                         $cookie_name = "$email";
                         $pointpos = strrpos ($email , '.');
-                        $substremail = substr ($email , 0, $pointpos );
+                        $substremail = substr ($email , 0, $pointpos);
                         $cookie_name = "$substremail";
 
                         $usersinfo = array(
@@ -418,8 +526,7 @@ function login($email, $password, $mysqli) {
                     else {
                         // Passwort ist falsch
                         // Versuch in DB gespeichert
-                        $time = time();
-                        $mysqli->query("INSERT INTO login_attempts(id_users, time) VALUES ('$usersid', '$time')");
+                        $mysqli->query("INSERT INTO login_attempts(usersid, time) VALUES ('$usersid')");
                         return false;
                     }
                 }

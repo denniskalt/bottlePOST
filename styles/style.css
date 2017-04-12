@@ -1,0 +1,243 @@
+/*
+Author:         #
+Author URI:     #
+Description:    #
+Version:        1.0
+License:        GNU General Public License v3
+License URI:    https://www.gnu.org/licenses/gpl-3.0.de.html
+Color1:         rgb(214,34,39) rot #d62227
+Color2:         rgb(58,55,57) dunkelgrau #3a3739
+Color3:         rgb(255,255,255) weiß #ffffff
+*/
+
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# General
+	## Generic styles
+	## Buttons and links
+# Forms
+# Typography
+# Footer
+# Responsive
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Import
+--------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Generic Styles
+--------------------------------------------------------------*/
+
+*{
+    font-family: 'Roboto', sans-serif;
+    color : #ffffff;
+}
+
+body {
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body.be-different {
+    background-image: url(../images/bg/be-different.jpg);
+}
+
+body.chapter {
+    background-image: url(../images/bg/chapter.jpg);
+}
+
+body.decisions {
+    background-image: url(../images/bg/decisions.jpg);
+}
+
+body.faith {
+    background-image: url(../images/bg/faith.jpg);
+}
+
+body.success {
+    background-image: url(../images/bg/success.jpg);
+}
+
+body.way {
+    background-image: url(../images/bg/way.jpg);
+}
+
+/*--------------------------------------------------------------
+## Buttons and links
+--------------------------------------------------------------*/
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+a.button {
+    background: rgba(214,34,39,0.9);
+    font-size: 16px;
+    letter-spacing: 2px;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 25px;
+    width: 100%;
+    color: #FFF;
+    display: block;
+    cursor: pointer;
+    text-transform: none;
+    text-align: center;
+    margin-top: 15px;
+}
+
+a.button:hover {
+    background: rgba(214,34,39,0.75);
+}
+
+#login-container {
+    position: relative;
+    top: 50px;
+}
+
+#login-container div.tab-head {
+    background: rgba(58,55,57,0.9);
+}
+
+#tab-wrapper {
+    background:rgba(58,55,57,.6);
+    padding: 70px 70px 30px 70px;
+    text-transform:uppercase;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+    margin-top: 50px;
+}
+
+#tab-wrapper input[type="radio"] {
+    display: none;
+}
+
+.group .input,
+.group .button {
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+
+#tab-wrapper .group{
+	margin-bottom: 20px;
+}
+
+#tab-wrapper .group .label,
+#tab-wrapper .group .input,
+#tab-wrapper .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+
+#tab-wrapper .group .input,
+#tab-wrapper .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+
+#tab-wrapper .group .label{
+	color: rgba(255,255,255,.8);
+	font-size: 13px;
+}
+
+#tab-wrapper .group input[type=email]:focus,
+#tab-wrapper .group input[type=password]:focus{
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
+    box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
+}
+
+#tab-wrapper .group .button{
+	background: rgba(214,34,39,0.9);
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+#tab-wrapper .group .button:hover {
+    background: rgba(214,34,39,0.75);
+}
+
+.hr {
+    height: 2px;
+    margin: 20px 0;
+    background: rgba(255,255,255,.2);
+}
+
+#tab-wrapper div.footer{
+	text-align: center;
+    font-size: 16px;
+}
+
+#tab-wrapper div.footer label:hover {
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+div.tab-head {
+    height: 140px;
+}
+
+#time {
+    margin-bottom: 70px;
+    padding-top: 15px;
+    text-align: center;
+
+}
+
+#time p {
+    padding: 0;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+#time p.datum {
+    font-size: 75%;
+}
+
+div.info {
+    margin-bottom: 25px;
+}
+
+#title-name {
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: 1px;
+    text-transform: none;
+    text-align: center;
+}
+
+#desc-firmname {
+    font-size: 16px;
+    text-transform: initial;
+    font-weight: normal;
+    text-align: center;
+}
+
+#desc-firmname small {
+    font-size: 80%;
+}
+
+a.button.activation-link {
+    margin-top: 50px;
+}

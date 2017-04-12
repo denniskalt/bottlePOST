@@ -43,7 +43,7 @@
     $vorname = $data["vorname"];
     $nachname = $data["nachname"];
 ?>
-<body class="way">
+    <body style="background-image: url(images/bg/<?php echo "way.jpg" ?>);">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->

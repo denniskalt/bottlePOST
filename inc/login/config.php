@@ -4,7 +4,7 @@
     define('HOST', 'localhost');            // Der Host mit dem du dich verbinden willst.
     define('USER', 'root');             // Der Datenbank-Benutzername.
     define('PASSWORD', ''); // Das Datenbank-Passwort.
-    define('DATABASE', 'bee');     // Der Datenbankname.
+    define('DATABASE', 'php-praktikum');     // Der Datenbankname.
     $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
     //App-Konfigurationen
