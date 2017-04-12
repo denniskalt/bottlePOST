@@ -480,3 +480,8 @@ div.info {
     padding-top: 1px;
     padding-right: 10px;
 }
+
+#myModal, #myModal p, #myModal h4 {
+    text-transform: none;
+    color: #3a3739;
+}

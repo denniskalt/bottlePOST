@@ -105,7 +105,7 @@
                     ?>
                     <div id="desc-firmname" class="desc">"<?php echo $quote[$choice]['text'];?>" <small>- <?php echo $quote[$choice]['author']?></small></div>
                 </div>
-                <!-- Modal -->
+<!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -113,13 +113,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Aktivierung</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <p>Dies ist eine Anzeige, um den Registrierungsprozess zu Demonstrationszwecken zu verschlanken.</p>
+        <p>Somit muss kein Mailserver eingerichtet werden und auf die mail()-Funktion kann verzichtet werden.</p>
+        <p>In der endgültigen Version würde dies entfernt werden und während des Registrierungsprozesses wird eine E-Mail an die vom User eingegebene E-Mail-Adresse gesendet, in der der Aktivierungscode sowie der Link zum Aktivieren enthalten ist.</p>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-default" href="inc/login/activation-link.php">Close</a>
+        <a class="btn btn-default" href="inc/login/activation-link.php">Zum Aktivierungscode</a>
       </div>
     </div>
 

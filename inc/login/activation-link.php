@@ -78,13 +78,11 @@ include_once('functions.php');
                     ?>
                     <div id="title-name" class="title"><?php echo $confirmcode ?></div>
                     <div id="desc-firmname" class="desc">Aktivierungslink</div>
-                    <a class="button activation-link" href="activate.php?activate=<?php echo $confirmcode ?>">Aktivieren</a>
+                    <a class="button activation-link" href="activate.php?email=<?php echo $email; ?>&activate=<?php echo $confirmcode; ?>">Aktivieren</a>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 
 

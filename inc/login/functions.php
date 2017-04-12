@@ -200,6 +200,46 @@ function checkbrute($usersid, $mysqli) {
     }
 }
 
+/**
+    Erstellen und senden der Aktivierungsmail
+
+    @author Dennis Kalt
+    @param string $email            Eingegebene E-Mail-Adresse
+    @param string $confcode         Bestätigungscode
+    @return boolean
+    @version 1.0
+*/
+function sendConfirmationMail($email, $confcode) {
+    if(strlen($confcode) > 10) {
+        return false;
+    }
+    else if(strlen($confcode) < 10) {
+        return false;
+    }
+    else {
+        $to = $email; // Empfänger
+        $subject = 'Aktiviere Deinen Account'; // Betreff der E-Mail
+        $activationSite = 'http://localhost/php-praktikum/inc/login/activate.php';
+        // Eigentlicher E-Mail-Inhalt mit Aktivierungslink
+        $message = '
+
+        Dankeschön für Ihr Vertrauen in Bee!
+        Dein Nutzer wurde erstellt. Bitte bestätige diesen nun noch mit einem Klick auf den Link.
+
+        ------------------------
+        E-Mail-Adresse: '.$email.'
+        ------------------------
+
+        Bitte klicke auf diesen Link, um deinen Account zu aktivieren:
+        '.$activationSite.'?email='.$email.'&activate='.$confcode.'
+
+        ';
+
+        $headers = 'From: noreply@webdesign-denniskalt.de' . "\r\n"; // Header-Informationen
+        mail($to, $subject, $message, $headers); // Versendet die E-Mail
+    }
+}
+
 /*
 
 */
@@ -259,9 +299,22 @@ function getUserDesign($email, $mysqli) {
 /*
 
 */
-function setStatus($usersid, $statusCode, $mysqli) {
-    if(mysqli_query($mysqli, "UPDATE users, confirmcode SET users.status='2' WHERE users.email='$email' AND confirmcode.idConfirmCode='$confirmCode' AND users.status='1'")) {
-        return true;
+function setStatus($email, $status, $mysqli) {
+    if($stmt = $mysqli->prepare("SELECT status.idStatus FROM status WHERE status.beschreibung = ? LIMIT 1")) {
+        $stmt->bind_param('s', $status);
+        $stmt->execute();
+        $stmt->store_result();
+
+        // Holt Variablen vom result
+        $stmt->bind_result($idstatus);
+        $stmt->fetch();
+        $rows = $stmt->num_rows;
+        if(mysqli_query($mysqli, "UPDATE users SET users.status='$idstatus' WHERE users.email='$email'")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     else {
         return false;
@@ -610,4 +663,37 @@ function login_check($mysqli) {
         return false;
     }
 }
+
+/*
+ Aktivierung
+*/
+
+function activateAccount($email, $confcode, $mysqli) {
+    $email = filterEmail($email);
+    if(setStatus($email, 'aktiv', $mysqli)) {
+        sendConfirmationMail($email, $confirmcode);
+
+        list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli);
+
+        if($stmt = $mysqli->prepare("DELETE FROM confirmcodes WHERE confirmcodes.usersId = ? LIMIT 1")) {
+            $stmt->bind_param('i', $usersid);
+            $stmt->execute();
+            $stmt->store_result();
+
+            // Holt Variablen vom result
+            $stmt->bind_result($idstatus);
+            $stmt->fetch();
+            $rows = $stmt->num_rows;
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+}
+
 ?>

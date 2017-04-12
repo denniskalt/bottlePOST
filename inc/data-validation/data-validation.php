@@ -38,7 +38,7 @@ function filterTrim($input) {
  */
 function filterUrlPart($input) {
     $pattern = "[a-zA-Z0-9\/.\&\?=]";
-    $output = preg_replace($pattern, $input);
+    $output = preg_replace($pattern, "", $input);
     return $output;
 }
 
@@ -52,10 +52,13 @@ function filterUrlPart($input) {
  *
  */
 function filterEmail($input) {
-    $input = filter_var($input, FILTER_SANITIZE_EMAIL);
-    $pattern = "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$";
-    $output = preg_replace($pattern, $input);
-    return $output;
+    $output = filter_var($input, FILTER_SANITIZE_EMAIL);
+    $pattern = '/[[A-Z0-9._%+-]+[ ]?[\(]?(@|at)[\)]?[ ]?[A-Z0-9.-]+[ ]?[\(]?(\.|dot)[)]?[ ]?[A-Z]{2,4}/i';
+    if(preg_match($pattern, $input)) {
+        return $output;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -69,7 +72,7 @@ function filterEmail($input) {
  */
 function filterPhone($input) {
     $pattern = '\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?';
-    $output = preg_replace($pattern, $input);
+    $output = preg_replace($pattern, "", $input);
     return $output;
 }
 
