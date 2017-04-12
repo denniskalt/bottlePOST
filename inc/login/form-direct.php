@@ -7,7 +7,7 @@ include_once('functions.php');
 include_once('../data-validation/data-validation.php');
 
 // Start der PHP-Sitzung
-if (isset($_POST['email'], $_POST['password'])) {
+if (isset($_POST['email'])) {
 
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -53,7 +53,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         // Registrierung erfolgreich
         if(pwreset($email, $mysqli) == true) {
             // Ausgabe Login-Seite
-            header('Location: ../../index.php');
+            header('Location: ../../index.php?pwreset');
         }
         // Registrierung fehlgeschlagen
         else {

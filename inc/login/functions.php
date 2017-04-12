@@ -115,7 +115,7 @@ function randomString($length) {
 */
 function generateSalt($email, $rounds) {
     //Verwendete Funktion
-    $usedFunction = '$2a';
+    $usedFunction = '$2y';
 
     //0 vor Rundenanzahl bei Zahlen kleiner 10
     if($rounds<10) {
@@ -127,11 +127,9 @@ function generateSalt($email, $rounds) {
 
     //Individueller Salt
     $emailPart = subStr($email, 0, 3);
-    $time = time();
-    $time = subStr($time, 0, 5);
-    $randomSalt = randomString(20);
+    $randomSalt = randomString(25);
 
-    $salt = subStr($usedFunction.$rounds.$emailPart.$time.$randomSalt, 0, 22);
+    $salt = subStr($usedFunction.$rounds.$emailPart.$randomSalt, 0, 22);
 
     return $salt;
 }
@@ -672,8 +670,6 @@ function login_check($mysqli) {
 function activateAccount($email, $confcode, $mysqli) {
     $email = filterEmail($email);
     if(setStatus($email, 'aktiv', $mysqli)) {
-        sendConfirmationMail($email, $confirmcode);
-
         list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli);
 
         if($stmt = $mysqli->prepare("DELETE FROM confirmcodes WHERE confirmcodes.usersId = ? LIMIT 1")) {
@@ -694,6 +690,106 @@ function activateAccount($email, $confcode, $mysqli) {
     }
     else {
         return false;
+    }
+}
+
+/**
+    Funktionen zum Zurücksetzen des Passworts
+
+    @author Dennis Kalt
+    @param  string  $email          Eingegebene E-Mail-Adresse
+    @param  object  $mysqli         Verbindungseinstellungen
+    @return boolean
+    @version 1.0
+*/
+
+function pwreset($email, $mysqli) {
+
+    if(list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli)) {
+        // Status inaktiv setzen
+        $status = 'inaktiv';
+        setStatus($email, $status, $mysqli);
+        $confirmCode = createConfirmCode($mysqli);
+        $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
+        sendConfirmationMail($email, $confirmCode);
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
+
+
+
+function changePW($email, $password, $mysqli) {
+
+    /**
+        Übergabewerte validieren
+    */
+    $email = mask($email);
+    $password = mask($password);
+
+    /**
+        Prüfung, ob Nutzer bereits vorhanden
+    */
+
+    // Prepared Statements zum Verhindern von SQL-Injektionen
+    if($stmt = $mysqli->prepare("SELECT idUsers FROM users WHERE email = ? LIMIT 1")) {
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        // Holt Variablen vom result
+        $stmt->bind_result($idUsers);
+        $stmt->fetch();
+
+        // Bereits vorhandener Nutzer
+        if($stmt->num_rows == 0) {
+            return false;
+        }
+
+        // Fortführung des Registrierungsprozess bei keinem vorhandenen Nutzer
+        else if($stmt->num_rows == 1) {
+     /**
+        Salt generieren
+    */
+            $salt = generateSalt($email, 7);
+
+            // Options für Hash festlegen
+            $options = array(
+                'salt' => $salt,
+                'cost' => subStr($salt, 4, 7),
+            );
+
+    /**
+        Passwort hashen
+    */
+            $password = password_hash($password, PASSWORD_BCRYPT, $options);
+
+    /**
+        Speichern in DB
+    */
+            // Definieren des Status
+            $status = 'aktiv';
+
+            // Speichern der Daten in der Datenbank
+            if(mysqli_query($mysqli, "UPDATE users SET users.password='$password', users.salt='$salt' WHERE users.email='$email'")) {
+                $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
+                $row = $result->fetch_assoc();
+                $idUsers = $row['idUsers'];
+                setStatus($email, $status, $mysqli);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        // Irgendwas schief gelaufen
+        else {
+            return false;
+        }
     }
 }
 
