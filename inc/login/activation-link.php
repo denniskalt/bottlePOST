@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('config.php');
 include_once('functions.php');
 ?>
@@ -30,13 +31,16 @@ include_once('functions.php');
 </head>
     <?php
         if(isset($_GET["acbtn"])) {
-            $email = $_GET["email"];
-            list ($bg, $design) = getUserDesign($email, $mysqli);
-        }
-        else {
-            $bg = 'success.jpg';
-            $design = 'default';
-        }
+           $email = $_GET["email"];
+        //    if(!getUserDesign($email, $mysqli)) {
+                $bg = 'success.jpg';
+                $design = 'default';
+            }
+            else {
+        //        list($bg, $design) = getUserDesign($email, $mysqli);
+            }
+        //}
+
 
     ?>
 <body style="background-image: url(../../images/bg/<?php echo $bg ?>);" onload="window.setInterval('updateTime()',100)">
@@ -76,8 +80,8 @@ include_once('functions.php');
                     <?php
                         list ($usersid, $confirmcode) = getConfirmCode($_GET["email"], $mysqli);
                     ?>
-                    <div id="title-name" class="title"><?php echo $confirmcode ?></div>
-                    <div id="desc-firmname" class="desc">Aktivierungslink</div>
+                    <div id="title-name" class="title" style="text-transform: uppercase;"><?php echo $confirmcode ?></div>
+                    <div id="desc-firmname" class="desc">Aktivierungscode<br/><small style="text-decoration: underline;">Der Aktivierungscode sowie der Link (Button) würde normalerweise in der E-Mail angezeigt werden.</small></div>
                     <a class="button activation-link" href="activate.php?email=<?php echo $email; ?>&activate=<?php echo $confirmcode; ?>">Aktivieren</a>
                 </div>
             </div>

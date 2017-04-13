@@ -1,5 +1,5 @@
 <?php
-include_once('../data-validation/data-validation.php');
+session_start();
 include_once('config.php');
 include_once('functions.php');
 

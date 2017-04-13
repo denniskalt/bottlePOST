@@ -163,7 +163,8 @@ div.tab-head {
 }
 
 .tab-content .group input[type=email]:focus,
-.tab-content .group input[type=password]:focus{
+.tab-content .group input[type=password]:focus,
+.tab-content .group input[type=text]:focus {
     -webkit-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     -moz-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
@@ -314,6 +315,7 @@ div.info {
 
 #desc-firmname small {
     font-size: 80%;
+    font-style: italic;
 }
 
 /* Hide/Show Password */

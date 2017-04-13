@@ -1,8 +1,8 @@
-function saveLocalStorage(email, profilepic, vorname, nachname) {
+function saveLocalStorage(email, profilepic, user, vorname, nachname) {
         var Storage = new Array();
 
         // Array Storage mit benötigten Daten füllen
-        Storage.push(email, profilepic, vorname, nachname);
+        Storage.push(email, profilepic, user, vorname, nachname);
 
         // Mithilfe der Stringify-Funktion wird das Array in ein String übersetzt
         var JSONReady = JSON.stringify(Storage);
@@ -23,10 +23,16 @@ function loadLocalStorage() {
             var Storage = JSON.parse(retrievedData);
             var email = Storage[0];
             var profilepic = Storage[1];
-            var vorname = Storage[2];
-            var nachname = Storage[3];
+            var user = Storage[2];
+            var vorname = Storage[3];
+            var nachname = Storage[4];
             $("#avatar").attr("src", 'images/'+profilepic);
-            document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';
+            if(vorname!="" || nachname!="") {
+                document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+user+'!';
+            }
+            else {
+                document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';
+            }
         }
         else {
             $("#avatar").attr("src", 'images/user.jpg');

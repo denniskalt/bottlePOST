@@ -1,26 +1,64 @@
 <?php
-session_start();
 include_once('config.php');
+include_once('../data-validation/data-validation.php');
 
 /**
-Module Name: Login-Modul
+Module Name: login
 Description: Register and login users. Change passwords
 Version: 1.0
-
-Use Case #01: The user can register with his email-adress and a password. Then he get an email with a link to activate his account. If it´s successful, he would be redirected to his profile page.
-
-Use Case #02: The user is already registered and want to be logged in. He use his email-adress and the password. If they are correct, he would be redirected to his profile page (in case he hadn´t the required fields) or to the dashboard.
-
-Use Case #03: The user has forgotten his password. He types in his email-adress and get an email with a link to activate his account. Then he will be redirected to a site he can change his password.
-
-Use Case #04: The user tries 3 times to login and has a false password. Then his account is blocked an he get an email with a link to activate his account. Then he will be redirected to a site he can change his password.
+Author: #
+Author URI: #
 */
+/**
+    Use Case #01: The user can register with his email-adress and a password. Then he get an email with a link to activate his account. If it´s successful, he would be redirected to his profile page.
+
+    Use Case #02: The user is already registered and want to be logged in. He use his email-adress and the password. If they are correct, he would be redirected to his profile page (in case he hadn´t the required fields) or to the dashboard.
+
+    Use Case #03: The user has forgotten his password. He types in his email-adress and get an email with a link to activate his account. Then he will be redirected to a site he can change his password.
+
+    Use Case #04: The user tries 3 times to login and has a false password. Then his account is blocked an he get an email with a link to activate his account. Then he will be redirected to a site he can change his password.
+*/
+
+/**
+    Sicherer Aufbau einer PHP-Session
+
+    @author Dennis Kalt
+    @param string   $session_name   vergibt den Sessionnamen
+    @param boolean  $secure         Cookie nur über gesicherte Verbindungen senden
+    @param boolean  $httponly       HTTPonly-Flag für Übertragungen über HTTP
+    @param []       $cookieParams   Array für die Session-Cookie-Parameter
+    @version 1.0
+*/
+function sec_session_start() {
+    $session_name = 'sec_session_id';
+    $secure = false;
+    $httponly = true;
+
+    // Zwingt Sessions nur Cookies zu nutzen
+    if(ini_set('session.use_only_cookies', 1) === FALSE) {
+        header("Location: ../error.php");
+        exit();
+    }
+
+    // Holt Cookie-Parameter
+    $cookieParams = session_get_cookie_params();
+    session_set_cookie_params(
+        $cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"],
+        $secure,
+        $httponly
+    );
+
+    // Setzt Session-Name
+    session_name($session_name);
+    session_start();            // Startet PHP-Sitzung
+    session_regenerate_id();    // Erneuert Session, löscht alte
+}
 
 /**
     Maskieren von Eingaben
 
     @author Dennis Kalt
-    @param  string  $input          Zu maskierende Eingabe
+    @param  string  $input        Zu maskierende Eingabe
     @return string  $masked_string  Maskierte Ausgabe
     @version 1.0
 */
@@ -48,7 +86,7 @@ function randomString($length) {
     $zeichen = '0123456789';
     $zeichen .= 'abcdefghijklmnopqrstuvwxyz';
     $zeichen .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $zeichen .= './_-#()@§!';
+    $zeichen .= './';
 
     //String wird generiert
     $randomString = '';
@@ -73,7 +111,7 @@ function randomString($length) {
     2. Anzahl der Runden (zwischen 1 und 31): $07
     3. individueller Salt: Groß- und Kleinbuchstaben, Zahlen sowie ./
 
-    Der Salt besteht aus einem Teil der verwendeten E-Mail-Adresse und einem automatisch generierten Saltpart.
+    Der Salt wird mit einem Teil der verwendeten E-Mail-Adresse, einem Teil des UNIX-Zeitstempels und einem automatisch generierten Saltpart.
 */
 function generateSalt($email, $rounds) {
     //Verwendete Funktion
@@ -94,6 +132,24 @@ function generateSalt($email, $rounds) {
     $salt = subStr($usedFunction.$rounds.$emailPart.$randomSalt, 0, 22);
 
     return $salt;
+}
+
+/**
+    Diese Funktion überprüft, ob auf dem Server CRYPT_BLOWFISH definiert ist, um BCRYPT verwenden zu können
+
+    @author Dennis Kalt
+    @return boolean (true = CRYPT_BLOWFISH enabled)
+    @version 1.0
+*/
+function blowfish(){
+    if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
+        // CRYPT_BLOWFISH is enabled
+        return true;
+    }
+    else {
+        // CRYPT_BLOWFISH is not available
+        return false;
+    }
 }
 
 /**
@@ -165,7 +221,7 @@ function sendConfirmationMail($email, $confcode) {
         // Eigentlicher E-Mail-Inhalt mit Aktivierungslink
         $message = '
 
-        Dankeschön für Dein Vertrauen!
+        Dankeschön für Ihr Vertrauen in Bee!
         Dein Nutzer wurde erstellt. Bitte bestätige diesen nun noch mit einem Klick auf den Link.
 
         ------------------------
@@ -182,26 +238,8 @@ function sendConfirmationMail($email, $confcode) {
     }
 }
 
-/**
-    GET-Methode Nutzerdaten
+/*
 
-    @author Dennis Kalt
-    @param string $email            Eingegebene E-Mail-Adresse
-    @return array $usersid
-                  $username
-                  $email
-                  $password
-                  $salt
-                  $regDate
-                  $status
-                  $profilepic
-                  $forename
-                  $surname
-                  $birthDate
-                  $postcode
-                  $userTypesId
-                  $url
-    @version 1.0
 */
 function getUser($email, $mysqli) {
         $stmt = $mysqli->prepare("SELECT idUsers, username, email, password, salt, regDate, status.beschreibung, profilepic, forename, surname, birthDate, postcode, usersTypesId, url FROM users INNER JOIN status ON status.idStatus=users.status WHERE email = ? LIMIT 1");
@@ -217,14 +255,8 @@ function getUser($email, $mysqli) {
         return array($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url);
 }
 
-/**
-    GET-Methode Bestätigungscode
+/*
 
-    @author Dennis Kalt
-    @param string $email            Eingegebene E-Mail-Adresse
-    @return array $usersid
-                  $confirmcode
-    @version 1.0
 */
 function getConfirmCode($email, $mysqli) {
         $stmt = $mysqli->prepare("SELECT idUsers, confirmcodes.idConfirmcodes FROM users INNER JOIN confirmcodes ON users.idUsers=confirmcodes.usersId WHERE email = ? LIMIT 1");
@@ -240,14 +272,8 @@ function getConfirmCode($email, $mysqli) {
         return array($usersid, $confirmcode);
 }
 
-/**
-    GET-Methode User-Design-Einstellungen
+/*
 
-    @author Dennis Kalt
-    @param string $email            Eingegebene E-Mail-Adresse
-    @return array $bg
-                  $design
-    @version 1.0
 */
 function getUserDesign($email, $mysqli) {
         $stmt = $mysqli->prepare("SELECT bg, design FROM options INNER JOIN users ON users.idUsers=options.usersId WHERE email = ? LIMIT 1");
@@ -260,24 +286,18 @@ function getUserDesign($email, $mysqli) {
         $stmt->fetch();
         $rows = $stmt->num_rows;
 
-        if($bg!="") {
-            return array($bg, $design);
-        }
-        else {
-            return false;
-        }
+        return array($bg, $design);
 }
 
-/**
-    UPDATE-Methode Status
+/*
 
-    @author Dennis Kalt
-    @param string $email            Eingegebene E-Mail-Adresse
-           string $status           Beschreibung des Status
-    @return boolean
-    @version 1.0
 */
-function updateStatus($email, $status, $mysqli) {
+
+
+/*
+
+*/
+function setStatus($email, $status, $mysqli) {
     if($stmt = $mysqli->prepare("SELECT status.idStatus FROM status WHERE status.beschreibung = ? LIMIT 1")) {
         $stmt->bind_param('s', $status);
         $stmt->execute();
@@ -299,13 +319,8 @@ function updateStatus($email, $status, $mysqli) {
     }
 }
 
-/**
-    Loggen der Login-Daten
+/*
 
-    @author Dennis Kalt
-    @param string $usersid            Eingegebene E-Mail-Adresse
-    @return boolean
-    @version 1.0
 */
 function logLogin($usersid, $mysqli) {
     $logfile = fopen("../../logs/logLogin.txt", "a");
@@ -319,6 +334,7 @@ function logLogin($usersid, $mysqli) {
                     "\r\n";
     fputs($logfile, $eintrag);
     fclose($logfile);
+    return true;
 }
 
 /**
@@ -395,96 +411,11 @@ function createConfirmCode($mysqli) {
 }
 
 /**
-    Funktionen zum Aktivieren des Accounts
-
-    @author Dennis Kalt
-    @param  string  $email          Eingegebene E-Mail-Adresse
-    @param  string  $confcode       Confirmcode
-    @param  object  $mysqli         Verbindungseinstellungen
-    @return boolean
-*/
-function activateAccount($email, $confcode, $mysqli) {
-    $email = filterEmail($email);
-    if(updateStatus($email, 'aktiv', $mysqli)) {
-        list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli);
-
-        if($stmt = $mysqli->prepare("DELETE FROM confirmcodes WHERE confirmcodes.usersId = ? LIMIT 1")) {
-            $stmt->bind_param('i', $usersid);
-            $stmt->execute();
-            $stmt->close();
-            // Holt User-Agent-String des Nutzers
-            $user_browser = $_SERVER['HTTP_USER_AGENT'];
-
-            // XSS-Schutz
-            $usersid = preg_replace("/[^0-9]+/", "", $usersid);
-            $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-            $_SESSION['usersid'] = $usersid;
-            $_SESSION['email'] = $email;
-            $_SESSION['login_string'] = hash('sha512', $email . $user_browser);
-
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    else {
-        return false;
-    }
-}
-
-/***
-    Funktionen zum Zurücksetzen des Passworts
-
-    @author Dennis Kalt
-    @param  string  $email          Eingegebene E-Mail-Adresse
-    @param  object  $mysqli         Verbindungseinstellungen
-    @return boolean
-    @version 1.0
-*/
-function pwreset($email, $mysqli) {
-
-    if(list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli)) {
-        // Status inaktiv setzen
-        $status = 'inaktiv';
-        updateStatus($email, $status, $mysqli);
-        $confirmCode = createConfirmCode($mysqli);
-        $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
-        sendConfirmationMail($email, $confirmCode);
-        return true;
-    }
-    else {
-        return false;
-    }
-
-}
-
-/**
- *
- * Validiert E-Mails
- *
- * @param string $input         Input-String
- * @param string $pattern       Pattern for filter the email adress
- * @return string
- *
- */
-function filterEmail($input) {
-    $output = filter_var($input, FILTER_SANITIZE_EMAIL);
-    $pattern = '/[[A-Z0-9._%+-]+[ ]?[\(]?(@|at)[\)]?[ ]?[A-Z0-9.-]+[ ]?[\(]?(\.|dot)[)]?[ ]?[A-Z]{2,4}/i';
-    if(preg_match($pattern, $input)) {
-        return $output;
-    } else {
-        return false;
-    }
-}
-
-/**
     Funktionen zum Registrieren des Nutzers
 
     @author Dennis Kalt
     @param  string  $email          Eingegebene E-Mail-Adresse
-    @param  string  $password       Eingegebenes Passwort
-    @param  string  $user           Eingegebener Benutzername
+    @param  string  $passwort       Eingegebenes Passwort
     @param  object  $mysqli         Verbindungseinstellungen
     @return boolean
     @version 1.0
@@ -497,15 +428,19 @@ function filterEmail($input) {
     5. Speichern in DB
     6. Bestätigungsmail erstellen und versenden
 */
-function signup($email, $password, $user, $mysqli) {
+function signup($email, $password, $vorname, $nachname, $mysqli) {
 
-    //Übergabewerte validieren
+    /**
+        Übergabewerte validieren
+    */
     $email = mask($email);
-    $email = filterEmail($email);
     $password = mask($password);
-    $user = mask($user);
+    $vorname = mask($vorname);
+    $nachname = mask($nachname);
 
-    /** Prüfung, ob Nutzer bereits vorhanden */
+    /**
+        Prüfung, ob Nutzer bereits vorhanden
+    */
 
     // Prepared Statements zum Verhindern von SQL-Injektionen
     if($stmt = $mysqli->prepare("SELECT idUsers FROM users WHERE email = ? LIMIT 1")) {
@@ -524,8 +459,9 @@ function signup($email, $password, $user, $mysqli) {
 
         // Fortführung des Registrierungsprozess bei keinem vorhandenen Nutzer
         else if($stmt->num_rows == 0) {
-
-            // Salt generieren
+     /**
+        Salt generieren
+    */
             $salt = generateSalt($email, 7);
 
             // Options für Hash festlegen
@@ -534,25 +470,31 @@ function signup($email, $password, $user, $mysqli) {
                 'cost' => subStr($salt, 4, 7),
             );
 
-            // PW hashen
+    /**
+        Passwort hashen
+    */
             $password = password_hash($password, PASSWORD_BCRYPT, $options);
 
             // Erzeugen des Bestätigungscodes
             $confirmCode = createConfirmCode($mysqli);
 
-            /** Speichern in DB */
+    /**
+        Speichern in DB
+    */
             // Definieren des Status
             $status = 'inaktiv';
 
             // Speichern der Daten in der Datenbank
-            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, username) VALUES ('$email', '$password', '$salt', '$user')");
+            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, forename, surname) VALUES ('$email', '$password', '$salt', '$vorname', '$nachname')");
             $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
             $row = $result->fetch_assoc();
             $idUsers = $row['idUsers'];
-            updateStatus($email, $status, $mysqli);
+            setStatus($email, $status, $mysqli);
             $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
             sendConfirmationMail($email, $confirmCode);
             return true;
+
+
         }
 
         // Irgendwas schief gelaufen
@@ -563,22 +505,7 @@ function signup($email, $password, $user, $mysqli) {
 }
 
 /**
-    Funktionen zum Einloggen des Nutzers
 
-    @author Dennis Kalt
-    @param  string  $email          Eingegebene E-Mail-Adresse
-    @param  string  $password       Eingegebenes Passwort
-    @param  object  $mysqli         Verbindungseinstellungen
-    @return boolean
-    @version 1.0
-
-    Ablauf:
-    1. Übergabewerte validieren
-    2. Prüfung, ob Nutzer bereits vorhanden
-    3. Salt generieren
-    4. Passwort hashen
-    5. Speichern in DB
-    6. Bestätigungsmail erstellen und versenden
 */
 function login($email, $password, $mysqli) {
     /**
@@ -627,11 +554,11 @@ function login($email, $password, $mysqli) {
                         $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
                         // XSS-Schutz
-                        $usersid = preg_replace("/[^0-9]+/", "", $usersid);
-                        $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-                        $_SESSION['usersid'] = $usersid;
-                        $_SESSION['email'] = $email;
-                        $_SESSION['login_string'] = hash('sha512', $email . $user_browser);
+                        //$usersid = preg_replace("/[^0-9]+/", "", $usersid);
+                        //$_SESSION['usersid'] = $usersid;
+                        //$username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+                        //$_SESSION['username'] = $username;
+                        //$_SESSION['login_string'] = hash('sha512', $email . $user_browser);
 
                         // Login-Log
                         logLogin($usersid, $mysqli);
@@ -674,6 +601,126 @@ function login($email, $password, $mysqli) {
         return false;
     }
 }
+
+/**
+    Die "login_string" SESSION-Variable enthält die Browser-Information des Benutzers gehasht mit der E-Mail-Adresse. Die Browser-Informationen werden genutzt, denn es ist sehr unwahrscheinlich dass der Benutzer innerhalb der Sitzung den Browser wechselt.
+
+    @author Dennis Kalt
+    @param  string  $usersid        Ermittelte Users-ID
+    @param  object  $mysqli         Verbindungseinstellungen
+    @return boolean (true = mehr als x-beliebige Anmeldeversuche)
+    @version 1.0
+*/
+function login_check($mysqli) {
+    // Überprüfe, ob alle Session-Variablen gesetzt sind
+    if (isset($_SESSION['usersid'],
+              $_SESSION['username'],
+              $_SESSION['login_string']
+             )
+       ) {
+
+        $usersid = $_SESSION['usersid'];
+        $usersid = preg_replace("/[^0-9]+/", "", $usersid);
+        $login_string = $_SESSION['login_string'];
+        $username = $_SESSION['username'];
+
+        // Hole den user-agent string des Benutzers.
+        $user_browser = $_SERVER['HTTP_USER_AGENT'];
+
+        if ($stmt = $mysqli->prepare("SELECT email
+                                      FROM users
+                                      WHERE users_id = ? LIMIT 1")) {
+            // Bind "$usersid" zum Parameter.
+            $stmt->bind_param('i', $usersid);
+            $stmt->execute();   // Execute the prepared query.
+            $stmt->store_result();
+
+            if ($stmt->num_rows == 1) {
+                // Wenn es den Benutzer gibt, hole die Variablen von result.
+                $stmt->bind_result($email);
+                $stmt->fetch();
+
+                $login_check = hash('sha512', $email . $user_browser);
+
+                if ($login_check == $login_string) {
+                    // Eingeloggt!!!!
+                    return true;
+                } else {
+                    // Nicht eingeloggt
+                    return false;
+                }
+            } else {
+                // Nicht eingeloggt
+                return false;
+            }
+        } else {
+            // Nicht eingeloggt
+            return false;
+        }
+    } else {
+        // Nicht eingeloggt
+        return false;
+    }
+}
+
+/*
+ Aktivierung
+*/
+
+function activateAccount($email, $confcode, $mysqli) {
+    $email = filterEmail($email);
+    if(setStatus($email, 'aktiv', $mysqli)) {
+        list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli);
+
+        if($stmt = $mysqli->prepare("DELETE FROM confirmcodes WHERE confirmcodes.usersId = ? LIMIT 1")) {
+            $stmt->bind_param('i', $usersid);
+            $stmt->execute();
+            $stmt->store_result();
+
+            // Holt Variablen vom result
+            $stmt->bind_result($idstatus);
+            $stmt->fetch();
+            $rows = $stmt->num_rows;
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+}
+
+/**
+    Funktionen zum Zurücksetzen des Passworts
+
+    @author Dennis Kalt
+    @param  string  $email          Eingegebene E-Mail-Adresse
+    @param  object  $mysqli         Verbindungseinstellungen
+    @return boolean
+    @version 1.0
+*/
+
+function pwreset($email, $mysqli) {
+
+    if(list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli)) {
+        // Status inaktiv setzen
+        $status = 'inaktiv';
+        setStatus($email, $status, $mysqli);
+        $confirmCode = createConfirmCode($mysqli);
+        $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
+        sendConfirmationMail($email, $confirmCode);
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
+
+
 
 function changePW($email, $password, $mysqli) {
 
@@ -731,7 +778,7 @@ function changePW($email, $password, $mysqli) {
                 $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
                 $row = $result->fetch_assoc();
                 $idUsers = $row['idUsers'];
-                updateStatus($email, $status, $mysqli);
+                setStatus($email, $status, $mysqli);
                 return true;
             }
             else {

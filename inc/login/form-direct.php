@@ -2,9 +2,9 @@
 /**
     Verarbeitung des Formular-Inhaltes
 */
+session_start();
 include_once('config.php');
 include_once('functions.php');
-include_once('../data-validation/data-validation.php');
 
 // Start der PHP-Sitzung
 if (isset($_POST['email'])) {
@@ -12,14 +12,13 @@ if (isset($_POST['email'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if(!filterEmail($email) && empty($password)) {
+    /*if(!filterEmail($email) && empty($password)) {
         http_response_code(403);
-    }
+    }*/
 
 // Login-Bereich
-    if(isset($_POST['loginbtn'])) {
+    if(isset($_POST['loginbtn']) && isset($_POST['password'])) {
         // Sichere Session starten
-        sec_session_start();
         // Login erfolgreich
         if(login($email, $password, $mysqli) == true) {
             // Ausgabe gesicherte Seite
@@ -33,13 +32,13 @@ if (isset($_POST['email'])) {
     }
 
 // Signup-Bereich
-    else if(isset($_POST['signupbtn'])) {
-        $vorname = $_POST['vorname'];
-        $nachname = $_POST['nachname'];
+    else if(isset($_POST['signupbtn']) && isset($_POST['password']) && isset($_POST['user'])) {
+        $user = $_POST['user'];
         // Registrierung erfolgreich
-        if(signup($email, $password, $vorname, $nachname, $mysqli) == true) {
+        if(signup($email, $password, $user, $mysqli) == true) {
             // Ausgabe gesicherte Seite
-            header('Location: ../../index.php?register=1');
+            //header('Location: ../../index.php?register=1');
+            header('Location: register.php');
         }
         // Registrierung fehlgeschlagen
         else {

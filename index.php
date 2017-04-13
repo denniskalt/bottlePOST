@@ -4,8 +4,11 @@
         header("Location: SAFEAREA");
     }
 
-    include_once 'inc/config.php';
+    include_once 'inc/login/config.php';
     include_once 'inc/login/functions.php';*/
+    session_start();
+$value = "value";
+$_SESSION["newsession"]=$value;
 ?>
 
 <!DOCTYPE html>
@@ -138,11 +141,11 @@
                     ?>
                     <div class="group">
                         <label for="email" class="label">E-Mail-Adresse</label>
-                        <input id="email" name="email" type="email" class="input" form="login" onkeyup="loadLocalStorage();">
+                        <input id="email" name="email" type="email" class="input" form="login" onkeyup="loadLocalStorage();" required>
                     </div>
 				    <div class="group">
                         <label for="password" class="label">Passwort</label>
-                        <input id="passwordlogin" name="password" type="password" class="input" data-type="password" form="login">
+                        <input id="passwordlogin" name="password" type="password" class="input" data-type="password" form="login" required>
                     </div>
 				    <div class="group">
                         <input type="submit" class="button" name="loginbtn" value="Login" form="login"> <?php } else { ?>
@@ -159,19 +162,15 @@
                 <form id="signup" action="inc/login/form-direct.php" method="post" name="signup">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
-					   <input id="email" type="email" name="email" class="input" form="signup">
+					   <input id="email" type="email" name="email" class="input" form="signup" required>
 				    </div>
                     <div class="group">
-					   <label for="vorname" class="label">Vorname</label>
-					   <input id="vorname" type="text" name="vorname" class="input" form="signup">
-				    </div>
-                    <div class="group">
-					   <label for="nachname" class="label">Nachname</label>
-					   <input id="nachname" type="text" name="nachname" class="input" form="signup">
+					   <label for="user" class="label">Benutzername</label>
+					   <input id="user" type="text" name="user" class="input" form="signup" required>
 				    </div>
 				    <div class="group">
 					   <label for="password" class="label">Passwort</label>
-					   <input id="passwordsignup" type="password" name="password" class="input" data-type="password" form="signup">
+					   <input id="passwordsignup" type="password" name="password" class="input" data-type="password" form="signup" required>
                     </div>
                     <div class="progress">
 				        <div id="complexity-bar" class="progress-bar" role="progressbar"><h1 id="complexity" class="pull-right">Ihr Passwort ist zu <span class="complexity-value">0%</span> sicher!</h1></div>
@@ -191,7 +190,7 @@
                 <form id="pw" action="inc/login/form-direct.php" method="post" name="pw">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
-					   <input id="email" type="email" name="email" class="input" form="pw">
+					   <input id="email" type="email" name="email" class="input" form="pw" required>
 				    </div>
 				    <div class="group">
 					   <input type="submit" class="button" name="pwbtn"  value="Passwort zurücksetzen" form="pw">

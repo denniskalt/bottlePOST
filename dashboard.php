@@ -1,8 +1,10 @@
 <?php
+include_once('inc/functions.php');
+include_once('inc/login/functions.php');
+include_once('inc/login/config.php');
+session_start();
     // Bei abgelegtem User direkt an den geschützten Bereich weiterleiten
-    if(!isset($_COOKIE['user'])) {
-        header("Location: index.php");
-    }
+activateAccount('t@e.de', 'd3c664328257', $mysqli)
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +46,7 @@
     $nachname = $data["nachname"];
 ?>
     <body style="background-image: url(images/bg/<?php echo "way.jpg" ?>);">
+<?php if(login_check($mysqli) == true) { ?>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -113,7 +116,7 @@
         <div class="row-fluid">
             <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
                 <div class="info">
-                    <div id="desc-firmname" class="desc">Hallo</div>
+                    <div id="desc-firmname" class="desc">Welcome</div>
                 </div>
                 <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Register</label>
@@ -178,12 +181,32 @@
             </div>
         </div>
     </div>
-
+<?php } else { ?>
+    <div class="container-fluid">
+        <div class="row-fluid" id="login-container">
+            <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
+                <div class="cardheader">
+                    <div id="time"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
+                <div class="info">
+                    <div id="title-name" class="title">Sie sind nicht berechtigt, diese Seite zu besuchen.</div>
+                    <div id="desc-firmname" class="desc">Bitte <a href="index.php">loggen</a> Sie sich ein.</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 <script src="inc/localstorage.js" type="application/javascript"></script>
 <script type="text/javascript">
-    saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
+    saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $username ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
 </script>
 </body>
 </html>
