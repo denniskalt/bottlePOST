@@ -508,7 +508,7 @@ function signup($email, $password, $user, $mysqli) {
     /** Prüfung, ob Nutzer bereits vorhanden */
 
     // Prepared Statements zum Verhindern von SQL-Injektionen
-    if($stmt = $mysqli->prepare("SELECT idUsers FROM users WHERE email = ? LIMIT 1")) {
+    if($stmt = $mysqli->prepare("SELECT idUsers FROM users WHERE email = ? ")) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
@@ -525,6 +525,15 @@ function signup($email, $password, $user, $mysqli) {
         // Fortführung des Registrierungsprozess bei keinem vorhandenen Nutzer
         else if($stmt->num_rows == 0) {
 
+            if($stmt = $mysqli->prepare("SELECT idUsers FROM users WHERE username = ? LIMIT 1")) {
+                $stmt->bind_param('s', $user);
+                $stmt->execute();
+                $stmt->store_result();
+
+                // Holt Variablen vom result
+                $stmt->bind_result($idUsers);
+                $stmt->fetch();
+                if($stmt->num_rows == 0) {
             // Salt generieren
             $salt = generateSalt($email, 7);
 
@@ -553,8 +562,15 @@ function signup($email, $password, $user, $mysqli) {
             $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
             sendConfirmationMail($email, $confirmCode);
             return true;
+                }
+                else {
+                    return false;
+                }
         }
-
+        else {
+            return false;
+        }
+        }
         // Irgendwas schief gelaufen
         else {
             return false;

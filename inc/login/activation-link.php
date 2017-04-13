@@ -29,21 +29,7 @@ include_once('functions.php');
     <!-- Fonts -->
     <link href="../../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
-    <?php
-        if(isset($_GET["acbtn"])) {
-           $email = $_GET["email"];
-        //    if(!getUserDesign($email, $mysqli)) {
-                $bg = 'success.jpg';
-                $design = 'default';
-            }
-            else {
-        //        list($bg, $design) = getUserDesign($email, $mysqli);
-            }
-        //}
-
-
-    ?>
-<body style="background-image: url(../../images/bg/<?php echo $bg ?>);" onload="window.setInterval('updateTime()',100)">
+<body style="background-image: url(../../images/bg/way.jpg);" onload="window.setInterval('updateTime()',100)">
     <div class="container-fluid">
         <div class="row-fluid" id="login-container">
             <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
