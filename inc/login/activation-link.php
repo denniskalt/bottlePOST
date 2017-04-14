@@ -68,7 +68,7 @@ include_once('functions.php');
                     ?>
                     <div id="title-name" class="title" style="text-transform: uppercase;"><?php echo $confirmcode ?></div>
                     <div id="desc-firmname" class="desc">Aktivierungscode<br/><small style="text-decoration: underline;">Der Aktivierungscode sowie der Link (Button) würde normalerweise in der E-Mail angezeigt werden.</small></div>
-                    <a class="button activation-link" href="activate.php?email=<?php echo $email; ?>&activate=<?php echo $confirmcode; ?>">Aktivieren</a>
+                    <a class="button activation-link" href="activate.php?email=<?php echo $_GET["email"]; ?>&activate=<?php echo $confirmcode; ?>">Aktivieren</a>
                 </div>
             </div>
         </div>

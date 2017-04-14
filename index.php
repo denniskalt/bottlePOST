@@ -73,7 +73,7 @@ $_SESSION["newsession"]=$value;
 <body onload="window.setInterval('updateTime()',100)" class="<?php echo $quote[$choice]['img'];?>">
     <div class="container-fluid">
         <div class="row-fluid" id="login-container">
-            <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
+            <div class="col-lg-4 col-sm-8 col-md-5 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 tab-head">
                 <div class="cardheader">
                     <div id="time"></div>
                 </div>
@@ -81,11 +81,19 @@ $_SESSION["newsession"]=$value;
                     <img alt="Profilfoto" src="images/user.jpg" class="image-circle" id="avatar">
                 </div>
             </div>
+            <div class="col-lg-4 col-md-5 col-lg-offset-2 col-md-offset-1 hidden-sm hidden-xs tab-head">
+                <div class="cardheader">
+                    <div id="time">
+                        <p class="uhrzeit">Bitte nutze sichere Passwörter!</p>
+                        <p class="datum">Verwende zu dieses Passwort zu deiner Sicherheit an keiner anderen Stelle.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
-            <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
+            <div id="tab-wrapper" class="col-lg-4 col-sm-8 col-md-5 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
                 <div class="info">
                     <?php
                         $time = time();
@@ -199,8 +207,24 @@ $_SESSION["newsession"]=$value;
                 </div>
             </div>
         </div>
+        <div id="tab-wrapper" class="col-lg-4 col-md-5 hidden-sm hidden-xs col-lg-offset-2 col-md-offset-1 card">
+                <div class="info">
+                    <div id="title-name" class="title">Folgende Regeln wurden für deine Sicherheit implementiert:</div>
+                    <div id="desc-firmname" class="desc" style="text-align: left;"><br/>
+                        - Mindestlänge: 8 Zeichen<br/>
+                        - Davon mindestens 2 Ziffern oder Sonderzeichen<br/>
+                        <small>Erlaubt sind: _, -, #, (, ), @, §, !</small>
+                    </div>
+                    <div id="title-name" class="title" style="margin-top: 40px;">So kommst du an ein sicheres Passwort, das sich leicht merken lässt:</div>
+                    <div id="desc-firmname" class="desc" style="text-align: left;"><br/>
+                        Bilde einen Satz und setze das Passwort aus den Anfangsbuchstaben in der jeweiligen Groß- und Kleinschreibung zusammen. <br/>
+                        <small>Beispiel:<br/>"Am Sonntag stehe ich nie vor 12 Uhr auf!": ASsinv12Ua!<br/>"Morgen ist ein Feiertag - das ist aber schön!": MieF-dias!</small>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

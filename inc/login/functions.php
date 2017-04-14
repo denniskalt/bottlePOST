@@ -449,7 +449,8 @@ function pwreset($email, $mysqli) {
         $status = 'inaktiv';
         updateStatus($email, $status, $mysqli);
         $confirmCode = createConfirmCode($mysqli);
-        $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
+        $pwreset = generateConfirmCode();
+        $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId, pwreset) VALUES ('$confirmCode', '$usersid', '$pwreset')");
         sendConfirmationMail($email, $confirmCode);
         return true;
     }
@@ -561,6 +562,15 @@ function signup($email, $password, $user, $mysqli) {
             updateStatus($email, $status, $mysqli);
             $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId) VALUES ('$confirmCode', '$idUsers')");
             sendConfirmationMail($email, $confirmCode);
+
+            // Holt User-Agent-String des Nutzers
+                        $user_browser = $_SERVER['HTTP_USER_AGENT'];
+
+                        // XSS-Schutz
+                        $usersid = preg_replace("/[^0-9]+/", "", $idUsers);
+                        $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $user);
+                        $_SESSION['usersid'] = $usersid;
+                        $_SESSION['login_string'] = hash('sha512', $email . $user_browser);
             return true;
                 }
                 else {
@@ -646,7 +656,6 @@ function login($email, $password, $mysqli) {
                         $usersid = preg_replace("/[^0-9]+/", "", $usersid);
                         $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                         $_SESSION['usersid'] = $usersid;
-                        $_SESSION['email'] = $email;
                         $_SESSION['login_string'] = hash('sha512', $email . $user_browser);
 
                         // Login-Log

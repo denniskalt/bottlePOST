@@ -159,7 +159,8 @@ a.button:hover {
 }
 
 #tab-wrapper .group input[type=email]:focus,
-#tab-wrapper .group input[type=password]:focus{
+#tab-wrapper .group input[type=password]:focus,
+#tab-wrapper .group input[type=text]:focus {
     -webkit-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     -moz-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
@@ -408,7 +409,25 @@ a.button.activation-link {
     padding-right: 10px;
 }
 
+/* Modal */
+
 #myModal, #myModal p, #myModal h4 {
     text-transform: none;
     color: #3a3739;
+}
+
+.modal-content {
+    background-color: rgba(255,255,255,0.8);
+}
+
+.modal-footer .btn-default {
+	background: rgba(214,34,39,0.9);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: white;
+    border-color: transparent;
+}
+
+.modal-footer .btn-default:hover {
+    background: rgba(214,34,39,0.75);
 }

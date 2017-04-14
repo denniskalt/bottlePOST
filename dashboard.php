@@ -2,9 +2,14 @@
 include_once('inc/functions.php');
 include_once('inc/login/functions.php');
 include_once('inc/login/config.php');
-session_start();
-    // Bei abgelegtem User direkt an den geschützten Bereich weiterleiten
-activateAccount('t@e.de', 'd3c664328257', $mysqli)
+$status = session_status();
+if($status == PHP_SESSION_NONE){
+    //There is no active session
+    session_start();
+}else
+if($status == PHP_SESSION_DISABLED){
+    //Sessions are not available
+}
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +98,7 @@ activateAccount('t@e.de', 'd3c664328257', $mysqli)
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><a href="logout.php">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -204,6 +209,7 @@ activateAccount('t@e.de', 'd3c664328257', $mysqli)
     <?php } ?>
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="inc/localstorage.js" type="application/javascript"></script>
 <script type="text/javascript">
     saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $username ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');

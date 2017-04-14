@@ -47,7 +47,7 @@ include_once('functions.php');
         <div class="row-fluid">
             <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
                 <div class="info">
-                    <div id="title-name" class="title">Du wurdest erfolgreich registriert.</div>
+                    <div id="title-name" class="title">Passwort wurde zurückgesetzt!</div>
                     <div id="desc-firmname" class="desc">Es wurde eine Mail an Deine angegebene E-Mail-Adresse versendet.<br/><small style="text-decoration: underline;">Zu Demozwecken wurde eine Alternative entwickelt. Bitte klicke hierfür den Button.</small></div>
                 </div>
 <!-- Modal -->
@@ -75,6 +75,24 @@ include_once('functions.php');
                 <div id="sign-in-content" class="tab-content">
 				    <div class="group">
                         <input type="submit" class="btn btn-info btn-lg button" data-toggle="modal" data-target="#myModal" value="Aktivierung durchführen" />
+                    </div>
+                </div>
+                <div id="sign-in-content" class="tab-content">
+                <form id="login" action="pwreset.php" method="post" name="login">
+                </form>
+                    <div class="group">
+                        <label for="email" class="label">E-Mail-Adresse</label>
+                        <input id="email" name="email" type="email" class="input" form="login">
+                    </div>
+                    <div class="group">
+					   <label for="password" class="label">Passwort</label>
+					   <input id="passwordsignup" type="password" name="password" class="input" data-type="password" form="login">
+                    </div>
+                    <div class="progress">
+				        <div id="complexity-bar" class="progress-bar" role="progressbar"><h1 id="complexity" class="pull-right">Ihr Passwort ist zu <span class="complexity-value">0%</span> sicher!</h1></div>
+				    </div>
+				    <div class="group">
+                        <input type="submit" class="button" name="pwbtn" value="Passwort ändern" form="login">
                     </div>
                 </div>
             </div>

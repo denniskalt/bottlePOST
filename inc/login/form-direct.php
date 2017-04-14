@@ -52,7 +52,7 @@ if (isset($_POST['email'])) {
         // Registrierung erfolgreich
         if(pwreset($email, $mysqli) == true) {
             // Ausgabe Login-Seite
-            header('Location: ../../index.php?pwreset');
+            header('Location: pw.php');
         }
         // Registrierung fehlgeschlagen
         else {

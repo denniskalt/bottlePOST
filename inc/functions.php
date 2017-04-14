@@ -11,15 +11,12 @@ include_once('login/config.php');
 function login_check($mysqli) {
     // Überprüfe, ob alle Session-Variablen gesetzt sind
     if (isset($_SESSION['usersid'],
-              $_SESSION['email'],
-              $_SESSION['login_string']
-             )
+              $_SESSION['login_string']            )
        ) {
 
         $usersid = $_SESSION['usersid'];
         $usersid = preg_replace("/[^0-9]+/", "", $usersid);
         $login_string = $_SESSION['login_string'];
-        $email = $_SESSION['email'];
 
         // Hole den user-agent string des Benutzers.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
