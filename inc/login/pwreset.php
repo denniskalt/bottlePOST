@@ -46,8 +46,8 @@ include_once('functions.php');
     <div class="container-fluid">
         <div class="row-fluid">
             <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
-                <div class="info">
-                    <div id="title-name" class="title">Passwort wurde zurückgesetzt!</div>
+                <?php if(!isset($_GET['demo']) && isset($_GET["email"])) { ?><div class="info">
+                    <div id="title-name" class="title">Das Passwort wurde erfolgreich zurückgesetzt!</div>
                     <div id="desc-firmname" class="desc">Es wurde eine Mail an Deine angegebene E-Mail-Adresse versendet.<br/><small style="text-decoration: underline;">Zu Demozwecken wurde eine Alternative entwickelt. Bitte klicke hierfür den Button.</small></div>
                 </div>
 <!-- Modal -->
@@ -66,7 +66,26 @@ include_once('functions.php');
         <p>In der endgültigen Version würde dies entfernt werden und während des Registrierungsprozesses wird eine E-Mail an die vom User eingegebene E-Mail-Adresse gesendet, in der der Aktivierungscode sowie der Link zum Aktivieren enthalten ist.</p>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-default" href="activation-link.php">Zum Aktivierungscode</a>
+        <?php
+            $confirmcode = $_GET["activate"];
+            $email = $_GET["email"];
+            $pwreset = $_GET["pwreset"];
+            if(list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli)) {
+                if($stmt = $mysqli->prepare("SELECT users.email FROM users INNER JOIN confirmcodes ON confirmcodes.usersId=users.idUsers WHERE confirmcodes.pwreset = ? LIMIT 1")) {
+                    $stmt->bind_param('s', $pwreset);
+                    $stmt->execute();
+                    $stmt->store_result();
+
+                    $stmt->bind_result($emailDB);
+                    $stmt->fetch();
+                }
+                if($emailDB==$email) {
+
+                    $link = "pwreset.php?activate=$confirmcode&email=$email&pwreset=$pwreset&demo=1";
+                }
+            }
+        ?>
+        <a class="btn btn-default" href="<?php echo $link ?>">Zum Aktivierungscode</a>
       </div>
     </div>
 
@@ -76,13 +95,43 @@ include_once('functions.php');
 				    <div class="group">
                         <input type="submit" class="btn btn-info btn-lg button" data-toggle="modal" data-target="#myModal" value="Aktivierung durchführen" />
                     </div>
+                </div> <?php } elseif(isset($_GET["success"])){?>
+                <div class="info">
+                    <div id="title-name" class="title">Das Passwort wurde erfolgreich geändert!</div>
                 </div>
+                <div class="group">
+                    <a class="button activation-link" href="../../index.php">Bitte logge Dich ein</a>
+                </div>
+                <?php } else {?>
+
+                <?php
+
+            $confirmcode = $_GET["activate"];
+            $email = $_GET["email"];
+            $pwreset = $_GET["pwreset"];
+            if(list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli)) {
+                if($stmt = $mysqli->prepare("SELECT users.email FROM users INNER JOIN confirmcodes ON confirmcodes.usersId=users.idUsers WHERE confirmcodes.pwreset = ? LIMIT 1")) {
+                    $stmt->bind_param('s', $pwreset);
+                    $stmt->execute();
+                    $stmt->store_result();
+
+                    $stmt->bind_result($emailDB);
+                    $stmt->fetch();
+                }
+                if($emailDB==$email) {
+
+                    $email_r = $email;
+                }
+            }
+
+                ?>
                 <div id="sign-in-content" class="tab-content">
                 <form id="login" action="pwreset.php" method="post" name="login">
                 </form>
                     <div class="group">
+                        <input type="hidden" name="email" value="<?php echo $email; ?>" form="login">
                         <label for="email" class="label">E-Mail-Adresse</label>
-                        <input id="email" name="email" type="email" class="input" form="login">
+                        <p class="input"><?php echo $email; ?></p>
                     </div>
                     <div class="group">
 					   <label for="password" class="label">Passwort</label>
@@ -94,10 +143,25 @@ include_once('functions.php');
 				    <div class="group">
                         <input type="submit" class="button" name="pwbtn" value="Passwort ändern" form="login">
                     </div>
-                </div>
+                </div> <?php } ?>
             </div>
         </div>
     </div>
+    <?php
+    if(isset($_POST['pwbtn'], $_POST['password'])) {
+
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        if(changePW($email, $password, $mysqli)) {
+            header('Location: pwreset.php?success=1');
+        }
+        else {
+            header('Location: index.php?error=changepw');
+        }
+
+    }
+?>
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
     <script src="../../assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

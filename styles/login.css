@@ -164,7 +164,10 @@ div.tab-head {
 
 .tab-content .group input[type=email]:focus,
 .tab-content .group input[type=password]:focus,
-.tab-content .group input[type=text]:focus {
+.tab-content .group input[type=text]:focus,
+.tab-content .group input[type=email]:hover,
+.tab-content .group input[type=password]:hover,
+.tab-content .group input[type=text]:hover{
     -webkit-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     -moz-box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
     box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);

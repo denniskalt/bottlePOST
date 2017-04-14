@@ -151,7 +151,7 @@ function checkbrute($usersid, $mysqli) {
     @return boolean
     @version 1.0
 */
-function sendConfirmationMail($email, $confcode) {
+function sendConfirmationMail($email, $confcode, $pwreset) {
     if(strlen($confcode) > 10) {
         return false;
     }
@@ -161,21 +161,37 @@ function sendConfirmationMail($email, $confcode) {
     else {
         $to = $email; // Empfänger
         $subject = 'Aktiviere Deinen Account'; // Betreff der E-Mail
-        $activationSite = 'http://localhost/php-praktikum/inc/login/activate.php';
+        if($pwreset!="") {
+            $activationSite = 'http://localhost/php-praktikum/inc/login/pwreset.php';
+        }
+        else {
+            $activationSite = 'http://localhost/php-praktikum/inc/login/activate.php';
+        }
         // Eigentlicher E-Mail-Inhalt mit Aktivierungslink
-        $message = '
+        if($pwreset!="") {
+            $message = '
+            Dankeschön für Dein Vertrauen!
+            Dein Nutzer wurde erstellt. Bitte bestätige diesen nun noch mit einem Klick auf den Link.
 
-        Dankeschön für Dein Vertrauen!
-        Dein Nutzer wurde erstellt. Bitte bestätige diesen nun noch mit einem Klick auf den Link.
+            ------------------------
+            E-Mail-Adresse: '.$email.'
+            ------------------------
 
-        ------------------------
-        E-Mail-Adresse: '.$email.'
-        ------------------------
+            Bitte klicke auf diesen Link, um deinen Account zu aktivieren:
+            <a href="'.$activationSite.'?email='.$email.'&activate='.$confcode.'&pwreset='.$pwreset.'">'.$activationSite.'?email='.$email.'&activate='.$confcode.'&pwreset='.$pwreset.'</a>';
+        }
+        else {
+            $message = '
+            Dankeschön für Dein Vertrauen!
+            Dein Nutzer wurde erstellt. Bitte bestätige diesen nun noch mit einem Klick auf den Link.
 
-        Bitte klicke auf diesen Link, um deinen Account zu aktivieren:
-        '.$activationSite.'?email='.$email.'&activate='.$confcode.'
+            ------------------------
+            E-Mail-Adresse: '.$email.'
+            ------------------------
 
-        ';
+            Bitte klicke auf diesen Link, um deinen Account zu aktivieren:
+            <a href="'.$activationSite.'?email='.$email.'&activate='.$confcode.'">'.$activationSite.'?email='.$email.'&activate='.$confcode.'</a>';
+        }
 
         $headers = 'From: noreply@webdesign-denniskalt.de' . "\r\n"; // Header-Informationen
         mail($to, $subject, $message, $headers); // Versendet die E-Mail
@@ -288,14 +304,24 @@ function updateStatus($email, $status, $mysqli) {
         $stmt->fetch();
         $rows = $stmt->num_rows;
         if(mysqli_query($mysqli, "UPDATE users SET users.status='$idstatus' WHERE users.email='$email'")) {
-            return true;
+            if($stmt = $mysqli->prepare("SELECT confirmcodes.idConfirmcodes FROM confirmcodes INNER JOIN users ON users.idUsers = confirmcodes.usersId WHERE users.email = ?")) {
+                $stmt->bind_param('s', $email);
+                $stmt->execute();
+                $stmt->store_result();
+
+                // Holt Variablen vom result
+                $stmt->bind_result($confirmcode);
+                $stmt->fetch();
+                $rows = $stmt->num_rows;
+
+                if($stmt = $mysqli->prepare("DELETE FROM confirmcodes WHERE confirmcodes.idConfirmcodes = ?")) {
+                    $stmt->bind_param('s', $confirmcode);
+                    $stmt->execute();
+                    $stmt->close();
+                    return true;
+                }
+            }
         }
-        else {
-            return false;
-        }
-    }
-    else {
-        return false;
     }
 }
 
@@ -373,7 +399,7 @@ function generateConfirmCode() {
         $confirmCode .= $zeichen[rand(0,$anzahl-1)];
     }
     // Generate a 12 character hash
-    $confirmCode = md5($confirmCode);
+    //$confirmCode = md5($confirmCode);
     return $confirmCode;
 }
 
@@ -452,7 +478,7 @@ function pwreset($email, $mysqli) {
         $pwreset = generateConfirmCode();
         $mysqli->query("INSERT INTO confirmcodes(idConfirmcodes, usersId, pwreset) VALUES ('$confirmCode', '$usersid', '$pwreset')");
         sendConfirmationMail($email, $confirmCode);
-        return true;
+        return array($email, $confirmCode, $pwreset);
     }
     else {
         return false;
@@ -757,6 +783,7 @@ function changePW($email, $password, $mysqli) {
                 $row = $result->fetch_assoc();
                 $idUsers = $row['idUsers'];
                 updateStatus($email, $status, $mysqli);
+
                 return true;
             }
             else {

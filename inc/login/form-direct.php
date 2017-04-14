@@ -50,9 +50,10 @@ if (isset($_POST['email'])) {
 // Passwort zurücksetzen-Bereich
     else if(isset($_POST['pwbtn'])) {
         // Registrierung erfolgreich
-        if(pwreset($email, $mysqli) == true) {
+        if(list($email, $confirmcode, $pwreset) = pwreset($email, $mysqli)) {
             // Ausgabe Login-Seite
-            header('Location: pw.php');
+            //header('Location: pwreset.php?activate='.$confirmcode.'&email='.$email.'&pwreset='.$pwreset.'');
+            header("Location: pwreset.php?activate=$confirmcode&email=$email&pwreset=$pwreset");
         }
         // Registrierung fehlgeschlagen
         else {
