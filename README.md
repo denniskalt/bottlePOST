@@ -33,9 +33,9 @@ Mittels JavaScript wird auf der Startseite die Uhrzeit sowie das Datum angezeigt
 
 #### Tageszeitbasierte Begrüßung
 Auf Basis der Tageszeit wird der Nutzer mit 
-`"Guten Morgen!"`
-`"Guten Tag!"`
-`"Guten Abend!"`
+`"Guten Morgen!"`,
+`"Guten Tag!"`,
+`"Guten Abend!"` und
 `"Gute Nacht!`
 begrüßt.
 
