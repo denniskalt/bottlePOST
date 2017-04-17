@@ -9,3 +9,6 @@ Es können sich auf der Plattform mehrere Nutzer anmelden und ihre Daten über e
 2. Datenbankverbindung durch Angabe von Datenbankhost, Datenbank-Nutzername und Datenbank-Passwort in der "includes/config.php" aufbauen
 3. SQL-Skript in die angegebene Datenbank importieren
 4. Registrieren oder mit den bereits registrierten Nutzern ... einloggen. Für diese Nutzer ist das Passwort ...
+
+## Module
+### Login-Modul

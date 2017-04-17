@@ -85,7 +85,7 @@ $_SESSION["newsession"]=$value;
                 <div class="cardheader">
                     <div id="time">
                         <p class="uhrzeit">Bitte nutze sichere Passwörter!</p>
-                        <p class="datum">Verwende zu dieses Passwort zu deiner Sicherheit an keiner anderen Stelle.</p>
+                        <p class="datum">Verwende dieses Passwort zu deiner Sicherheit an keiner anderen Stelle.</p>
                     </div>
                 </div>
             </div>
