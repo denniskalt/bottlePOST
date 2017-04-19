@@ -243,8 +243,8 @@ if($status == PHP_SESSION_DISABLED){
               </ul>
             </li>-->
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu notification wide">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="loadContent();"><i class="fa fa-bell" aria-hidden="true"></i></a>
+              <ul class="dropdown-menu notification wide" id="myContent">
                 <li class="heading">Benachrichtigungen</li>
                 <li>
                     <div class="notification-wrapper">
@@ -357,3 +357,5 @@ if($status == PHP_SESSION_DISABLED){
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+<p id="myContent">
+</p>

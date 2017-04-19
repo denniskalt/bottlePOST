@@ -32,5 +32,39 @@
     message: { text: 'Aw yeah, It works!' }
   }).show(); // for the ones that aren't closable and don't fade out there is a .hide() function.
 </script>
+<script type="text/javascript">
+
+var xmlHttpObject = false;
+if (typeof XMLHttpRequest != 'undefined') {
+    xmlHttpObject = new XMLHttpRequest();
+}
+if (!xmlHttpObject) {
+    try {
+        xmlHttpObject = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch(e) {
+        try {
+            xmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch(e) {
+            xmlHttpObject = null;
+        }
+    }
+}
+
+function loadContent() {
+    xmlHttpObject.open('get','notifications.php');
+    xmlHttpObject.onreadystatechange = handleContent;
+    xmlHttpObject.send(null);
+    return false;
+}
+
+function handleContent() {
+    if (xmlHttpObject.readyState == 4)
+    {
+        document.getElementById('myContent').innerHTML = xmlHttpObject.responseText;
+    }
+}
+</script>
 </body>
 </html>
