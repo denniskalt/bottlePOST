@@ -347,7 +347,7 @@ if($status == PHP_SESSION_DISABLED){
                       <div class="list-item">Datenschutz</div>
                   </a></li>
                   <li role="separator" class="divider"></li>
-                  <li class="highlight"><a href="#">
+                  <li class="highlight"><a href="logout.php">
                       <div class="list-topic"><i class="fa fa-power-off" aria-hidden="true"></i></div>
                       <div class="list-item">Ausloggen</div>
                   </a></li>
@@ -357,5 +357,3 @@ if($status == PHP_SESSION_DISABLED){
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-<p id="myContent">
-</p>
