@@ -1,6 +1,13 @@
 <?php
-session_start();
-include_once('config.php');
+$status = session_status();
+if($status == PHP_SESSION_NONE){
+    //There is no active session
+    session_start();
+}else
+if($status == PHP_SESSION_DISABLED){
+    //Sessions are not available
+}
+include_once('../../config.php');
 include_once('functions.php');
 ?>
 <!DOCTYPE html>
@@ -19,7 +26,7 @@ include_once('functions.php');
     <meta name="viewport" content="width=devide-width, initial-scale=1.0" />
 
     <!-- Custom Styles -->
-    <link href="../../styles/style.css" rel="stylesheet" />
+    <link href="../../styles/login.css" rel="stylesheet" />
 
     <!-- Icon -->
     <link rel="shortcut icon" href="../../images/logo.png" type="image/png" />
@@ -45,7 +52,7 @@ include_once('functions.php');
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
-            <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
+            <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card show">
                 <?php if(!isset($_GET['demo']) && isset($_GET["email"])) { ?><div class="info">
                     <div id="title-name" class="title">Das Passwort wurde erfolgreich zurückgesetzt!</div>
                     <div id="desc-firmname" class="desc">Es wurde eine Mail an Deine angegebene E-Mail-Adresse versendet.<br/><small style="text-decoration: underline;">Zu Demozwecken wurde eine Alternative entwickelt. Bitte klicke hierfür den Button.</small></div>

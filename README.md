@@ -44,5 +44,3 @@ Beim Aufrufen der Startseite werden aus sechs Motivationssprüchen ein Motivatio
 
 #### LocalStorage-Funktionalitäten
 Die JavaScript-Funktionen `saveLocalStorage()` und `loadLocalStorage()` beherbergen die Logik, um den Usernamen sowie das Profilbild im LocalStorage des Nutzers nach erfolgreichem Login zu speichern und beim nächstem Aufruf der Startseite nach erfolgter Eingabe der E-Mail-Adresse einen personalisierten Begrüßungstext sowie das entsprechende Profilbild anzuzeigen.
-
-### Registrierung

@@ -1,6 +1,14 @@
 <?php
-session_start();
-include_once('config.php');
+$status = session_status();
+if($status == PHP_SESSION_NONE){
+    //There is no active session
+    session_start();
+}else
+if($status == PHP_SESSION_DISABLED){
+    //Sessions are not available
+}
+
+include_once('../../config.php');
 
 /**
 Module Name: Login-Modul

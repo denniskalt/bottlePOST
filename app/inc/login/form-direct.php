@@ -2,8 +2,7 @@
 /**
     Verarbeitung des Formular-Inhaltes
 */
-session_start();
-include_once('config.php');
+include_once('../../config.php');
 include_once('functions.php');
 
 // Start der PHP-Sitzung
@@ -22,12 +21,14 @@ if (isset($_POST['email'])) {
         // Login erfolgreich
         if(login($email, $password, $mysqli) == true) {
             // Ausgabe gesicherte Seite
-            header('Location: '.MEMBERPAGE);
+            header('Location: http://localhost/bottlepost/app/index.php'/*.MEMBERPAGE*/);
+            exit;
         }
         // Login fehlgeschlagen
         else {
             // Fehler auf Login-Seite
-            header('Location: ../../index.php?error=login');
+            header('Location: ERROR');
+            exit;
         }
     }
 
@@ -39,11 +40,13 @@ if (isset($_POST['email'])) {
             // Ausgabe gesicherte Seite
             //header('Location: ../../index.php?register=1');
             header('Location: register.php');
+            exit;
         }
         // Registrierung fehlgeschlagen
         else {
             // Fehler auf Signup-Seite
-            header('Location: ../../index.php?error=signup');
+            header('Location: ERROR');
+            exit;
         }
     }
 
@@ -54,22 +57,25 @@ if (isset($_POST['email'])) {
             // Ausgabe Login-Seite
             //header('Location: pwreset.php?activate='.$confirmcode.'&email='.$email.'&pwreset='.$pwreset.'');
             header("Location: pwreset.php?activate=$confirmcode&email=$email&pwreset=$pwreset");
+            exit;
         }
         // Registrierung fehlgeschlagen
         else {
             // Fehler bei PW-Reset
-            header('Location: ../../index.php?error=1');
+            header('Location: ERROR');
+            exit;
         }
     }
 
 // Weder der Login-, noch der Signup-Button wurde gedrückt.
     else {
-        header('Location: ../../index.php?error=push');
+        header('Location: ERROR');
+        exit;
     }
 }
 
 else {
     // Die korrekten POST-Variablen wurden nicht zu dieser Seite geschickt.
-    header('Location: ../../index.php?error=var');
+    header('Location: ERROR');
 }
 ?>

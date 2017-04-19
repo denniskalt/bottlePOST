@@ -1,6 +1,6 @@
 <?php
-include_once('../inc/functions.php');
-include_once('../inc/login/config.php');
+include_once('inc/app-functions.php');
+include_once('config.php');
 $status = session_status();
 if($status == PHP_SESSION_NONE){
     //There is no active session
@@ -21,21 +21,21 @@ if($status == PHP_SESSION_DISABLED){
     <title>PHP-Praktikum</title>
 
     <!-- Bootstrap -->
-    <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Responsive -->
     <meta name="viewport" content="width=devide-width, initial-scale=1.0" />
 
     <!-- Custom Styles -->
-    <link href="style.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
 
     <!-- Icon -->
-    <link rel="shortcut icon" href="../images/logo.png" type="image/png" />
-    <link rel="icon" href="../images/logo.png" type="image/png" />
-    <link rel="apple-touch-icon-precomposed" href="../images/icon.png" type="image/png" />
+    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
+    <link rel="icon" href="images/logo.png" type="image/png" />
+    <link rel="apple-touch-icon-precomposed" href="images/icon.png" type="image/png" />
 
     <!-- Fonts -->
-    <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <?php
     /*$user = $_COOKIE["user"];

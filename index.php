@@ -7,8 +7,6 @@
     include_once 'inc/login/config.php';
     include_once 'inc/login/functions.php';*/
     session_start();
-$value = "value";
-$_SESSION["newsession"]=$value;
 ?>
 
 <!DOCTYPE html>
@@ -21,13 +19,13 @@ $_SESSION["newsession"]=$value;
     <title>PHP-Praktikum</title>
 
     <!-- Bootstrap -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="app/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Responsive -->
     <meta name="viewport" content="width=devide-width, initial-scale=1.0" />
 
     <!-- Custom Styles -->
-    <link href="styles/login.css" rel="stylesheet" />
+    <link href="app/styles/login.css" rel="stylesheet" />
 
     <!-- Icon -->
     <link rel="shortcut icon" href="images/logo.png" type="image/png" />
@@ -78,7 +76,7 @@ $_SESSION["newsession"]=$value;
                     <div id="time"></div>
                 </div>
                 <div class="avatar">
-                    <img alt="Profilfoto" src="images/user.jpg" class="image-circle" id="avatar">
+                    <img alt="Profilfoto" src="app/images/user/default-0.jpg" class="image-circle" id="avatar">
                 </div>
             </div>
             <div class="col-lg-4 col-md-5 col-lg-offset-2 col-md-offset-1 hidden-sm hidden-xs tab-head">
@@ -142,7 +140,7 @@ $_SESSION["newsession"]=$value;
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Register</label>
                 <input id="tab-3" type="radio" name="tab" class="forgot-password"><label for="tab-3" class="tab" style="display: none;">Forgot?</label>
                 <div id="sign-in-content" class="tab-content">
-                <form id="login" action="inc/login/form-direct.php" method="post" name="login">
+                <form id="login" action="app/inc/login/form-direct.php" method="post" name="login">
                 </form>
                     <?php
                         if(!isset($_GET["register"])) {
@@ -167,7 +165,7 @@ $_SESSION["newsession"]=$value;
 				    </div>
                 </div>
                 <div id="sign-up-content" class="tab-content">
-                <form id="signup" action="inc/login/form-direct.php" method="post" name="signup">
+                <form id="signup" action="app/inc/login/form-direct.php" method="post" name="signup">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
 					   <input id="email" type="email" name="email" class="input" form="signup" required>
@@ -195,7 +193,7 @@ $_SESSION["newsession"]=$value;
                 </div>
                 <div id="forgot-password-content" class="tab-content">
                 </form>
-                <form id="pw" action="inc/login/form-direct.php" method="post" name="pw">
+                <form id="pw" action="app/inc/login/form-direct.php" method="post" name="pw">
 				    <div class="group">
 					   <label for="email" class="label">E-Mail-Adresse</label>
 					   <input id="email" type="email" name="email" class="input" form="pw" required>
@@ -227,15 +225,15 @@ $_SESSION["newsession"]=$value;
     </div>
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="inc/clock.js" type="application/javascript"></script>
-<script src="inc/localstorage.js" type="application/javascript"></script>
-<script src="inc/login/hidepw.js"></script>
+<script src="app/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="app/inc/clock.js" type="application/javascript"></script>
+<script src="app/inc/localstorage.js" type="application/javascript"></script>
+<script src="app/inc/login/hidepw.js"></script>
 <script>
     $('#passwordlogin').hidePassword(true);
     $('#passwordsignup').hidePassword(true);
 </script>
-<script type="text/javascript" src="inc/login/jquery.complexify.js"></script>
+<script type="text/javascript" src="app/inc/login/jquery.complexify.js"></script>
 <script type="text/javascript">
   (function($) {
 

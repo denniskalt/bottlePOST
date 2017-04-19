@@ -1,6 +1,6 @@
 <?php
-include_once('../inc/functions.php');
-include_once('../inc/login/config.php');
+include_once('inc/app-functions.php');
+include_once('config.php');
 include "header.php";
 if(login_check($mysqli) == true) {
 ?>

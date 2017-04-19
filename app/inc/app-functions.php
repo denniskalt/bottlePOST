@@ -1,5 +1,5 @@
 <?php
-include_once('login/config.php');
+include_once('config.php');
 /**
     Die "login_string" SESSION-Variable enthält die Browser-Information des Benutzers gehasht mit der E-Mail-Adresse. Die Browser-Informationen werden genutzt, denn es ist sehr unwahrscheinlich dass der Benutzer innerhalb der Sitzung den Browser wechselt.
     @author Dennis Kalt

@@ -26,16 +26,16 @@ function loadLocalStorage() {
             var user = Storage[2];
             var vorname = Storage[3];
             var nachname = Storage[4];
-            $("#avatar").attr("src", 'images/'+profilepic);
-            if(vorname!="" || nachname!="") {
-                document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+user+'!';
+            $("#avatar").attr("src", 'app/images/'+profilepic);
+            if(vorname!="" && nachname!="") {
+                document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';
             }
             else {
-                document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';
+                document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+user+'!';
             }
         }
         else {
-            $("#avatar").attr("src", 'images/user.jpg');
+            $("#avatar").attr("src", 'app/images/user/default-0.jpg');
         }
     }
 }

@@ -1,7 +1,7 @@
 /*
 Author:         #
 Author URI:     #
-Description:    #
+Description:    Stylesheet für den Login von bottlePost
 Version:        1.0
 License:        GNU General Public License v3
 License URI:    https://www.gnu.org/licenses/gpl-3.0.de.html
@@ -70,10 +70,38 @@ body.way {
     background-image: url(../images/bg/way.jpg);
 }
 
+/*--------------------------------------------------------------
+## Buttons and links
+--------------------------------------------------------------*/
+
 a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+a.button {
+    background: rgba(214,34,39,0.9);
+    font-size: 16px;
+    letter-spacing: 2px;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 25px;
+    width: 100%;
+    color: #FFF;
+    display: block;
+    cursor: pointer;
+    text-transform: none;
+    text-align: center;
+    margin-top: 15px;
+}
+
+a.button:hover {
+    background: rgba(214,34,39,0.75);
 }
 
 div.tab-head {
@@ -123,8 +151,14 @@ div.tab-head {
     display: none;
 }
 
+#tab-wrapper.show .tab-content {
+    display: block;
+}
+
 #tap-wrapper .group .input,
-#tap-wrapper .group .button{
+#tap-wrapper .group .button,
+.group .input,
+.group .button {
 	border:none;
 	padding:15px 20px;
 	border-radius:25px;
@@ -137,10 +171,14 @@ div.tab-head {
     display: block;
 }
 
-.tab-content .group{
+.tab-content .group,
+#tab-wrapper .group{
 	margin-bottom: 20px;
 }
 
+#tab-wrapper .group .label,
+#tab-wrapper .group .input,
+#tab-wrapper .group .button,
 .tab-content .group .label,
 .tab-content .group .input,
 .tab-content .group .button{
@@ -149,6 +187,8 @@ div.tab-head {
 	display:block;
 }
 
+#tab-wrapper .group .input,
+#tab-wrapper .group .button,
 .tab-content .group .input,
 .tab-content .group .button{
 	border:none;
@@ -157,11 +197,19 @@ div.tab-head {
 	background:rgba(255,255,255,.1);
 }
 
+#tab-wrapper .group .label,
 .tab-content .group .label{
 	color: rgba(255,255,255,.8);
 	font-size: 13px;
 }
 
+#tab-wrapper .group input[type=email]:focus,
+#tab-wrapper .group input[type=password]:focus,
+#tab-wrapper .group input[type=text]:focus,
+#tab-wrapper .group input[type=email]:hover,
+#tab-wrapper .group input[type=password]:hover,
+#tab-wrapper .group input[type=text]:hover,
+#tab-wrapper .group p.input:hover,
 .tab-content .group input[type=email]:focus,
 .tab-content .group input[type=password]:focus,
 .tab-content .group input[type=text]:focus,
@@ -173,14 +221,21 @@ div.tab-head {
     box-shadow: 0px 0px 15px 0px rgba(18,18,20,0.82);
 }
 
+#tab-wrapper .group .button,
 .tab-content .group .button{
 	background: rgba(214,34,39,0.9);
     font-size: 16px;
     letter-spacing: 2px;
+    margin-top: 20px;
 }
 
+#tab-wrapper .group .button:hover,
 .tab-content .group .button:hover {
     background: rgba(214,34,39,0.75);
+}
+
+#tab-wrapper .group p.input {
+    text-transform: none;
 }
 
 .checkbox {
@@ -262,6 +317,10 @@ div.tab-head {
 }
 
 /* Tab Header + Profil */
+div.tab-head {
+    height: 140px;
+}
+
 #time {
     margin-bottom: 70px;
     padding-top: 15px;
@@ -319,6 +378,10 @@ div.info {
 #desc-firmname small {
     font-size: 80%;
     font-style: italic;
+}
+
+a.button.activation-link {
+    margin-top: 50px;
 }
 
 /* Hide/Show Password */
@@ -486,7 +549,25 @@ div.info {
     padding-right: 10px;
 }
 
+/* Modal */
+
 #myModal, #myModal p, #myModal h4 {
     text-transform: none;
     color: #3a3739;
+}
+
+.modal-content {
+    background-color: rgba(255,255,255,0.8);
+}
+
+.modal-footer .btn-default {
+	background: rgba(214,34,39,0.9);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: white;
+    border-color: transparent;
+}
+
+.modal-footer .btn-default:hover {
+    background: rgba(214,34,39,0.75);
 }
