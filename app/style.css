@@ -1,0 +1,344 @@
+/*
+Author:         #
+Author URI:     #
+Description:    #
+Version:        1.0
+License:        GNU General Public License v3
+License URI:    https://www.gnu.org/licenses/gpl-3.0.de.html
+dunkelblau      #264890
+blau            #3884cf
+aquamarin       #0fd4cb
+türkis          #67d29e
+dunkler Sand    #b7c0a5
+heller Sand     #dfd2c1
+dunkelgrau      #3a3739 rgb(58,55,57)
+weiß            #ffffff rgb(255,255,255)
+hellgrau        #9c9b9c
+*/
+
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# General
+	## Generic styles
+	## Buttons and links
+# Forms
+# Typography
+# Footer
+# Responsive
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Import
+--------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Generic Styles
+--------------------------------------------------------------*/
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.clear {
+    clear: both;
+}
+
+body.be-different {
+    background-image: url(../images/bg/be-different.jpg);
+}
+
+body.chapter {
+    background-image: url(../images/bg/chapter.jpg);
+}
+
+body.decisions {
+    background-image: url(../images/bg/decisions.jpg);
+}
+
+body.faith {
+    background-image: url(../images/bg/faith.jpg);
+}
+
+body.success {
+    background-image: url(../images/bg/success.jpg);
+}
+
+body.way {
+    background-image: url(../images/bg/way.jpg);
+}
+
+/*--------------------------------------------------------------
+## Navigation
+--------------------------------------------------------------*/
+
+.navbar {
+    background-color: #3a3739;
+    border: 0;
+}
+
+.navbar-inner {
+    min-height: 0px;
+}
+
+.navbar > .container-fluid p.navbar-brand {
+    margin: 0;
+}
+
+p.navbar-brand {
+    margin: 0;
+    vertical-align: middle;
+    line-height: 40px;
+    color: white;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 70px;
+    height: 70px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-nav li a:hover,
+.navbar-nav li a:focus {
+    color: #3a3739;
+}
+
+.navbar-brand {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+a.navbar-brand {
+    background-color: white;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: 40px;
+}
+
+.navbar-nav a i.fa {
+    color: white;
+    font-size: 25px;
+    line-height: 70px;
+    vertical-align: middle;
+}
+
+/* Dropdown-Menüs */
+
+.dropdown-toggle {
+    color: white;
+    font-size: 20px;
+}
+
+.navbar-nav .dropdown-menu > li > a {
+    line-height: 20px;
+}
+
+.dropdown-menu a i.fa {
+    color: #9c9b9c;
+    font-size: 18px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li a {
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.dropdown-toggle img.profile {
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu {
+    padding-top: 0;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu.small {
+    width: 250px;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu.wide {
+    width: 400px;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li.heading {
+    color: #3a3739 ;
+    text-align: center;
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    text-transform: uppercase;
+    background-color: #0fd4cb;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li.heading:first-child {
+    margin-top: 0;
+}
+
+.navbar-nav i.fa {
+    color: black;
+}
+
+.dropdown-menu {
+    border: 1px solid #0fd4cb;
+}
+
+.dropdown-menu li .list-topic {
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.dropdown-menu li .list-item {
+    display: inline-block;
+}
+
+.dropdown-menu .divider {
+    margin: 0;
+    background-color: #0fd4cb;
+}
+
+.navbar-nav li.dropdown .dropdown-menu .highlight {
+    background-color: #0fd4cb;
+}
+
+.navbar-nav li.dropdown .dropdown-menu .highlight a i.fa {
+    color: #3a3739;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li {
+    background-color: rgba(223,210,193,0.4);
+    border-bottom: 1px solid #0fd4cb;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li:hover {
+    background-color: #dfd2c1;
+}
+
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+    background-color: #dfd2c1;
+}
+
+.navbar-nav li.dropdown .dropdown-menu .highlight a:hover {
+    background-color: #0dbcb4;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: #dfd2c1;
+}
+
+.nav .open > a, .nav .open > a:focus,
+.nav .open > a:hover {
+    background-color: #dfd2c1;
+}
+
+/* Notifications */
+.navbar-nav li.dropdown ul.dropdown-menu {
+    padding-bottom: 0;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li .notification-wrapper {
+    background-color: rgba(223,210,193,0.4);
+    border-bottom: 1px solid #0fd4cb;
+}
+
+.navbar-nav li.dropdown ul.dropdown-menu li .notification-wrapper:hover {
+    background-color: #dfd2c1;
+}
+
+.notification-wrapper {
+    padding: 20px;
+    clear: both;
+}
+
+.notification-wrapper .notification-image img {
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.notification-wrapper .notification-image {
+    width: 50px;
+    margin-right: 20px;
+    float: left;
+}
+
+.notification-wrapper .notification-topic {
+    width: 30px;
+    margin-left: 10px;
+    float: right;
+}
+
+.notification-wrapper .notification-item {
+    width: 230px;
+    float: left;
+    margin-top: 5px;
+}
+
+.notification-wrapper .content .notification-topic i.fa {
+    color: #9c9b9c;
+    font-size: 30px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+
+.item-title {
+    font-size: 14px;
+    color: #3a3739;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 18px;
+}
+
+.item-info {
+    font-size: 10px;
+    color: #9c9b9c;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-weight: lighter;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.item-subtitle {
+    font-size: 12px;
+    background-color: #dfd2c1;
+    border-radius: 3px;
+    line-height: 14px;
+    padding: 10px;
+    text-align: left;
+    color: #3a3739;
+    font-weight: lighter;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

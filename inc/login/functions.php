@@ -669,7 +669,6 @@ function login($email, $password, $mysqli) {
                 if(checkbrute(§usersid, $mysqli) == true) {
                     // Konto blockiert
                     header('Location: ../login.php?error=brute');
-                    break;
                 }
                 else {
                     // Überprüft, ob das Passwort in der Datenbank mit dem vom Benutzer eingegebenen Passwort übereinstimmt
