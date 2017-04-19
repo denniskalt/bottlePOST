@@ -50,7 +50,7 @@ if($status == PHP_SESSION_DISABLED){
     $nachname = $data["nachname"];*/
 ?>
 <body style="background-image: url(images/bg/way.jpg);">
-<?php //if(login_check($mysqli) == true) { ?>
+<?php if(login_check($mysqli) == true) { ?>
     <nav class="navbar navbar-custom">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -357,3 +357,4 @@ if($status == PHP_SESSION_DISABLED){
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+<?php } ?>

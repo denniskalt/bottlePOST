@@ -22,7 +22,7 @@ if (isset($_POST['email'])) {
         // Login erfolgreich
         if(login($email, $password, $mysqli) == true) {
             // Ausgabe gesicherte Seite
-            header('Location: ../../'.MEMBERPAGE);
+            header('Location: '.MEMBERPAGE);
         }
         // Login fehlgeschlagen
         else {

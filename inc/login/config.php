@@ -8,6 +8,6 @@
     $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
     //App-Konfigurationen
-    define('MEMBERPAGE', 'dashboard.php');
+    define('MEMBERPAGE', 'http://localhost/php-praktikum/app/index.php');
 
 ?>
