@@ -26,7 +26,9 @@ function loadLocalStorage() {
             var user = Storage[2];
             var vorname = Storage[3];
             var nachname = Storage[4];
-            $("#avatar").attr("src", 'app/images/'+profilepic);
+            if(profilepic!="") {
+                $("#avatar").attr("src", 'app/images/'+profilepic);
+            }
             if(vorname!="" && nachname!="") {
                 document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';
             }
@@ -35,7 +37,7 @@ function loadLocalStorage() {
             }
         }
         else {
-            $("#avatar").attr("src", 'app/images/user/default-0.jpg');
+            /*$("#avatar").attr("src", 'app/images/user/default-0.jpg');*/
         }
     }
 }
