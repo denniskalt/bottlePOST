@@ -1,21 +1,17 @@
-                <li class="heading">Benachrichtigungen</li>
 <?php
-    echo '<li><div class="notification-wrapper"><a class="content" href="#"><div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div><div class="notification-item">';
-$name = 'Max Mustermann';
-                                echo '<h4 class="item-title">'.$name.' hat deinen Post kommentiert.</h4>
-                                <p class="item-subtitle">"Das ist mein erster Kommentar zu einem Post!"</p>
-                                <p class="item-info">vor 4 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>';
-?>
+if(isset($_POST["view"])) {
+    include("config.php");
+    if($_POST["view"] != '') {
+        $update_query = "UPDATE notifications SET status=1 WHERE status=0";
+        mysqli_query($mysqli, $update_query);
+    }
+    $query = "SELECT * FROM notifications ORDER BY idNotifications DESC LIMIT 5";
+    $result = mysqli_query($mysqli, $query);
+    $output = '<li class="heading">Benachrichtigungen</li>';
+
+    if(mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_array($result)) {
+            $output .= '
                 <li>
                     <div class="notification-wrapper">
                         <a class="content" href="#">
@@ -24,64 +20,29 @@ $name = 'Max Mustermann';
                             </div>
                             <div class="notification-item">
                                 <h4 class="item-title">Dennis Kalt hat deinen Post kommentiert.</h4>
-                                <p class="item-subtitle">"Das ist mein erster Kommentar zu einem Post!"</p>
+                                <p class="item-subtitle">'.$row["message"].'</p>
                                 <p class="item-info">vor 4 Stunden</p>
                             </div>
                             <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                <i class="fa fa-commenting-o"></i>
                             </div>
                             <div class="clear"></div>
                         </a>
                     </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-2.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Lukas Bosse mag deinen Post.</h4>
-                                <p class="item-info">vor 7 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-1.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Maren Bassmann mag deinen Post.</h4>
-                                <p class="item-info">vor 8 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-2.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Lukas Bosse folgt dir nun. Schaue dir sein Profil an.</h4>
-                                <p class="item-info">18.03.2017</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-user-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
+                </li>';
+        }
+    }
+    else {
+        $output .= '<li><a href="#" class="text-bold text-italic">No Notification Found</a></li>';
+    }
+
+    $query_1 = "SELECT * FROM notifications WHERE status=0";
+    $result_1 = mysqli_query($mysqli, $query_1);
+    $count = mysqli_num_rows($result_1);
+    $data = array(
+        'notification'   => $output,
+        'unseen_notification' => $count
+    );
+    echo json_encode($data);
+}
+?>

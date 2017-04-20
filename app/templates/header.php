@@ -90,6 +90,7 @@ if($status == PHP_SESSION_DISABLED){
           </form>-->
           <ul class="nav navbar-nav navbar-right">
               <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+
             <!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Anfragen <span class="caret"></span></a>
               <ul class="dropdown-menu notification wide">
@@ -243,8 +244,11 @@ if($status == PHP_SESSION_DISABLED){
               </ul>
             </li>-->
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="loadContent();"><i class="fa fa-bell" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu notification wide" id="myContent">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="loadContent();">
+                  <span class="label label-pill label-danger count" style="border-radius:10px;"></span>
+                  <i class="fa fa-bell" aria-hidden="true"></i>
+                </a>
+              <ul class="dropdown-menu wide notification" id="myContent">
                 <li class="heading">Benachrichtigungen</li>
                 <li>
                     <div class="notification-wrapper">

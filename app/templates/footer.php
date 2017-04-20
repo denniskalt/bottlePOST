@@ -27,7 +27,8 @@
 <script type="text/javascript">
     saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $username ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
 </script>
-<script type="text/javascript">
+<script src="inc/notifications/load-notifications.js" type="application/javascript"></script>
+<!--<script type="text/javascript">
 
 var xmlHttpObject = false;
 if (typeof XMLHttpRequest != 'undefined') {
@@ -60,6 +61,22 @@ function handleContent() {
         document.getElementById('myContent').innerHTML = xmlHttpObject.responseText;
     }
 }
+</script>-->
+<script>
+$(document).ready(function(){
+ load_unseen_notification();
+
+ $(document).on('click', '.dropdown-toggle', function(){
+  $('.count').html('');
+  load_unseen_notification('yes');
+ });
+
+ setInterval(function(){
+  load_unseen_notification();
+ }, 5000);
+
+});
 </script>
+
 </body>
 </html>
