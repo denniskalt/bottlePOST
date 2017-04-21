@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 18. Apr 2017 um 11:17
+-- Erstellungszeit: 21. Apr 2017 um 02:49
 -- Server-Version: 10.1.19-MariaDB
 -- PHP-Version: 5.5.38
 
@@ -46,6 +46,13 @@ CREATE TABLE `comments` (
   `comment` varchar(240) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `comments`
+--
+
+INSERT INTO `comments` (`idComments`, `usersId`, `postsId`, `comment`) VALUES
+(1, 4, 1, 'Mein erster Kommentar. ');
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +71,7 @@ CREATE TABLE `confirmcodes` (
 --
 
 INSERT INTO `confirmcodes` (`idConfirmcodes`, `usersId`, `created`, `pwreset`) VALUES
-('cYxbp5sS79gx', 4, '2017-04-18 09:09:24', '5xwgt89E3eAQ');
+('oDadzevo39eB', 6, '2017-04-20 11:16:23', '');
 
 -- --------------------------------------------------------
 
@@ -102,6 +109,52 @@ CREATE TABLE `login_attempts` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `idNotifications` int(11) NOT NULL,
+  `notificationtypesId` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usersId` int(11) NOT NULL,
+  `commentsId` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `notifications`
+--
+
+INSERT INTO `notifications` (`idNotifications`, `notificationtypesId`, `time`, `usersId`, `commentsId`, `status`) VALUES
+(8, 1, '2017-04-03 23:11:32', 4, 1, 1),
+(9, 2, '2017-04-20 23:11:32', 4, 0, 1),
+(12, 3, '2017-04-21 00:37:45', 5, 0, 1),
+(13, 1, '2017-04-21 00:18:57', 4, 1, 1),
+(15, 3, '2017-04-21 00:46:41', 4, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `notificationtypes`
+--
+
+CREATE TABLE `notificationtypes` (
+  `idNotificationtypes` int(11) NOT NULL,
+  `description` varchar(90) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `notificationtypes`
+--
+
+INSERT INTO `notificationtypes` (`idNotificationtypes`, `description`) VALUES
+(1, 'Post kommentiert'),
+(2, 'Post geliked'),
+(3, 'Neuer Follower');
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `options`
 --
 
@@ -131,6 +184,13 @@ CREATE TABLE `posts` (
   `usersId` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `posts`
+--
+
+INSERT INTO `posts` (`idPosts`, `content`, `usersId`, `date`) VALUES
+(1, 'Mein erster Post.', 4, '2017-04-20 22:24:06');
 
 -- --------------------------------------------------------
 
@@ -166,6 +226,7 @@ CREATE TABLE `users` (
   `regDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(3) NOT NULL,
   `profilepic` varchar(90) NOT NULL,
+  `title` varchar(12) NOT NULL,
   `forename` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `birthDate` date NOT NULL,
@@ -179,11 +240,10 @@ CREATE TABLE `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`idUsers`, `username`, `email`, `password`, `salt`, `regDate`, `status`, `profilepic`, `forename`, `surname`, `birthDate`, `postcode`, `usersTypesId`, `url`, `lastLogin`) VALUES
-(4, 'tester', 'test@test.de', '$2y$07$JDJ5JDA3dGVzakpCUE5vYuTTpGaWR1/ztmBPkCCqPuplsgwULKRuq', '$2y$07tesjJBPNocKGKz-d', '2017-04-11 20:40:54', 1, 'bg/way.jpg', 'Max', 'Mustermann', '1995-07-10', '31785', 0, 'tester', '0000-00-00'),
-(5, 'dennis', 'dennis@test.de', '$2y$07$JDJ5JDA3ZGVuKcJmdVpuN.19XB/ukF0zzKtxhU0nqC006H1JqoMIu', '$2y$07den)ÂfuZn4AOz@n6', '2017-04-15 11:51:16', 2, '', '', '', '0000-00-00', '', 4, '', '0000-00-00'),
-(6, 'Cat', 'd@t.de', '$2y$07$JDJ5JDA3ZEB0UkFZRDZAQOeThTot/kvGFdXelMKGh9J9WLaxXJUlW', '$2y$07d@tRAYD6@AF1-nQC', '2017-04-16 13:33:30', 1, '', '', '', '0000-00-00', '', 0, '', '0000-00-00'),
-(7, 'test', 't@t.de', '$2y$07$JDJ5JDA3dEB0a0hPZlBIRu5pXP8odJos4tzmkYhbWyAAyPFhjdEBu', '$2y$07t@tkHOfPHGjXIYFW', '2017-04-18 08:10:08', 2, '', '', '', '0000-00-00', '', 0, '', '0000-00-00');
+INSERT INTO `users` (`idUsers`, `username`, `email`, `password`, `salt`, `regDate`, `status`, `profilepic`, `title`, `forename`, `surname`, `birthDate`, `postcode`, `usersTypesId`, `url`, `lastLogin`) VALUES
+(4, 'tester', 'test@test.de', '$2y$07$JDJ5JDA3dGVzSmM5S0kzTe5AglSdFl.XZSDx86pyr2p0.pD1omayO', '$2y$07tesJc9KI3NWf90-K', '2017-04-11 20:40:54', 2, 'user/default-0.jpg', 'Herr', 'Max', 'Mustermann', '1995-07-10', '31785', 0, 'tester', '0000-00-00'),
+(5, 'dennis', 'dennis@test.de', '$2y$07$JDJ5JDA3ZGVuKcJmdVpuN.19XB/ukF0zzKtxhU0nqC006H1JqoMIu', '$2y$07den)ÂfuZn4AOz@n6', '2017-04-15 11:51:16', 2, 'user/default-1.jpg', 'Frau', 'Julia', 'Nauer', '0000-00-00', '', 4, '', '0000-00-00'),
+(6, 'test', 't@t.de', '$2y$07$JDJ5JDA3dEB0NlCnc3M4aeom2nwjHXmp./hKXGvqUInWcj.Z6mFjO', '$2y$07t@t6P§ss8jKJ@n!.', '2017-04-20 11:16:23', 1, '', '', '', '', '0000-00-00', '', 0, '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -252,6 +312,20 @@ ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`usersId`);
 
 --
+-- Indizes für die Tabelle `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`idNotifications`),
+  ADD KEY `IX_notificationsUser` (`usersId`),
+  ADD KEY `status` (`status`);
+
+--
+-- Indizes für die Tabelle `notificationtypes`
+--
+ALTER TABLE `notificationtypes`
+  ADD PRIMARY KEY (`idNotificationtypes`);
+
+--
 -- Indizes für die Tabelle `options`
 --
 ALTER TABLE `options`
@@ -295,12 +369,22 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT für Tabelle `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `idComments` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idComments` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT für Tabelle `hashtags`
 --
 ALTER TABLE `hashtags`
   MODIFY `idHashtags` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `idNotifications` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT für Tabelle `notificationtypes`
+--
+ALTER TABLE `notificationtypes`
+  MODIFY `idNotificationtypes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT für Tabelle `options`
 --
@@ -310,7 +394,7 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT für Tabelle `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `idPosts` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPosts` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT für Tabelle `status`
 --
@@ -320,7 +404,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUsers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT für Tabelle `userstypes`
 --
