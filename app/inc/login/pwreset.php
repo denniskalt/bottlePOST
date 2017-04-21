@@ -107,7 +107,7 @@ include_once('functions.php');
                     <div id="title-name" class="title">Das Passwort wurde erfolgreich geändert!</div>
                 </div>
                 <div class="group">
-                    <a class="button activation-link" href="../../index.php">Bitte logge Dich ein</a>
+                    <a class="button activation-link" href="../../../index.php">Bitte logge Dich ein</a>
                 </div>
                 <?php } else {?>
 
