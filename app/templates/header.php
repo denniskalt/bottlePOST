@@ -37,18 +37,6 @@ if($status == PHP_SESSION_DISABLED){
     <!-- Fonts -->
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 </head>
-<?php
-    /*$user = $_COOKIE["user"];
-    $pointpos = strrpos ($user , '.');
-    $substremail = substr ($user , 0, $pointpos );
-    $data = json_decode($_COOKIE[$substremail], true);
-
-    $email = $data["email"];
-    $profilepic = $data["profilepic"];
-    $username = $data["username"];
-    $vorname = $data["vorname"];
-    $nachname = $data["nachname"];*/
-?>
 <body style="background-image: url(images/bg/way.jpg);">
 <?php if(login_check($mysqli) == true) { ?>
     <nav class="navbar navbar-custom">
@@ -244,81 +232,12 @@ if($status == PHP_SESSION_DISABLED){
               </ul>
             </li>-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="loadContent();">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="label label-pill label-danger count" style="border-radius:10px;"></span>
                   <i class="fa fa-bell" aria-hidden="true"></i>
                 </a>
               <ul class="dropdown-menu wide notification" id="myContent">
                 <li class="heading">Benachrichtigungen</li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Dennis Kalt hat deinen Post kommentiert.</h4>
-                                <p class="item-subtitle">"Das ist mein erster Kommentar zu einem Post!"</p>
-                                <p class="item-info">vor 4 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-2.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Lukas Bosse mag deinen Post.</h4>
-                                <p class="item-info">vor 7 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-1.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Maren Bassmann mag deinen Post.</h4>
-                                <p class="item-info">vor 8 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-2.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Lukas Bosse folgt dir nun. Schaue dir sein Profil an.</h4>
-                                <p class="item-info">18.03.2017</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-user-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
               </ul>
             </li>
             <li class="dropdown">
