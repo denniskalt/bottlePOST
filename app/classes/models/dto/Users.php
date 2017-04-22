@@ -7,7 +7,7 @@
      *
      */
     class Users {
-        /*var $id;
+        var $id;
         var $username;
         var $email;
         var $regDate;
@@ -19,7 +19,7 @@
         var $birthdate;
         var $postcode;
         var $userstype;
-        var $lastLogin;*/
+        var $lastLogin;
     }
 
 ?>
