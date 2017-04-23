@@ -12,4 +12,9 @@
 	require_once('dto/Users.php');
 	require_once('sqldao/UsersMySqlDAO.php');
 
+    /* Status */
+    require_once('dao/StatusDAO.php');
+	require_once('dto/Status.php');
+	require_once('sqldao/StatusMySqlDAO.php');
+
 ?>

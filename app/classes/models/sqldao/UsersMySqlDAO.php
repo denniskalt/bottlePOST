@@ -10,10 +10,6 @@ include_once('config.php');
 
     class UsersMySqlDAO  {
 
-        public function __construct() {
-            $mysqli = new mysqli('localhost', 'root', '', 'php-praktikum');
-        }
-
         /**
          * Get all Users
          * @return Users with idUsers, username, email
@@ -237,7 +233,11 @@ include_once('config.php');
         * @return affected rows
         */
         public function deleteUserById($id){
-            $sql = 'DELETE FROM users WHERE id = ?';
+            $sql = 'DELETE FROM notifications WHERE usersId = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->setNumber($id);
+            $this->executeUpdate($sqlQuery);
+            $sql = 'DELETE FROM users WHERE idUsers = ?';
             $sqlQuery = new SqlQuery($sql);
             $sqlQuery->setNumber($id);
             return $this->executeUpdate($sqlQuery);
@@ -375,14 +375,6 @@ include_once('config.php');
         protected function executeInsert($sqlQuery){
             return QueryExecutor::executeInsert($sqlQuery);
         }
-        /*public function getUsers() {
-            if($stmt = $mysqli->prepare("SELECT idUsers, username, email FROM users WHERE idUsers = ?")) {
-                $stmt->bind_param('s', $id);
-                $stmt->bind_result($id, $user, $email);
-                $stmt->fetch();
-                $stmt->close();
-            }
-        }*/
 
     }
 

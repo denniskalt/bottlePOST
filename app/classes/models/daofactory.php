@@ -14,6 +14,10 @@ class DAOFactory{
 		return new UsersMySqlDAO();
 	}
 
+    public static function getStatusDAO(){
+		return new StatusMySqlDAO();
+	}
+
 
 }
 ?>
