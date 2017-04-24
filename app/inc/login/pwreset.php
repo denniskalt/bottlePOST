@@ -164,7 +164,7 @@ include_once('functions.php');
             header('Location: pwreset.php?success=1');
         }
         else {
-            header('Location: index.php?error=changepw');
+            header('Location: ERROR');
         }
 
     }
