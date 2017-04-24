@@ -13,7 +13,7 @@ class View{
 	private $_ = array();
 
 	/**
-	 * Ordnet eine Variable einem bestimmten Schl&uuml;ssel zu.
+	 * Ordnet eine Variable einem bestimmten Schlüssel zu.
 	 *
 	 * @param String $key Schlüssel
 	 * @param String $value Variable
@@ -36,8 +36,7 @@ class View{
 	/**
 	 * Das Template-File laden und zurückgeben
 	 *
-	 * @param string $tpl Der Name des Template-Files (falls es nicht vorher
-	 * 						über steTemplate() zugewiesen wurde).
+	 * @param string $tpl Der Name des Template-Files (falls es nicht vorher über setTemplate() zugewiesen wurde).
 	 * @return string Der Output des Templates.
 	 */
 	public function loadTemplate(){

@@ -17,27 +17,27 @@ class Controller{
 	}
 
 	/**
-	 * Methode zum anzeigen des Contents.
+	 * Methode zum Anzeigen des Contents.
 	 *
-	 * @return String Content der Applikation.
+	 * @return String Inhalt der Applikation.
 	 */
-	public function display(){
+	public function display() {
 		$view = new View();
-		switch($this->template){
+
+        switch($this->template) {
 			case 'entry':
 				$view->setTemplate('entry');
 				$entryid = $this->request['id'];
-				$entry = Model::getEntry($entryid);
+				$entry = Users::getUsers();
 				$view->assign('title', $entry['title']);
 				$view->assign('content', $entry['content']);
 				break;
 
 			case 'default':
 			default:
-				$entries = Model::getEntries();
-				$view->setTemplate('default');
-				$view->assign('entries', $entries);
-		}
+                include('defaultController.php');
+                $user = new Users();
+        }
 		$this->view->setTemplate('theblog');
 		$this->view->assign('blog_title', 'Der Titel des Blogs');
 		$this->view->assign('blog_footer', 'Ein Blog von und mit MVC');

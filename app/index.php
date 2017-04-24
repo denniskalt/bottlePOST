@@ -1,7 +1,19 @@
 <?php
 require_once('classes/models/include_dao.php');
 
-    if(isset($_GET['view'])) {
+// Klassen einbinden
+include('classes/controllers/controller.php');
+include('classes/models/include_dao.php');
+include('classes/views/view.php');
+
+// $_GET und $_POST zusammenfasen, $_COOKIE interessiert uns nicht.
+$request = array_merge($_GET, $_POST);
+// Controller erstellen
+$controller = new Controller($request);
+// Inhalt der Webanwendung ausgeben.
+echo $controller->display();
+
+    /*if(isset($_GET['view'])) {
         $view = $_GET['view'];
         require 'classes/controllers/'.$view.'.php';
         $controller = new $view;
@@ -101,7 +113,7 @@ require_once('classes/models/include_dao.php');
         $user->idUsers = $id;
         $res = DAOFactory::getUsersDAO()->update($user);
         echo "Affected Rows: ";
-        print_r($res);
+        print_r($res);*/
 
         /*echo '<h3>deleteUserById($id)</h3>';
         $user = new Users();
@@ -139,7 +151,7 @@ require_once('classes/models/include_dao.php');
         echo "Affected Rows: ";
         print_r($res);*/
 
-        echo '<h1>Status</h1>';
+        /*echo '<h1>Status</h1>';
 
         $id = 1;
         $description = 'inaktiv';
@@ -165,7 +177,7 @@ require_once('classes/models/include_dao.php');
         $status->description = $description;
         $res = DAOFactory::getStatusDAO()->update($status);
         echo "Affected Rows: ";
-        print_r($res);
+        print_r($res);*/
 
         /*echo '<h3>deleteStatusById($id)</h3>';
         $status = new Status();
@@ -185,5 +197,5 @@ require_once('classes/models/include_dao.php');
         echo "Affected Rows: ";
         print_r($res);*/
 
-    }
+    //}
 ?>

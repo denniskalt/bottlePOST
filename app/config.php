@@ -9,5 +9,4 @@
 
     //App-Konfigurationen
     define('MEMBERPAGE', 'http://localhost/php-praktikum/app/index.php');
-
 ?>

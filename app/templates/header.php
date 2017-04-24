@@ -1,5 +1,4 @@
 <?php
-include_once('inc/app-functions.php');
 include_once('config.php');
 $status = session_status();
 if($status == PHP_SESSION_NONE){
@@ -36,9 +35,32 @@ if($status == PHP_SESSION_DISABLED){
 
     <!-- Fonts -->
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="inc/weather.js" type="text/javascript"></script>
 </head>
-<body style="background-image: url(images/bg/way.jpg);">
-<?php if(login_check($mysqli) == true) { ?>
+<body style="background-image: url(images/bg/blue.jpeg);">
+<?php
+/*
+// Gibt eine Instanz der Directory Klasse an $dirHandle zurück
+$dirHandle = dir("../app");
+
+// Verzeichnis Datei für Datei lesen
+while (($f = $dirHandle->read()) != false) {
+   // Nur ausgeben, wenn nicht . oder ..
+    if ($f != "." && $f != ".."){
+        // Wenn es sich um ein Verzeichnis handelt
+        if (is_dir("files/".$f)){
+            echo "<em>".$f."</em><br />";
+        }
+        else {
+            echo $f."<br />";
+        }
+    }
+}
+
+// Verzeichnis wieder schließen
+$dirHandle->close();
+    */
+?>
     <nav class="navbar navbar-custom">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -280,4 +302,3 @@ if($status == PHP_SESSION_DISABLED){
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-<?php } ?>
