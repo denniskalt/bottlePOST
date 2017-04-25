@@ -35,7 +35,7 @@ if($status == PHP_SESSION_DISABLED){
 
     <!-- Fonts -->
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="inc/weather.js" type="text/javascript"></script>
+    <link href="assets/weather-icons/css/weather-icons.min.css" rel=stylesheet />
 </head>
 <body style="background-image: url(images/bg/blue.jpeg);">
 <?php

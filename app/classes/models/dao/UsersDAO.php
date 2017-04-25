@@ -103,7 +103,7 @@
          * @param $id primary key
          * @return Users with postcode
          */
-        public function getPostcode($id);
+        public function getCity($id);
 
         /**
          * Get the code of user type

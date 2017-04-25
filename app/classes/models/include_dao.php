@@ -17,4 +17,9 @@
 	require_once('dto/Status.php');
 	require_once('sqldao/StatusMySqlDAO.php');
 
+    /* Cities */
+    require_once('dao/CitiesDAO.php');
+	require_once('dto/Cities.php');
+	require_once('sqldao/CitiesMySqlDAO.php');
+
 ?>

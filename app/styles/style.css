@@ -81,6 +81,10 @@ body.way {
     background-image: url(../images/bg/way.jpg);
 }
 
+img.circle {
+    border-radius: 50%;
+}
+
 /*--------------------------------------------------------------
 ## Navigation
 --------------------------------------------------------------*/
@@ -357,11 +361,16 @@ a.navbar-brand {
 }
 
 .widget .inner {
-    padding: 0 5px;
-    background-color: white;
+    margin: 0 15px;
 }
 
-/* Weather */
+.widget .inner .container {
+    padding: 0;
+}
+
+/*--------------------------------------------------------------
+# Weather-Widget
+--------------------------------------------------------------*/
 .row-no-gutter {
 	margin-right: 0;
 	margin-left: 0;
@@ -376,11 +385,6 @@ a.navbar-brand {
 #card {
 	background: #fff;
 	position: relative;
-
-	-webkit-box-shadow: 0px 1px 10px 0px rgba(207,207,207,1);
-	-moz-box-shadow: 0px 1px 10px 0px rgba(207,207,207,1);
-	box-shadow: 0px 1px 10px 0px rgba(207,207,207,1);
-
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-ms-transition: all 0.5s ease;
@@ -439,17 +443,6 @@ article {
 	align-self: auto;
 }
 
-.info .city:after {
-	content: '';
-	width: 15px;
-	height: 2px;
-	background: #fff;
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
-}
-
 .city span {
 	color: #fff;
 	font-size: 13px;
@@ -476,9 +469,8 @@ article {
 	-webkit-align-self: center;
 	-ms-flex-item-align: center;
 	align-self: center;
-
+    font-size: 55px;
 	overflow: visible;
-
 }
 
 
@@ -487,6 +479,13 @@ article {
 	display: block;
 	position: relative;
 	font-weight: bold;
+}
+
+.temp span.temp {
+    font-size: 50%;
+    display: inline;
+    line-height: 73px;
+    vertical-align: top;
 }
 
 svg {
@@ -531,38 +530,60 @@ figure {
     transition: all 0.5s ease;
 }
 
-.days .row [class*="col-"]:nth-child(2) .day  {
-    border-width: 0 1px 0 1px;
-    border-style: solid;
-    border-color: #eaeaea;
+/*.day {
+    background-color: #2a4a71;
+    margin-bottom: -10px;
+}*/
+
+/*--------------------------------------------------------------
+# New Post-Widget
+--------------------------------------------------------------*/
+.post-text {
 }
 
-.days .row [class*="col-"] {
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+.post-text .inner {
 }
 
-.days .row [class*="col-"]:hover{
-	background: #eaeaea;
+.post-text .inner .container-fluid .user img {
+    width: 70%;
+    margin-top: 5px;
+    margin-left: 10%;
 }
 
-.day {
-	padding: 10px 0px;
-	text-align: center;
-
+.post-textarea {
+    border: 0;
 }
 
-.day h1 {
-	font-size: 14px;
-	text-transform: uppercase;
-	margin-top: 10px;
+#tabs {
+    padding: 0;
 }
 
-.day svg {
-	color: #000;
-	width: 32px;
-	height: 32px;
+#tabs .nav-pills > li > a {
+    border-radius: 4px 4px 0 0 ;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#tabs .tab-content {
+    color : black;
+    background-color: #fafafa;
+    padding : 10px 15px;
+}
+
+.nav-pills > li.active > a {
+    background-color: rgba(250,250,250,0.8);
+    cursor: initial;
+    color: #3a3739;
+}
+
+.nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    background-color: rgba(250,250,250,0.4);
+    opacity: 0.8;
+    cursor: initial;
+}
+
+.nav-pills {
+    border-radius: 4px 4px 0 0 ;
+    background-color: rgba(250,250,250,0.8);
 }

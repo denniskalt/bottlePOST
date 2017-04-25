@@ -15,7 +15,7 @@ include_once('config.php');
          * @return Users with idUsers, username, email
          */
         public function getUsers() {
-            $sql = 'SELECT idUsers, username, email FROM users';
+            $sql = 'SELECT * FROM users';
 		    $sqlQuery = new SqlQuery($sql);
 		    return $this->getList($sqlQuery);
         }
@@ -165,12 +165,12 @@ include_once('config.php');
         }
 
         /**
-         * Get postcode
+         * Get cities id
          * @param $id primary key
-         * @return Users with postcode
+         * @return Users with id from cities
          */
-        public function getPostcode($id) {
-            $sql = 'SELECT postcode FROM users WHERE idUsers = ?';
+        public function getCity($id) {
+            $sql = 'SELECT citiesId FROM users WHERE idUsers = ?';
             $sqlQuery = new SqlQuery($sql);
             $sqlQuery->set($id);
             return $this->getList($sqlQuery);
@@ -318,7 +318,7 @@ include_once('config.php');
             if(isset($row['forename'])) { $user->forename = $row['forename']; }
             if(isset($row['surname'])) { $user->surname = $row['surname']; }
             if(isset($row['birthDate'])) { $user->birthDate = $row['birthDate']; }
-            if(isset($row['postcode'])) { $user->postcode = $row['postcode']; }
+            if(isset($row['citiesId'])) { $user->city = $row['citiesId']; }
             if(isset($row['usersTypesId'])) { $user->usersTypesId = $row['usersTypesId']; }
             if(isset($row['lastLogin'])) { $user->lastLogin = $row['lastLogin']; }
 

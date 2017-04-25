@@ -18,6 +18,10 @@ class DAOFactory{
 		return new StatusMySqlDAO();
 	}
 
+    public static function getCitiesDAO(){
+		return new CitiesMySqlDAO();
+	}
+
 
 }
 ?>

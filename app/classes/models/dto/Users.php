@@ -16,8 +16,8 @@
         var $title;
         var $forename;
         var $surname;
-        var $birthdate;
-        var $postcode;
+        var $birthDate;
+        var $city;
         var $userstype;
         var $lastLogin;
     }
