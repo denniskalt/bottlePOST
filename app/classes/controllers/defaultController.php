@@ -33,7 +33,7 @@
     // Sample auf API ändern
 
     $appid = '721d32d59d8826ee442431c9d08d9039';
-    $weather_url = 'http://samples.openweathermap.org/data/2.5/weather?id='.$idCities.'&APPID='.$appid;
+    $weather_url = 'http://api.openweathermap.org/data/2.5/weather?id='.$idCities.'&APPID='.$appid;
     $weather_json = file_get_contents($weather_url);
     $weather_array = json_decode($weather_json, true);
     // Temperatur

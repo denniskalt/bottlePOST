@@ -7,8 +7,10 @@ if(login_check($mysqli) == true) {
 ?>
 <h1></h1>
 <?php echo $this->_['blog_content']; } ?>
-<hr />
-<?php echo $this->_['blog_footer']; ?>
+<footer>
+<!--<hr />-->
+<?php //echo $this->_['blog_footer']; ?>
 <?php
 include "footer.php";
 ?>
+</footer>

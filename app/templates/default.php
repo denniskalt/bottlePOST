@@ -1,13 +1,11 @@
 <div class="container-fluid wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1><?php print_r($w = $this->_['weather_array']['weather'][0]['icon']);?></h1>
-            <h1><?php print_r($w['icon']) ?></h1>
-            <h1><?php //print_r($this->_['userSession']); ?></h1>
+
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 widget" >
+        <div class="col-lg-3 widget widget-weather">
             <div class="inner">
                 <div class="container-fluid">
                     <div class="row">
@@ -19,7 +17,6 @@
                                             <div class="city"><?php echo $this->_['user'][0]->name; ?></div>
                                             <div class="night"><?php echo $this->_['tageszeit']; ?> - <?php echo $this->_['datacalc']; ?></div>
                                             <div class="temp"><?php echo $this->_['temperature']; ?> <span class="temp">°C</span></div>
-
                                             <div class="wind">
                                                 <svg version="1.1" id="wind" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                      viewBox="0 0 300.492 300.492" style="enable-background:new 0 0 300.492 300.492;" xml:space="preserve">
@@ -53,16 +50,12 @@
                                                         </g>
                                                     </g>
                                                 </g>
-
                                                 <span><?php echo $this->_['wind']; ?> km/h</span>
                                             </div>
                                         </div>
-
                                         <div class="icon">
-
                                             <i class="wi <?php echo $this->_['weather']; ?>"></i>
                                         </div>
-
                                     </article>
                                     <figure style="background-image: url(images/country/de.jpg);"></figure>
                                     <!--<div class="day">
@@ -75,44 +68,172 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5 widget post-text" >
+        <div class="col-lg-5 widget widget-post">
             <div class="inner">
-                <div class="container-fluid">
-                    <div class="row">
-                        <form accept-charset="UTF-8" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                            <div id="tabs" class="container-fluid">
-                                <ul class="nav nav-pills">
-                                    <li class="active">
-                                        <a href="#1b" data-toggle="tab">Status</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content clearfix">
-                                    <div class="tab-pane active" id="1b">
-                                        <div class="col-lg-2 user">
-                                            <img class="circle" src="images/user/default-0.jpg" />
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <textarea class="post-textarea" id="new_post" name="new_post"
-            placeholder="Type in your message" rows="5"></textarea>
-                                            <span class="characters-remaining">160 Zeichen verbleibend</span>
-                                            <button class="btn btn-info" type="submit">Status posten</button>
-                                        </div>
+             <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                            <img src="images/bg/way.jpg" />
+                        </div>
+                        <div class="user">
+                            <img class="img-circle" src="images/user/default-0.jpg"/>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <form>
+                                    <textarea class="form-control" rows="3" id="posting" name="posting" maxlength="160"></textarea>
+                                    <span id="count_message" class="characters-remaining">160 Zeichen verbleibend</span>
+                                    <button class="btn btn-info btn-post" type="submit">Status posten</button>
+                                </form>
+                                <div class="clear"></div>
+
+                            </div>
+                            <!--<div class="footer">
+                                <a class="btn btn-simple" href="profile.php">
+                                    <i class="fa fa-mail-forward"></i> Zum Profil
+                                </a>
+                            </div>-->
+                        </div>
+                        </div> <!-- end front panel -->
+                    </div> <!-- end card -->
+                </div> <!-- end card-container -->
+            </div> <!-- end col sm 3 -->
+        </div>
+        <div class="col-lg-4 widget widget-stats">
+            <div class="inner">
+             <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="content">
+                            <div class="main">
+                                <h3 class="name">Max Mustermann</h3>
+                                <p class="profession">@tester</p>
+                                <div class="stats-container">
+                                    <div class="stats">
+                                        <h4>235</h4>
+                                        <p>
+                                            folgen Dir
+                                        </p>
+                                    </div>
+                                    <div class="stats">
+                                        <h4>114</h4>
+                                        <p>
+                                            folgst Du
+                                        </p>
+                                    </div>
+                                    <div class="stats">
+                                        <h4>35</h4>
+                                        <p>
+                                            Muschelpoints
+                                        </p>
                                     </div>
                                 </div>
-
-
-                        </form>
+                                <div class="clear"></div>
+                                <!--<p class="text-center">"Hier werden später Erinnerungen angezeigt."</p>-->
+                            </div>
+                            <div class="footer">
+                                <a class="btn btn-simple" href="profile.php">
+                                    <i class="fa fa-mail-forward"></i> Zum Profil
+                                </a>
+                            </div>
+                        </div>
+                        </div> <!-- end front panel -->
+                    </div> <!-- end card -->
+                </div> <!-- end card-container -->
+            </div> <!-- end col sm 3 -->
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-5 widget col-lg-offset-3">
+        <div class="inner">
+            <div class="[ panel panel-default ] panel-google-plus">
+                <!--<div class="dropdown">
+                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+                    </span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                    </ul>
+                </div>-->
+                <div class="panel-google-plus-tags">
+                    <ul>
+                        <li><a href="">~Millennials</a></li>
+                        <li><a href="">~Generation</a></li>
+                        <li><a href="">~Test</a></li>
+                    </ul>
+                </div>
+                <div class="panel-heading">
+                    <img class="circle pull-left" src="images/user/default-2.jpg" alt="" />
+                    <h3><a href="">Lukas Bosse</a></h3>
+                    <h5><span>vor 2 Stunden</span> </h5>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem Ipsum Dolor Sit amet.</p>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="[ btn btn-default ]">+1</button>
+                    <button type="button" class="[ btn btn-default ]">-1</button>
+                    <!--<button type="button" class="[ btn btn-default ]">
+                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
+                    </button>-->
+                    <div class="input-placeholder">Kommentiere...</div>
+                </div>
+                <div class="panel-google-plus-comment">
+                    <img class="img-circle" src="images/user/default-0.jpg" alt="" />
+                    <div class="panel-google-plus-textarea">
+                        <textarea rows="4" class="form-control"></textarea>
+                        <button type="submit" class="[ btn btn-info disabled ]">Kommentar abschicken</button>
+                        <button type="reset" class="[ btn btn-default ]">Schließen</button>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-        <!--<div class="col-lg-4 widget" >
-            <div class="inner">
-
+        </div>
+            <div class="col-lg-5 widget col-lg-offset-3">
+        <div class="inner">
+            <div class="[ panel panel-default ] panel-google-plus">
+                <div class="panel-google-plus-tags">
+                    <ul>
+                        <li><a href="">~Millennials</a></li>
+                        <li><a href="">~Generation</a></li>
+                        <li><a href="">~Test</a></li>
+                    </ul>
+                </div>
+                <div class="panel-heading">
+                    <img class="circle pull-left" src="images/user/default-2.jpg" alt="" />
+                    <h3><a href="">Lukas Bosse</a></h3>
+                    <h5><span>vor 2 Stunden</span> </h5>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem Ipsum Dolor Sit amet.</p>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="[ btn btn-default ]">+1</button>
+                    <button type="button" class="[ btn btn-default ]">-1</button>
+                    <div class="input-placeholder">Kommentiere...</div>
+                </div>
+                <div class="panel-google-plus-comment">
+                    <img class="img-circle" src="images/user/default-0.jpg" alt="" />
+                    <div class="panel-google-plus-textarea">
+                        <textarea rows="4" class="form-control"></textarea>
+                        <button type="submit" class="[ btn btn-info disabled ]">Kommentar abschicken</button>
+                        <button type="reset" class="[ btn btn-default ]">Schließen</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-        </div>-->
+        </div>
+        </div>
     </div>
 </div>
+<div class="clear"></div>
+
 
 
 

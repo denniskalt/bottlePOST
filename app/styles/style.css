@@ -362,10 +362,15 @@ a.navbar-brand {
 
 .widget .inner {
     margin: 0 15px;
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
 }
 
 .widget .inner .container {
     padding: 0;
+}
+
+.widget-post {
+    margin-bottom: 30px;
 }
 
 /*--------------------------------------------------------------
@@ -390,6 +395,7 @@ a.navbar-brand {
 	-ms-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
+    border-radius: 4px;
 }
 
 .city-selected {
@@ -397,6 +403,7 @@ a.navbar-brand {
 	overflow: hidden;
 	min-height: 200px;
 	background: #3D6AA2;
+    border-radius: 4px;
 }
 
 article {
@@ -457,7 +464,7 @@ article {
 	text-transform: uppercase;
 }
 
-.icon {
+#card .icon {
 	width: 84px;
 	height: 84px;
 	-webkit-order: 0;
@@ -571,19 +578,582 @@ figure {
     padding : 10px 15px;
 }
 
+#tabs .tab-footer {
+    background-color: rgb(245, 245, 245);
+    height: 55px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #3a3739;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+span.characters-remaining {
+    margin-top: 5px;
+    vertical-align: middle;
+    display: block;
+}
+
+.tab-footer .btn {
+    text-align: right;
+    float: right;
+    margin-top: 11px;
+}
+
 .nav-pills > li.active > a {
-    background-color: rgba(250,250,250,0.8);
+    background-color: rgb(245, 245, 245, 0.5);
     cursor: initial;
     color: #3a3739;
 }
 
 .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
-    background-color: rgba(250,250,250,0.4);
-    opacity: 0.8;
+    background-color: rgb(245, 245, 245, 0.4)
     cursor: initial;
 }
 
 .nav-pills {
     border-radius: 4px 4px 0 0 ;
     background-color: rgba(250,250,250,0.8);
+}
+
+/* Status */
+.label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-control {
+    display: block;
+    height: 36px;
+    width: 100%;
+    border: none;
+    border-radius: 0 !important;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid #757575;
+    border-left: 1px solid #757575;
+    max-width: 100%;
+    padding: 5px;
+    min-height: 50px;
+}
+
+.form-control:focus {
+    border-color: #757575;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+/* Events */
+.widget.events .inner {
+    background-color: green;
+}
+
+.widget.events .icon {
+    font-family: 'Calibri light', sans-serif;
+    display: inline-block;
+    font-size: 38px;
+    color: #fafafa;
+    font-weight: lighter;
+}
+
+/* Posting */
+.panel-google-plus {
+    padding: 15px;
+    position: relative;
+    border-radius: 0px;
+    border: 1px solid rgb(216, 216, 216);
+    font-family: 'Roboto', sans-serif;
+}
+.panel-google-plus > .dropdown {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+.panel-google-plus > .dropdown > span > span {
+    font-size: 10px;
+}
+.panel-google-plus > .dropdown > .dropdown-menu {
+    left: initial;
+    right: 0px;
+    border-radius: 2px;
+}
+
+.panel-google-plus > .panel-heading,
+.panel-google-plus > .panel-footer {
+    background-color: rgb(255, 255, 255);
+    border-width: 0px;
+}
+.panel-google-plus .panel-heading {
+    padding: 0;
+    margin-bottom: 10px;
+}
+.panel-google-plus .panel-body {
+    padding: 0;
+}
+
+.panel-google-plus > .panel-heading {
+    padding-bottom: 5px;
+}
+.panel-google-plus > .panel-heading > img {
+    margin-right: 15px;
+    height: 50px;
+    width: 50px;
+}
+.panel-google-plus > .panel-heading > h3 a {
+    margin: 0px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    font: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+.panel-google-plus > .panel-heading > h5 {
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    font-weight: 400;
+}
+.panel-google-plus > .panel-body {
+    padding-top: 5px;
+    font-size: 13px;
+}
+.panel-google-plus > .panel-body > .panel-google-plus-image {
+    display: block;
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(217, 217, 217);
+}
+.panel-google-plus > .panel-body > .panel-google-plus-image > img {
+    max-width: 100%;
+}
+
+.panel-google-plus > .panel-footer {
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 54px;
+}
+.panel-google-plus > .panel-footer > .btn {
+    float: left;
+    margin-right: 8px;
+}
+.panel-google-plus > .panel-footer > .input-placeholder {
+    display: block;
+    margin-left: 98px;
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 8px 6px 7px;
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 0px 0px;
+}
+.panel-google-plus.panel-google-plus-show-comment > .panel-footer > .input-placeholder {
+    display: none;
+}
+.panel-google-plus > .panel-google-plus-comment {
+    display: none;
+    padding: 10px 20px 15px 5px;
+    border-top: 1px solid #EEEEEE;
+}
+.panel-google-plus .panel-google-plus-comment img {
+    height: 46px;
+    border-radius: 50%;
+}
+.panel-google-plus.panel-google-plus-show-comment > .panel-google-plus-comment {
+    display: block;
+}
+/*.panel-google-plus > .panel-google-plus-comment > img {
+    float: left;
+}*/
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea {
+    float: right;
+    width: calc(100% - 56px);
+}
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > textarea {
+    display: block;
+    width: 100%;
+    resize: vertical;
+}
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > .btn {
+    margin-top: 10px;
+    margin-right: 8px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+.panel-google-plus .panel-google-plus-tags {
+    position: absolute;
+    top: 10px;
+    right: -3px;
+}
+
+.panel-google-plus .panel-google-plus-tags ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-right: 3px solid rgb(66, 127, 237);
+}
+
+.panel-google-plus .panel-google-plus-tags ul:hover {
+    box-shadow: 0px 0px 3px rgb(0, 0, 0);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+}
+
+.panel-google-plus .panel-google-plus-tags ul li {
+    display: block;
+    padding: 5px 0;
+    background-color: rgb(245, 245, 245);
+    font-size: 12px;
+    overflow: hidden;
+    right: 0px;
+    width: 0px;
+}
+
+.panel-google-plus > .panel-google-plus-tags > ul > li:after {
+    height: 100%;
+}
+
+.panel-google-plus .panel-google-plus-tags ul li a,
+.panel-google-plus .panel-google-plus-tags ul li a:active{
+    color: #333;
+    text-decoration: none;
+}
+
+.panel-google-plus > .panel-google-plus-tags > ul:hover > li,
+.panel-google-plus > .panel-google-plus-tags > ul > li:first-child {
+    padding: 5px 15px 5px 10px;
+    width: auto;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.panel-google-plus .panel-google-plus-tags ul li:hover,
+.panel-google-plus .panel-google-plus-tags ul li:hover a{
+    background-color: rgb(66, 127, 237);
+    color: rgb(255, 255, 255);
+}
+
+/*
+.panel-google-plus > .panel-google-plus-tags > ul > li {
+    display: block;
+    right: 0px;
+    width: 0px;
+    padding: 5px 0px 5px 0px;
+    background-color: rgb(245, 245, 245);
+    font-size: 12px;
+    overflow: hidden;
+}
+.panel-google-plus > .panel-google-plus-tags > ul > li::after {
+    content:"";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+	border-right: 3px solid rgb(66, 127, 237);
+}
+.panel-google-plus > .panel-google-plus-tags > ul:hover > li,
+.panel-google-plus > .panel-google-plus-tags > ul > li:first-child {
+    padding: 5px 15px 5px 10px;
+    width: auto;
+    cursor: pointer;
+    margin-left: auto;
+}
+.panel-google-plus > .panel-google-plus-tags > ul:hover > li {
+    background-color: rgb(255, 255, 255);
+}
+.panel-google-plus > .panel-google-plus-tags > ul > li:hover,
+.panel-google-plus > .panel-google-plus-tags > ul > li:hover a{
+    background-color: rgb(66, 127, 237);
+    color: rgb(255, 255, 255);
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Rotating Card */
+.card{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 4px;
+    color: #444444;
+}
+.card-container {
+	width: 100%;
+	border-radius: 4px;
+	-webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+}
+.card .cover{
+    height: 105px;
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+}
+.card .cover img{
+    width: 100%;
+}
+.card .user{
+    border-radius: 50%;
+    display: block;
+    height: 120px;
+    margin: -55px auto 0;
+    overflow: hidden;
+    width: 120px;
+}
+.card .user img{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 4px solid #FFFFFF;
+    width: 100%;
+}
+
+.card .content{
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+    padding: 10px 20px 20px;
+}
+.card .back .content .main {
+    height: 215px;
+}
+.card .name {
+		font-family: 'Arima Madurai', cursive;
+    font-size: 22px;
+    line-height: 28px;
+    margin: 10px 0 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+.card h5{
+    margin: 5px 0;
+    font-weight: 400;
+    line-height: 20px;
+}
+.card .profession{
+    color: #999999;
+    text-align: center;
+}
+.card .footer {
+    border-top: 1px solid #EEEEEE;
+    color: #999999;
+    margin: 30px 0 0;
+    padding: 10px 0 0;
+    text-align: center;
+}
+.card .footer .social-links{
+    font-size: 18px;
+}
+.card .footer .social-links a{
+    margin: 0 7px;
+}
+.card .footer .btn-simple{
+    margin-top: -6px;
+}
+.card .header {
+    padding: 15px 20px;
+    height: 90px;
+}
+.card .motto{
+		font-family: 'Arima Madurai', cursive;
+    border-bottom: 1px solid #EEEEEE;
+    color: #999999;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.card .stats-container{
+	width: 100%;
+	margin-top: 10px;
+}
+.card .stats{
+	display: block;
+	float: left;
+	width: 33.333333%;
+	text-align: center;
+    margin-bottom: 10px;
+}
+
+.card .stats:first-child{
+	border-right: 1px solid #EEEEEE;
+}
+.card .stats:last-child{
+	border-left: 1px solid #EEEEEE;
+}
+.card .stats h4{
+		font-family: 'Arima Madurai', cursive;
+	font-weight: 300;
+	margin-bottom: 5px;
+}
+.card .stats p{
+	color: #777777;
+}
+/*      Just for presentation        */
+
+.title{
+    color: #506A85;
+    text-align: center;
+    font-weight: 300;
+    font-size: 44px;
+    margin-bottom: 90px;
+    line-height: 90%;
+}
+.title small{
+    font-size: 17px;
+    color: #999;
+    text-transform: uppercase;
+    margin: 0;
+}
+.space-30{
+	height: 30px;
+	display: block;
+}
+.space-50{
+    height: 50px;
+    display: block;
+}
+.space-200{
+    height: 200px;
+    display: block;
+}
+.white-board{
+    background-color: #FFFFFF;
+    min-height: 200px;
+    padding: 60px 60px 20px;
+}
+.ct-heart{
+    color: #F74933;
+}
+
+ pre.prettyprint{
+    background-color: #ffffff;
+    border: 1px solid #999;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: left;
+}
+.atv, .str{
+    color: #05AE0E;
+}
+.tag, .pln, .kwd{
+     color: #3472F7;
+}
+.atn{
+  color: #2C93FF;
+}
+.pln{
+   color: #333;
+}
+.com{
+    color: #999;
+}
+
+.btn-simple{
+    opacity: .8;
+    color: #666666;
+    background-color: transparent;
+}
+
+.btn-simple:hover,
+.btn-simple:focus{
+    background-color: transparent;
+    box-shadow: none;
+    opacity: 1;
+}
+.btn-simple i{
+    font-size: 16px;
+}
+
+.navbar-brand-logo{
+    padding: 0;
+}
+.navbar-brand-logo .logo{
+    border: 1px solid #333333;
+    border-radius: 50%;
+    float: left;
+    overflow: hidden;
+    width: 60px;
+}
+.navbar .navbar-brand-logo .brand{
+    color: #FFFFFF;
+    float: left;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 60px;
+}
+.navbar-default .navbar-brand-logo .brand{
+    color: #555;
+}
+
+.btn-post {
+    width: 30%;
+    /*float: right;*/
+    margin-top: 15px;
+    text-align: center;
+    margin-left: 35%;
 }
