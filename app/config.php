@@ -8,5 +8,5 @@
     $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
     //App-Konfigurationen
-    define('MEMBERPAGE', 'http://localhost/php-praktikum/app/index.php');
+    define('MEMBERPAGE', 'http://localhost/bottlepost/app/index.php');
 ?>

@@ -228,17 +228,17 @@ function sendConfirmationMail($email, $confcode, $pwreset) {
     @version 1.0
 */
 function getUser($email, $mysqli) {
-        $stmt = $mysqli->prepare("SELECT idUsers, username, email, password, salt, regDate, status.beschreibung, profilepic, forename, surname, birthDate, postcode, usersTypesId, url FROM users INNER JOIN status ON status.idStatus=users.status WHERE email = ? LIMIT 1");
+        $stmt = $mysqli->prepare("SELECT idUsers, username, email, password, salt, status.beschreibung, profilepic, forename, surname FROM users INNER JOIN status ON status.idStatus=users.status WHERE email = ? LIMIT 1");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
 
         // Holt Variablen vom result
-        $stmt->bind_result($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url);
+        $stmt->bind_result($usersid, $username, $email, $password, $salt, $status, $profilepic, $forename, $surname);
         $stmt->fetch();
         $rows = $stmt->num_rows;
 
-        return array($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url);
+        return array($usersid, $username, $email, $password, $salt, $status, $profilepic, $forename, $surname);
 }
 
 /**
@@ -440,7 +440,7 @@ function createConfirmCode($mysqli) {
 function activateAccount($email, $confcode, $mysqli) {
     $email = filterEmail($email);
     if(updateStatus($email, 'aktiv', $mysqli)) {
-        list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli);
+        list ($usersid, $username, $email, $password, $salt, $status, $profilepic, $forename, $surname) = getUser($email, $mysqli);
 
         if($stmt = $mysqli->prepare("DELETE FROM confirmcodes WHERE confirmcodes.usersId = ? LIMIT 1")) {
             $stmt->bind_param('i', $usersid);
@@ -478,7 +478,7 @@ function activateAccount($email, $confcode, $mysqli) {
 */
 function pwreset($email, $mysqli) {
 
-    if(list ($usersid, $username, $email, $password, $salt, $regDate, $status, $profilepic, $forename, $surname, $birthDate, $postcode, $usersTypesId, $url) = getUser($email, $mysqli)) {
+    if(list ($usersid, $username, $email, $password, $salt, $status, $profilepic, $forename, $surname) = getUser($email, $mysqli)) {
         // Status inaktiv setzen
         $status = 'inaktiv';
         updateStatus($email, $status, $mysqli);
@@ -589,7 +589,7 @@ function signup($email, $password, $user, $mysqli) {
             $status = 'inaktiv';
 
             // Speichern der Daten in der Datenbank
-            mysqli_query($mysqli, "INSERT INTO users(email, password, salt, username) VALUES ('$email', '$password', '$salt', '$user')");
+            mysqli_query($mysqli, "INSERT INTO users(citiesId, email, password, salt, username) VALUES ('2911271', '$email', '$password', '$salt', '$user')");
             $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
             $row = $result->fetch_assoc();
             $idUsers = $row['idUsers'];
