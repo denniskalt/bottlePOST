@@ -724,6 +724,9 @@ span.characters-remaining {
     padding-top: 5px;
     font-size: 13px;
 }
+.panel-google-plus .panel-body p {
+    font-size: 16px;
+}
 .panel-google-plus > .panel-body > .panel-google-plus-image {
     display: block;
     text-align: center;

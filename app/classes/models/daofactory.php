@@ -22,6 +22,14 @@ class DAOFactory{
 		return new CitiesMySqlDAO();
 	}
 
+    public static function getCommentsDAO(){
+		return new CommentsMySqlDAO();
+	}
+
+    public static function getPostsDAO(){
+		return new PostsMySqlDAO();
+	}
+
 
 }
 ?>

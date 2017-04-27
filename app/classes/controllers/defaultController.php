@@ -21,6 +21,10 @@
         }
     }
 
+    /**
+	 * Wetter-Widget
+	 */
+
     // Ort herausbekommen
     $res = DAOFactory::getUsersDAO()->getUserById($usersId);
     $idCities = DAOFactory::getUsersDAO()->getCity($usersId);
@@ -142,5 +146,76 @@
             $view->assign('tageszeit', "Nachts");
             break;
     }
+
+    /**
+	 * Post-Widget
+	 */
+
+    // Posts
+    $res = DAOFactory::getPostsDAO()->getPosts();
+    $res = array_slice($res, 0, 5);
+    for($i=0; $i<count($res); $i++) {
+        $post[$i]['postid'] = $res[$i]->id;
+        $post[$i]['usersid'] = $res[$i]->usersid;
+        $post[$i]['date'] = $res[$i]->date;
+        $post[$i]['content'] = $res[$i]->content;
+        // Datum-Anzeige
+        $time = $post[$i]['date'];
+        $time = strtotime($time);
+        $now = time();
+        $diff = ($now-$time);
+        switch(TRUE) {
+            // bis 1 Minute
+            case ($diff < 60):
+                $diff = round($diff,0);
+                $output = 'vor '.$diff.' Sekunden';
+                $post[$i]['date'] = $output;
+                break;
+            // bis 1 Stunde
+            case ($diff >= 60 AND $diff <3600):
+                $diff = round(($diff/60),0);
+                if($diff>1) {
+                    $output = 'vor '.$diff.' Minuten';
+                }
+                else {
+                    $output = 'vor '.$diff.' Minute';
+                }
+                $post[$i]['date'] = $output;
+                break;
+            // bis 24 Stunden
+            case ($diff >= 3600 AND $diff <86400):
+                $diff = round(($diff/3600),0);
+                if($diff>1) {
+                    $output = 'vor '.$diff.' Stunden';
+                }
+                else {
+                    $output = 'vor '.$diff.' Stunde';
+                }
+                $post[$i]['date'] = $output;
+                break;
+            // über 24 Stunden
+            case ($diff >86400):
+                $time = date("d.m.Y", $time);
+                $output = 'am '.$time.'';
+                $post[$i]['date'] = $output;
+                break;
+        }
+
+
+        // User-Daten
+        $user = DAOFactory::getUsersDAO()->getUserById($res[$i]->usersid);
+        $post[$i]['forename'] = $user[0]->forename;
+        $post[$i]['surname'] = $user[0]->surname;
+        $post[$i]['profilepic'] = $user[0]->profilepic;
+
+    }
+    $view->assign('posts', $post);
+
+
+
+    // User
+    $res = DAOFactory::getUsersDAO()->getUserById(4);
+    $view->assign('users', $res);
+
 
 ?>

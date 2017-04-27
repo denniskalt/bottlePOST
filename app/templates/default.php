@@ -8,6 +8,7 @@
         <div class="col-lg-3 widget widget-weather">
             <div class="inner">
                 <div class="container-fluid">
+                    <!--<h1><?php //print_r($this->_['posts']); ?></h1>-->
                     <div class="row">
                         <div class="col">
                             <div id="card" class="weather">
@@ -145,57 +146,8 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-lg-5 widget col-lg-offset-3">
-        <div class="inner">
-            <div class="[ panel panel-default ] panel-google-plus">
-                <!--<div class="dropdown">
-                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
-                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
-                    </span>
-                    <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                    </ul>
-                </div>-->
-                <div class="panel-google-plus-tags">
-                    <ul>
-                        <li><a href="">~Millennials</a></li>
-                        <li><a href="">~Generation</a></li>
-                        <li><a href="">~Test</a></li>
-                    </ul>
-                </div>
-                <div class="panel-heading">
-                    <img class="circle pull-left" src="images/user/default-2.jpg" alt="" />
-                    <h3><a href="">Lukas Bosse</a></h3>
-                    <h5><span>vor 2 Stunden</span> </h5>
-                </div>
-                <div class="panel-body">
-                    <p>Lorem Ipsum Dolor Sit amet.</p>
-                </div>
-                <div class="panel-footer">
-                    <button type="button" class="[ btn btn-default ]">+1</button>
-                    <button type="button" class="[ btn btn-default ]">-1</button>
-                    <!--<button type="button" class="[ btn btn-default ]">
-                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
-                    </button>-->
-                    <div class="input-placeholder">Kommentiere...</div>
-                </div>
-                <div class="panel-google-plus-comment">
-                    <img class="img-circle" src="images/user/default-0.jpg" alt="" />
-                    <div class="panel-google-plus-textarea">
-                        <textarea rows="4" class="form-control"></textarea>
-                        <button type="submit" class="[ btn btn-info disabled ]">Kommentar abschicken</button>
-                        <button type="reset" class="[ btn btn-default ]">Schließen</button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-        </div>
-            <div class="col-lg-5 widget col-lg-offset-3">
+    <?php $i=0; while($i<count($this->_['posts'])) { ?>
+        <div class="col-lg-5 widget col-lg-offset-3">
         <div class="inner">
             <div class="[ panel panel-default ] panel-google-plus">
                 <div class="panel-google-plus-tags">
@@ -206,12 +158,16 @@
                     </ul>
                 </div>
                 <div class="panel-heading">
-                    <img class="circle pull-left" src="images/user/default-2.jpg" alt="" />
-                    <h3><a href="">Lukas Bosse</a></h3>
-                    <h5><span>vor 2 Stunden</span> </h5>
+                    <img class="circle pull-left" src="images/<?php echo $this->_['posts'][$i]['profilepic'];?>" alt="" />
+                    <h3>
+                        <a href="index.php?view=profile&id=<?php echo $this->_['posts'][$i]['usersid'];?>">
+                            <?php echo $this->_['posts'][$i]['forename'].' '.$this->_['posts'][$i]['surname']; ?>
+                        </a>
+                    </h3>
+                    <h5><span><?php echo $this->_['posts'][$i]['date'];?></span> </h5>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem Ipsum Dolor Sit amet.</p>
+                    <p><?php echo $this->_['posts'][$i]['content']; ?></p>
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="[ btn btn-default ]">+1</button>
@@ -230,6 +186,8 @@
             </div>
         </div>
         </div>
+    <?php $i++; } ?>
+
     </div>
 </div>
 <div class="clear"></div>

@@ -22,4 +22,14 @@
 	require_once('dto/Cities.php');
 	require_once('sqldao/CitiesMySqlDAO.php');
 
+    /* Comments */
+    require_once('dao/CommentsDAO.php');
+	require_once('dto/Comments.php');
+	require_once('sqldao/CommentsMySqlDAO.php');
+
+    /* Posts */
+    require_once('dao/PostsDAO.php');
+	require_once('dto/Posts.php');
+	require_once('sqldao/PostsMySqlDAO.php');
+
 ?>
