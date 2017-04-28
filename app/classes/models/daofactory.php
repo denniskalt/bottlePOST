@@ -30,6 +30,9 @@ class DAOFactory{
 		return new PostsMySqlDAO();
 	}
 
+    /*public static function getNotificationsDAO() {
+        return new NotificationsMySqlDAO();
+    }*/
 
 }
 ?>

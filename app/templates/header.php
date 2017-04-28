@@ -263,7 +263,7 @@ $dirHandle->close();
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="images/user/default-0.jpg" /> Max Mustermann <!--<span class="caret"></span>--></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php echo $view->_['users'][0]->forename.' '.$this->_['users'][0]->surname; ?> <!--<span class="caret"></span>--></a>
               <ul class="dropdown-menu small">
                   <li class="heading">Account</li>
                   <li><a href="#">

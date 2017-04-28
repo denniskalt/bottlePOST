@@ -32,4 +32,9 @@
 	require_once('dto/Posts.php');
 	require_once('sqldao/PostsMySqlDAO.php');
 
+    /* Notifications */
+    /*require_once('dao/NotificationsDAO.php');
+	require_once('dto/Notifications.php');
+	require_once('sqldao/NotificationsMySqlDAO.php');*/
+
 ?>

@@ -212,7 +212,7 @@
     $view->assign('posts', $post);
 
     // User
-    $res = DAOFactory::getUsersDAO()->getUserById(4);
+    $res = DAOFactory::getUsersDAO()->getUserById($usersId);
     $view->assign('users', $res);
 
 
