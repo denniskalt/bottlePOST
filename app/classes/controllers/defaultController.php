@@ -211,8 +211,6 @@
     }
     $view->assign('posts', $post);
 
-
-
     // User
     $res = DAOFactory::getUsersDAO()->getUserById(4);
     $view->assign('users', $res);

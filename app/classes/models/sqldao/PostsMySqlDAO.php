@@ -11,6 +11,21 @@ include_once('config.php');
     class PostsMySqlDAO  {
 
         /**
+         * Set post
+         * @return affected rows
+         */
+        public function setPost($posts){
+            $sql = 'INSERT INTO posts (content, usersid) VALUES (?, ?)';
+            $sqlQuery = new SqlQuery($sql);
+
+            $sqlQuery->set($posts->content);
+            $sqlQuery->set($posts->usersid);
+
+            //$sqlQuery->setNumber($posts->id);
+            $this->executeUpdate($sqlQuery);
+        }
+
+        /**
          * Get all Posts
          * @return Posts
          */
@@ -49,13 +64,14 @@ include_once('config.php');
          * @param PostsMySql posts
          * @return affected rows
          */
-        public function update($posts) {
+        public function update($posts){
             $sql = 'UPDATE posts SET content = ? WHERE idPosts = ?';
             $sqlQuery = new SqlQuery($sql);
 
             $sqlQuery->set($posts->content);
-            $sqlQuery->setNumber($posts->idPosts);
-            return $this->executeUpdate($sqlQuery);
+
+            $sqlQuery->setNumber($posts->id);
+            return $posts;//$this->executeUpdate($sqlQuery);
         }
 
 	   /**

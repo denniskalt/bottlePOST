@@ -9,6 +9,13 @@
     interface PostsDAO {
 
         /**
+         * Set post
+         * @param $posts Posts-Object
+         * @return affected rows
+         */
+        public function setPost($posts);
+
+        /**
          * Get all Posts
          * @return Posts
          */

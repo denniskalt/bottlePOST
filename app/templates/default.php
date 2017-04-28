@@ -82,10 +82,10 @@
                         </div>
                         <div class="content">
                             <div class="main">
-                                <form>
+                                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                     <textarea class="form-control" rows="3" id="posting" name="posting" maxlength="160"></textarea>
                                     <span id="count_message" class="characters-remaining">160 Zeichen verbleibend</span>
-                                    <button class="btn btn-info btn-post" type="submit">Status posten</button>
+                                    <button class="btn btn-info btn-post" name="submit_post" type="submit">Status posten</button>
                                 </form>
                                 <div class="clear"></div>
 
@@ -146,6 +146,20 @@
         </div>
     </div>
     <div class="row">
+    <?php
+    if(isset($_POST['submit_post'])) {
+        $id = 9;
+        $content = 'Mein Versuch.';
+        echo '<h3>update($posts)</h3>';
+        $posting = new Posts();
+        $posting->usersid = $id;
+        $posting->content = $content;
+        $res = DAOFactory::getPostsDAO()->setPost($posting);
+        //echo "Affected Rows: ";
+        print_r($res);
+    }
+    ?>
+
     <?php $i=0; while($i<count($this->_['posts'])) { ?>
         <div class="col-lg-5 widget col-lg-offset-3">
         <div class="inner">
