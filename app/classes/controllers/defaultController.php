@@ -22,6 +22,16 @@
     }
 
     /**
+	 * Methode zum Herausfinden von Wavetags
+	 *
+     * @param $txt string Eingabe-Text
+	 * @return
+	 */
+    function findWavetags($txt) {
+        preg_match_all('/~(\\w+)/', $txt);
+    }
+
+    /**
 	 * Wetter-Widget
 	 */
 
@@ -207,6 +217,14 @@
         $post[$i]['forename'] = $user[0]->forename;
         $post[$i]['surname'] = $user[0]->surname;
         $post[$i]['profilepic'] = $user[0]->profilepic;
+
+        // Hashtags
+        $hashtags = DAOFactory::getHashtagsDAO()->getHashtagByPostsId($res[$i]->id);
+        for($j=0; $j<count($hashtags); $j++) {
+            $post[$i]['hashtags'][$j]['description'] = $hashtags[$j]->description;
+            $post[$i]['hashtags'][$j]['hashtagid'] = $hashtags[$j]->id;
+        }
+
 
     }
     $view->assign('posts', $post);

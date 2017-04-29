@@ -37,4 +37,9 @@
 	require_once('dto/Notifications.php');
 	require_once('sqldao/NotificationsMySqlDAO.php');*/
 
+    /* Hashtags */
+    require_once('dao/HashtagsDAO.php');
+	require_once('dto/Hashtags.php');
+	require_once('sqldao/HashtagsMySqlDAO.php');
+
 ?>

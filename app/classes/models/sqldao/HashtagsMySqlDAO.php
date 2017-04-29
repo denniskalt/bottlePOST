@@ -2,105 +2,90 @@
 include_once('config.php');
 
     /**
-     * Class that operate on table 'posts'
+     * Class that operate on table 'hashtags'
      *
      * @author  Dennis Kalt
-     * @date    2017-04-27
+     * @date    2017-04-29
      */
 
-    class PostsMySqlDAO  {
+    class HashtagsMySqlDAO  {
 
         /**
-         * Set post
+         * Set Hashtag
+         * @param $hashtags Hashtags-Object
          * @return affected rows
          */
-        public function setPost($posts){
-            $sql = 'INSERT INTO posts (content, usersid) VALUES (?, ?)';
+        public function setHashtag($hashtags) {
+            $sql = 'INSERT INTO hashtags (bezeichnung) VALUES (?)';
             $sqlQuery = new SqlQuery($sql);
-
-            $sqlQuery->set($posts->content);
-            $sqlQuery->set($posts->usersid);
+            $sqlQuery->set($hashtags->description);
             return $this->executeUpdate($sqlQuery);
         }
 
         /**
-         * Get all Posts
-         * @return Posts
+         * Get all Hashtags
+         * @return Hashtags
          */
-        public function getPosts() {
-            $sql = 'SELECT * FROM posts ORDER BY idPosts DESC';
+        public function getHashtags() {
+            $sql = 'SELECT * FROM hashtags';
 		    $sqlQuery = new SqlQuery($sql);
 		    return $this->getList($sqlQuery);
         }
 
         /**
-         * Get Post by primary key
+         * Get Hashtag by primary key
          * @param String $id primary key
-         * @return Posts
+         * @return Hashtags
          */
-        public function getPostById($id) {
-            $sql = 'SELECT * FROM posts WHERE idPosts = ?';
+        public function getHashtagById($id) {
+            $sql = 'SELECT * FROM hashtags WHERE idHashtags = ?';
             $sqlQuery = new SqlQuery($sql);
             $sqlQuery->set($id);
             return $this->getList($sqlQuery);
         }
 
         /**
-         * Get Posts by usersid
-         * @param $usersid ID from table 'users'
-         * @return Posts with primary key
+         * Get Hashtag by postsid
+         * @param String $postsid ID from table 'posts'
+         * @return Hashtags
          */
-        public function getIdByUser($usersid) {
-            $sql = 'SELECT * FROM posts WHERE usersId = ?';
+        public function getHashtagByPostsId($postsid) {
+            $sql = 'SELECT hashtags.idHashtags, hashtags.bezeichnung, hashtagsposts.postsId FROM hashtags INNER JOIN hashtagsposts ON hashtags.idHashtags=hashtagsposts.hashtagsId WHERE hashtagsposts.postsId = ?';
             $sqlQuery = new SqlQuery($sql);
-            $sqlQuery->set($usersid);
+            $sqlQuery->set($postsid);
             return $this->getList($sqlQuery);
         }
 
         /**
-         * Update record in table 'posts'
-         * @param PostsMySql posts
-         * @return affected rows
+         * Get Hashtag by description
+         * @param $description description of hashtag
+         * @return Hashtags with idHashtags
          */
-        public function update($posts){
-            $sql = 'UPDATE posts SET content = ? WHERE idPosts = ?';
+        public function getIdByDescription($description) {
+            $sql = 'SELECT * FROM hashtags WHERE bezeichnung = ?';
             $sqlQuery = new SqlQuery($sql);
-
-            $sqlQuery->set($posts->content);
-
-            $sqlQuery->setNumber($posts->id);
-            return $posts;//$this->executeUpdate($sqlQuery);
-        }
-
-	   /**
-        * Delete post from table
-        * @param $id primary key
-        * @return affected rows
-        */
-        public function deletePostById($id) {
-            $sql = 'DELETE FROM posts WHERE idPosts = ?';
-            $sqlQuery = new SqlQuery($sql);
-            $sqlQuery->setNumber($id);
-            return $this->executeUpdate($sqlQuery);
+            $sqlQuery->set($description);
+            return $this->getList($sqlQuery);
         }
 
         /**
-        * Delete posts from table
-        * @param $usersid ID from table 'users'
-        * @return affected rows
-        */
-        public function deletePostsByUser($usersid) {
-            $sql = 'DELETE FROM posts WHERE usersId = ?';
+         * Update record in table 'hashtags'
+         * @param $hashtags Hashtags-Object
+         * @return affected rows
+         */
+        public function update($hashtags) {
+            $sql = 'UPDATE hashtags SET bezeichnung = ? WHERE idHashtags = ?';
             $sqlQuery = new SqlQuery($sql);
-            $sqlQuery->setNumber($usersid);
+            $sqlQuery->set($hashtags->description);
+            $sqlQuery->setNumber($hashtags->id);
             return $this->executeUpdate($sqlQuery);
         }
 
         /**
          * Delete all rows
          */
-        public function deletePosts() {
-            $sql = 'DELETE FROM posts';
+        public function deleteHashtags() {
+            $sql = 'DELETE FROM hashtags';
             $sqlQuery = new SqlQuery($sql);
             return $this->executeUpdate($sqlQuery);
         }
@@ -111,14 +96,13 @@ include_once('config.php');
          * @return UsersMySql
          */
         protected function readRow($row){
-            $posts = new Posts();
+            $hashtags = new Hashtags();
 
-            if(isset($row['idPosts'])) { $posts->id = $row['idPosts']; }
-            if(isset($row['content'])) { $posts->content = $row['content']; }
-            if(isset($row['usersId'])) { $posts->usersid = $row['usersId']; }
-            if(isset($row['date'])) { $posts->date = $row['date']; }
+            if(isset($row['idHashtags'])) { $hashtags->id = $row['idHashtags']; }
+            if(isset($row['bezeichnung'])) { $hashtags->description = $row['bezeichnung']; }
+            if(isset($row['postsId'])) { $hashtags->postsid = $row['postsId']; }
 
-            return $posts;
+            return $hashtags;
         }
 
         protected function getList($sqlQuery){

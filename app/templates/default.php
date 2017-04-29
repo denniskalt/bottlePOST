@@ -313,7 +313,13 @@ $dirHandle->close();
         <div class="col-lg-3 widget widget-weather">
             <div class="inner">
                 <div class="container-fluid">
-                    <!--<h1><?php //print_r($this->_['users']); ?></h1>-->
+                    <h1><?php
+                        $hashtags = DAOFactory::getHashtagsDAO()->getHashtagByPostsId(20);
+                        print_r($hashtags);
+                        ?></h1>
+                    <h1><?php
+                        print_r($this->_['posts']);
+                        ?></h1>
                     <div class="row">
                         <div class="col">
                             <div id="card" class="weather">
@@ -454,14 +460,24 @@ $dirHandle->close();
     <div class="row">
     <?php
     if(isset($_POST['submit_post'])) {
+
+        /**
+         * Methode zum Herausfinden von Wavetags
+         *
+         * @param $txt string Eingabe-Text
+         * @return
+         */
+        //function findWavetags($content) {
+        //    preg_match_all('/~(\\w+)/', $content);
+        //}
         $content = $_POST['posting'];
         $id = $_POST['usersid'];
         $posting = new Posts();
         $posting->usersid = $id;
         $posting->content = $content;
         $res = DAOFactory::getPostsDAO()->setPost($posting);
-        echo "Affected Rows: ";
-        print_r($res);
+
+        header('Location: '.$_SERVER['PHP_SELF']);
     }
     ?>
 
@@ -469,13 +485,19 @@ $dirHandle->close();
         <div class="col-lg-5 widget col-lg-offset-3">
         <div class="inner">
             <div class="[ panel panel-default ] panel-google-plus">
+                <?php if(isset($this->_['posts'][$i]['hashtags'])) { ?>
                 <div class="panel-google-plus-tags">
                     <ul>
-                        <li><a href="">~Millennials</a></li>
-                        <li><a href="">~Generation</a></li>
-                        <li><a href="">~Test</a></li>
+                        <?php
+                            for($j=0; $j<count($this->_['posts'][$i]['hashtags']); $j++) {
+                                echo '<li><a href="index.php?view=hashtag&id='.$this->_['posts'][$i]['hashtags'][$j]['hashtagid'].'">~'.$this->_['posts'][$i]['hashtags'][$j]['description'].'</a></li>';
+                            }
+                        ?>
                     </ul>
                 </div>
+                <?php
+                    }
+                ?>
                 <div class="panel-heading">
                     <img class="circle pull-left" src="images/<?php echo $this->_['posts'][$i]['profilepic'];?>" alt="" />
                     <h3>
