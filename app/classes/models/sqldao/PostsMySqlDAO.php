@@ -20,7 +20,7 @@ include_once('config.php');
 
             $sqlQuery->set($posts->content);
             $sqlQuery->set($posts->usersid);
-            return $this->executeUpdate($sqlQuery);
+            return $this->executeInsert($sqlQuery);
         }
 
         /**

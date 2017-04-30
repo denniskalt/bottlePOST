@@ -50,6 +50,13 @@
         public function update($hashtags);
 
         /**
+         * Find Hashtags in input
+         * @param $input string input message
+         * @return Array $keywords
+         */
+        public function findHashtags($content, $str);
+
+        /**
          * Delete all rows
          */
         public function deleteHashtags();

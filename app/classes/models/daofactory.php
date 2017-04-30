@@ -38,5 +38,9 @@ class DAOFactory{
         return new HashtagsMySqlDAO();
     }
 
+    public static function getHashtagsPostsDAO() {
+        return new HashtagsPostsMySqlDAO();
+    }
+
 }
 ?>

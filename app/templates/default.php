@@ -460,27 +460,59 @@ $dirHandle->close();
     <div class="row">
     <?php
     if(isset($_POST['submit_post'])) {
-
-        /**
-         * Methode zum Herausfinden von Wavetags
-         *
-         * @param $txt string Eingabe-Text
-         * @return
-         */
-        //function findWavetags($content) {
-        //    preg_match_all('/~(\\w+)/', $content);
-        //}
         $content = $_POST['posting'];
         $id = $_POST['usersid'];
         $posting = new Posts();
         $posting->usersid = $id;
         $posting->content = $content;
-        $res = DAOFactory::getPostsDAO()->setPost($posting);
+        $postid = DAOFactory::getPostsDAO()->setPost($posting);
+        // Hashtags filtern
+        $hashtags = DAOFactory::getHashtagsDAO()->findHashtags($content, $str = 0);
 
-        header('Location: '.$_SERVER['PHP_SELF']);
+        // Hashtags aus Post auslesen
+        for($k=0; $k<count($hashtags); $k++) {
+            $counter=0;
+            $res = DAOFactory::getHashtagsDAO()->getHashtags();
+            print_r($hashtags[$k]);
+            print_r($res[$k]->description);
+            // Alle Hashtags der DB durchlaufen
+            for($l=0; $l<count($res); $l++) {
+                if($hashtags[$k]===$res[$l]->description) {
+                    //$hashpost = new HashtagsPosts();
+                    //$hashpost->id = $hashtags[$k];
+                    //$res = DAOFactory::getHashtagsDAO()->setHashtag($hash);
+                    echo "<h2>Gefunden:</h2>";
+                    // id für Hashtag-ID
+                    echo "<h2>".$res[$l]->description."</h2>";
+                    $hashtagsid = $res[$l]->id;
+                    // Speichern von Beziehung
+                    $counter--;
+                }
+                else {
+
+                }
+            }
+            if($counter!=0) {
+                // Speichern Beziehung
+                $hashpost = new HashtagsPosts();
+                $hashpost->hashtagsid = $hashtagsid;
+                $hashpost->postsid = $postid;
+                DAOFactory::getHashtagsPostsDAO()->setHashtagPosts($hashpost);
+            }
+            else {
+                $hash = new Hashtags();
+                $hash->description = $hashtags[$k];
+                $hashtagid = DAOFactory::getHashtagsDAO()->setHashtag($hash);
+                $hashpost = new HashtagsPosts();
+                $hashpost->hashtagsid = $hashtagid;
+                $hashpost->postsid = $postid;
+                DAOFactory::getHashtagsPostsDAO()->setHashtagPosts($hashpost);
+            }
+        }
+    header('Location: '.$_SERVER['PHP_SELF']);
     }
-    ?>
 
+    ?>
     <?php $i=0; while($i<count($this->_['posts'])) { ?>
         <div class="col-lg-5 widget col-lg-offset-3">
         <div class="inner">

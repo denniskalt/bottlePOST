@@ -19,7 +19,7 @@ include_once('config.php');
             $sql = 'INSERT INTO hashtags (bezeichnung) VALUES (?)';
             $sqlQuery = new SqlQuery($sql);
             $sqlQuery->set($hashtags->description);
-            return $this->executeUpdate($sqlQuery);
+            return $this->executeInsert($sqlQuery);
         }
 
         /**
@@ -88,6 +88,30 @@ include_once('config.php');
             $sql = 'DELETE FROM hashtags';
             $sqlQuery = new SqlQuery($sql);
             return $this->executeUpdate($sqlQuery);
+        }
+
+        /**
+         * Find Hashtags in input
+         * @param $content string input message
+         * @return Array $keywords
+         */
+        public function findHashtags($content, $str = 1) {
+            preg_match_all('/~(\w+)/',$content,$matches);
+            $i = 0;
+            if ($str) {
+                foreach ($matches[1] as $match) {
+                    $count = count($matches[1]);
+                    $keywords .= "$match";
+                    $i++;
+                    if ($count > $i) $keywords .= ", ";
+                }
+            } else {
+                foreach ($matches[1] as $match) {
+                    $keyword[] = $match;
+                }
+                $keywords = $keyword;
+            }
+            return $keywords;
         }
 
         /**

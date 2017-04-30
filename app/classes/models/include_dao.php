@@ -42,4 +42,10 @@
 	require_once('dto/Hashtags.php');
 	require_once('sqldao/HashtagsMySqlDAO.php');
 
+    /* HashtagsPosts */
+    require_once('dao/HashtagsPostsDAO.php');
+	require_once('dto/HashtagsPosts.php');
+	require_once('sqldao/HashtagsPostsMySqlDAO.php');
+
+
 ?>
