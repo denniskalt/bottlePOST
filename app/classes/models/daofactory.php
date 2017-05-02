@@ -42,5 +42,9 @@ class DAOFactory{
         return new HashtagsPostsMySqlDAO();
     }
 
+    public static function getVotesDAO() {
+        return new VotesMySqlDAO();
+    }
+
 }
 ?>

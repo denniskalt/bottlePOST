@@ -225,7 +225,14 @@
             $post[$i]['hashtags'][$j]['hashtagid'] = $hashtags[$j]->id;
         }
 
+        // Votes
+        $votes = DAOFactory::getVotesDAO()->getVoteByPostUser($usersId, $res[$i]->id);
+        if(empty($votes)) {
 
+        }
+        else {
+            $post[$i]['votes'] = $votes[0]->vote;
+        }
     }
     $view->assign('posts', $post);
 

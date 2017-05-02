@@ -314,8 +314,12 @@ $dirHandle->close();
             <div class="inner">
                 <div class="container-fluid">
                     <h1><?php
-                        $hashtags = DAOFactory::getHashtagsDAO()->getHashtagByPostsId(20);
-                        print_r($hashtags);
+                        $res = DAOFactory::getVotesDAO()->saveVote(90, 4, 1);
+                        print_r($res);
+                        ?></h1>
+                    <h1><?php
+                        $votes = DAOFactory::getVotesDAO()->getVoteByPostUser(4, 91);
+                        print_r($votes);
                         ?></h1>
                     <h1><?php
                         print_r($this->_['posts']);
@@ -542,9 +546,37 @@ $dirHandle->close();
                 <div class="panel-body">
                     <p><?php echo $this->_['posts'][$i]['content']; ?></p>
                 </div>
+                <div id="rating" class="panel-footer">
+                    <button class="like btn btn-default
+                        <?php
+                            if(empty($this->_['posts'][$i]['votes'])) {
+                            }
+                            else {
+                                if($this->_['posts'][$i]['votes']==1) {
+                                    echo 'disabled';
+                                }
+                            }
+                            echo '" id="';
+                            echo $this->_['posts'][$i]['postid'];
+                        ?>" type="button">+1</button>
+                    <!--<span class="likes">0</span>-->
+                    <button class="dislike btn btn-default
+                        <?php
+                            if(empty($this->_['posts'][$i]['votes'])) {
+                            }
+                            else {
+                                if($this->_['posts'][$i]['votes']==-1) {
+                                    echo 'disabled';
+                                }
+                            }
+                            echo '" id="';
+                            echo $this->_['posts'][$i]['postid'];
+                        ?>" type="button">-1</button>
+                    <!--<span class="dislikes">0</span>
+                </div>
                 <div class="panel-footer">
                     <button type="button" class="[ btn btn-default ]">+1</button>
-                    <button type="button" class="[ btn btn-default ]">-1</button>
+                    <button type="button" class="[ btn btn-default ]">-1</button>-->
                     <div class="input-placeholder">Kommentiere...</div>
                 </div>
                 <div class="panel-google-plus-comment">

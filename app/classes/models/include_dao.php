@@ -47,5 +47,10 @@
 	require_once('dto/HashtagsPosts.php');
 	require_once('sqldao/HashtagsPostsMySqlDAO.php');
 
+    /* Votes */
+    require_once('dao/VotesDAO.php');
+	require_once('dto/Votes.php');
+	require_once('sqldao/VotesMySqlDAO.php');
+
 
 ?>

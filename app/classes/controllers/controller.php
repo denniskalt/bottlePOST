@@ -25,14 +25,12 @@ class Controller{
 		$view = new View();
 
         switch($this->template) {
-			case 'entry':
-				$view->setTemplate('entry');
+			case 'hashtag':
+                include('hashtagController.php');
+				$view->setTemplate('hashtag');
 				$entryid = $this->request['id'];
-				$entry = Users::getUsers();
-				$view->assign('title', $entry['title']);
-				$view->assign('content', $entry['content']);
+                $user = new Users();
 				break;
-
 			case 'default':
 			default:
                 include('defaultController.php');

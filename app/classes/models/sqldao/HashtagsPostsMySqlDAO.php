@@ -34,6 +34,17 @@ include_once('config.php');
         }
 
         /**
+         * Get Hashtag-posts-relations by hashtag
+         * @return Hashtags
+         */
+        public function getPostsByHashtag($hashtagsid) {
+            $sql = 'SELECT * FROM hashtagsPosts WHERE hashtagsid = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($hashtagsid);
+		    return $this->getList($sqlQuery);
+        }
+
+        /**
          * Delete all rows
          */
         public function deleteHashtagsPosts() {

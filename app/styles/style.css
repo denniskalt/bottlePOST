@@ -373,6 +373,29 @@ a.navbar-brand {
     margin-bottom: 30px;
 }
 
+.widget-hashtag {
+    margin-bottom: 30px;
+}
+
+.widget-hashtag .inner {
+    box-shadow: none;
+}
+
+.widget-hashtag .card-container {
+    box-shadow: none;
+    webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+.widget-hashtag .card {
+    background: none;
+}
+
+.widget-hashtag .card .cover {
+    overflow: hidden;
+    height: 170px;
+}
+
 /*--------------------------------------------------------------
 # Weather-Widget
 --------------------------------------------------------------*/
@@ -963,6 +986,23 @@ span.characters-remaining {
 }
 .card .cover img{
     width: 100%;
+}
+.card .cover.full ~ h1 {
+    height: auto;
+    margin-bottom: 80px;
+}
+.card .cover.full h1 {
+    z-index: 2;
+    display: inline;
+    position: absolute;
+    width: 70%;
+    background-color: rgba(255,255,255,0.8);
+    left: 15%;
+    text-align: center;
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
 }
 .card .user{
     border-radius: 50%;
