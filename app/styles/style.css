@@ -43,8 +43,9 @@ hellgrau        #9c9b9c
     font-family: 'Roboto', sans-serif;
 }
 
-body {
+html {
     height: 100vh;
+    background: url(../images/bg/blue.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
 }

@@ -313,17 +313,6 @@ $dirHandle->close();
         <div class="col-lg-3 widget widget-weather">
             <div class="inner">
                 <div class="container-fluid">
-                    <h1><?php
-                        $res = DAOFactory::getVotesDAO()->saveVote(90, 4, 1);
-                        print_r($res);
-                        ?></h1>
-                    <h1><?php
-                        $votes = DAOFactory::getVotesDAO()->getVoteByPostUser(4, 91);
-                        print_r($votes);
-                        ?></h1>
-                    <h1><?php
-                        print_r($this->_['posts']);
-                        ?></h1>
                     <div class="row">
                         <div class="col">
                             <div id="card" class="weather">
