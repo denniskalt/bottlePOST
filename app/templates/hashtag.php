@@ -36,7 +36,7 @@ if($status == PHP_SESSION_DISABLED){
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/weather-icons/css/weather-icons.min.css" rel=stylesheet />
 </head>
-<body style="background-image: url(images/bg/blue.jpeg);">
+<body>
     <nav class="navbar navbar-custom">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -112,7 +112,7 @@ if($status == PHP_SESSION_DISABLED){
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-5 widget widget-hashtag">
+        <div class="col-lg-8 widget col-lg-offset-2 widget widget-hashtag">
             <div class="inner">
              <div class="card-container manual-flip">
                 <div class="card">

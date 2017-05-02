@@ -37,7 +37,7 @@ if($status == PHP_SESSION_DISABLED){
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/weather-icons/css/weather-icons.min.css" rel=stylesheet />
 </head>
-<body style="background-image: url(images/bg/blue.jpeg);">
+<body>
 <?php
 /*
 // Gibt eine Instanz der Directory Klasse an $dirHandle zurück

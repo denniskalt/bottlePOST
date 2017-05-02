@@ -44,10 +44,14 @@ hellgrau        #9c9b9c
 }
 
 html {
-    height: 100vh;
+    min-height: 100vh;
     background: url(../images/bg/blue.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+body {
+    background-color: transparent;
 }
 
 .lowercase {
