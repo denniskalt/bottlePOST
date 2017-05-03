@@ -263,7 +263,7 @@ $dirHandle->close();
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php echo $this->_['users'][0]->forename.' '.$this->_['users'][0]->surname;?> <!--<span class="caret"></span>--></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php if(!empty($this->_['users'][0]->forename) && !empty($this->_['users'][0]->surname)) { echo $this->_['users'][0]->forename.' '.$this->_['users'][0]->surname; } else { echo $this->_['users'][0]->username; }?> <!--<span class="caret"></span>--></a>
               <ul class="dropdown-menu small">
                   <li class="heading">Account</li>
                   <li><a href="#">
@@ -569,11 +569,13 @@ $dirHandle->close();
                     <div class="input-placeholder">Kommentiere...</div>
                 </div>
                 <div class="panel-google-plus-comment">
-                    <img class="img-circle" src="images/user/default-0.jpg" alt="" />
+                    <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
-                        <textarea rows="4" class="form-control"></textarea>
-                        <button type="submit" class="[ btn btn-info disabled ]">Kommentar abschicken</button>
-                        <button type="reset" class="[ btn btn-default ]">Schließen</button>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>">
+                            <textarea rows="3" class="form-control" name="comment_cont" ></textarea>
+                            <button type="submit" class="btn btn-info disabled" name="submit_comment" >Kommentar abschicken</button>
+                            <button type="reset" class="btn btn-default" >Schließen</button>
+                        </form>
                     </div>
                     <div class="clearfix"></div>
                 </div>

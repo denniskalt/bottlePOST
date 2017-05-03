@@ -11,6 +11,20 @@ include_once('config.php');
     class CommentsMySqlDAO  {
 
         /**
+         * Set comments
+         * @return insert id
+         */
+        public function setComment($comments){
+            $sql = 'INSERT INTO comments (usersId, postsId, comment) VALUES (?, ?, ?)';
+            $sqlQuery = new SqlQuery($sql);
+
+            $sqlQuery->set($comments->usersid);
+            $sqlQuery->set($comments->postsid);
+            $sqlQuery->set($comments->comment);
+            return $this->executeInsert($sqlQuery);
+        }
+
+        /**
          * Get all comments
          * @return Comments
          */
@@ -50,7 +64,7 @@ include_once('config.php');
          * @return Comments
          */
         public function getCommentsByPostsId($postsid) {
-            $sql = 'SELECT * FROM comments WHERE postsId = ?';
+            $sql = 'SELECT * FROM comments WHERE postsId = ? ORDER BY idComments DESC';
             $sqlQuery = new SqlQuery($sql);
             $sqlQuery->set($postsid);
             return $this->getList($sqlQuery);
@@ -134,10 +148,10 @@ include_once('config.php');
             $comments = new Comments();
 
             if(isset($row['idComments'])) { $comments->id = $row['idComments']; }
-            if(isset($row['usersId'])) { $user->usersid = $row['usersId']; }
-            if(isset($row['postsId'])) { $user->postsid = $row['postsId']; }
-            if(isset($row['comment'])) { $user->comment = $row['comment']; }
-            if(isset($row['time'])) { $user->time = $row['time']; }
+            if(isset($row['usersId'])) { $comments->usersid = $row['usersId']; }
+            if(isset($row['postsId'])) { $comments->postsid = $row['postsId']; }
+            if(isset($row['comment'])) { $comments->comment = $row['comment']; }
+            if(isset($row['time'])) { $comments->time = $row['time']; }
             return $comments;
         }
 

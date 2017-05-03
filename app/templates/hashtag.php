@@ -246,11 +246,13 @@ if($status == PHP_SESSION_DISABLED){
                     <div class="input-placeholder">Kommentiere...</div>
                 </div>
                 <div class="panel-google-plus-comment">
-                    <img class="img-circle" src="images/user/default-0.jpg" alt="" />
+                    <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
-                        <textarea rows="4" class="form-control"></textarea>
-                        <button type="submit" class="[ btn btn-info disabled ]">Kommentar abschicken</button>
-                        <button type="reset" class="[ btn btn-default ]">Schließen</button>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>" name="comment" id="comment">
+                            <textarea rows="3" class="form-control" name="comment_cont" form="comment"></textarea>
+                            <button type="submit" class="btn btn-info disabled" name="submit_comment" form="comment">Kommentar abschicken</button>
+                            <button type="reset" class="btn btn-default" form="comment">Schließen</button>
+                        </form>
                     </div>
                     <div class="clearfix"></div>
                 </div>

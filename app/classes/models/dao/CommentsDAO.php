@@ -9,6 +9,12 @@
     interface CommentsDAO {
 
         /**
+         * Set comments
+         * @return insert id
+         */
+        public function setComment($comments);
+
+        /**
          * Get all comments
          * @return Comments
          */

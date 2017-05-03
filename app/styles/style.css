@@ -811,12 +811,12 @@ span.characters-remaining {
     float: right;
     width: calc(100% - 56px);
 }
-.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > textarea {
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > form > textarea {
     display: block;
     width: 100%;
     resize: vertical;
 }
-.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > .btn {
+.panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > form > .btn {
     margin-top: 10px;
     margin-right: 8px;
     width: 100%;

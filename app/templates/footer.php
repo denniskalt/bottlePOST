@@ -92,7 +92,7 @@ $('#count_message').html(text_remaining + ' Zeichen übrig');
 </script>
 <script>
 $(function () {
-   $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > button[type="reset"]').on('click', function(event) {
+   $('.panel-google-plus > .panel-footer > .input-placeholder, .panel-google-plus > .panel-google-plus-comment > .panel-google-plus-textarea > form > button[type="reset"]').on('click', function(event) {
         var $panel = $(this).closest('.panel-google-plus');
             $comment = $panel.find('.panel-google-plus-comment');
 
@@ -105,7 +105,7 @@ $(function () {
             $comment.find('textarea').focus();
         }
    });
-   $('.panel-google-plus-comment > .panel-google-plus-textarea > textarea').on('keyup', function(event) {
+   $('.panel-google-plus-comment > .panel-google-plus-textarea > form > textarea').on('keyup', function(event) {
         var $comment = $(this).closest('.panel-google-plus-comment');
 
         $comment.find('button[type="submit"]').addClass('disabled');

@@ -31,6 +31,12 @@ class Controller{
 				$entryid = $this->request['id'];
                 $user = new Users();
 				break;
+            case 'post':
+                include('postController.php');
+				$view->setTemplate('post');
+				$entryid = $this->request['id'];
+                $user = new Users();
+				break;
 			case 'default':
 			default:
                 include('defaultController.php');

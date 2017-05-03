@@ -589,7 +589,7 @@ function signup($email, $password, $user, $mysqli) {
             $status = 'inaktiv';
 
             // Speichern der Daten in der Datenbank
-            mysqli_query($mysqli, "INSERT INTO users(citiesId, email, password, salt, username) VALUES ('2911271', '$email', '$password', '$salt', '$user')");
+            mysqli_query($mysqli, "INSERT INTO users(citiesId, email, password, salt, username, profilepic) VALUES ('2911271', '$email', '$password', '$salt', '$user', 'user/default.jpg')");
             $result = $mysqli->query("SELECT idUsers FROM users WHERE email='$email'");
             $row = $result->fetch_assoc();
             $idUsers = $row['idUsers'];
