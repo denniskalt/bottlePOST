@@ -188,12 +188,12 @@ if($status == PHP_SESSION_DISABLED){
                 <div class="panel-footer">
                     <button type="button" class="[ btn btn-default ]">+1</button>
                     <button type="button" class="[ btn btn-default ]">-1</button>-->
-                    <div class="input-placeholder">Kommentiere...</div>
+                    <div class="input-placeholder long">Kommentiere...</div>
                 </div>
                 <div class="panel-google-plus-comment">
                     <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
-                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>" name="comment" id="comment">
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $_GET['id'];?>" name="comment" id="comment">
                             <textarea rows="3" class="form-control" name="comment_cont" form="comment"></textarea>
                             <button type="submit" class="btn btn-info disabled" name="submit_comment" form="comment">Kommentar abschicken</button>
                             <button type="reset" class="btn btn-default" form="comment">Schließen</button>

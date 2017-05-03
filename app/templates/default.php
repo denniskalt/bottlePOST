@@ -561,6 +561,11 @@ $dirHandle->close();
                             echo '" id="';
                             echo $this->_['posts'][$i]['postid'];
                         ?>" type="button">-1</button>
+                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-comments" aria-hidden="true"></i>
+                            </button>
+                        </a>
                     <!--<span class="dislikes">0</span>
                 </div>
                 <div class="panel-footer">

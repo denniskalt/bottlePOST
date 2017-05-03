@@ -238,6 +238,11 @@ if($status == PHP_SESSION_DISABLED){
                             echo '" id="';
                             echo $this->_['posts'][$i]['postid'];
                         ?>" type="button">-1</button>
+                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postsid'];?>">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-comments" aria-hidden="true"></i>
+                            </button>
+                        </a>
                     <!--<span class="dislikes">0</span>
                 </div>
                 <div class="panel-footer">
@@ -248,10 +253,10 @@ if($status == PHP_SESSION_DISABLED){
                 <div class="panel-google-plus-comment">
                     <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
-                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>" name="comment" id="comment">
-                            <textarea rows="3" class="form-control" name="comment_cont" form="comment"></textarea>
-                            <button type="submit" class="btn btn-info disabled" name="submit_comment" form="comment">Kommentar abschicken</button>
-                            <button type="reset" class="btn btn-default" form="comment">Schließen</button>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postsid'];?>">
+                            <textarea rows="3" class="form-control" name="comment_cont"></textarea>
+                            <button type="submit" class="btn btn-info disabled" name="submit_comment">Kommentar abschicken</button>
+                            <button type="reset" class="btn btn-default">Schließen</button>
                         </form>
                     </div>
                     <div class="clearfix"></div>
