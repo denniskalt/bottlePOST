@@ -194,7 +194,7 @@ if($status == PHP_SESSION_DISABLED){
                     <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $_GET['id'];?>" name="comment" id="comment">
-                            <textarea rows="3" class="form-control" name="comment_cont" form="comment"></textarea>
+                            <textarea rows="3" class="form-control" name="comment_cont" form="comment" maxlength="160"></textarea>
                             <button type="submit" class="btn btn-info disabled" name="submit_comment" form="comment">Kommentar abschicken</button>
                             <button type="reset" class="btn btn-default" form="comment">Schließen</button>
                         </form>

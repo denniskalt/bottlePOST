@@ -577,7 +577,7 @@ $dirHandle->close();
                     <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>">
-                            <textarea rows="3" class="form-control" name="comment_cont" ></textarea>
+                            <textarea rows="3" class="form-control" name="comment_cont" maxlength="160"></textarea>
                             <button type="submit" class="btn btn-info disabled" name="submit_comment" >Kommentar abschicken</button>
                             <button type="reset" class="btn btn-default" >Schließen</button>
                         </form>
