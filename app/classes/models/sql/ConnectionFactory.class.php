@@ -13,8 +13,7 @@ class ConnectionFactory{
 	 * @return polaczenie
 	 */
 	static public function getConnection(){
-		$conn = mysql_connect(ConnectionProperty::getHost(), ConnectionProperty::getUser(), ConnectionProperty::getPassword());
-		mysql_select_db(ConnectionProperty::getDatabase());
+		$conn = mysqli_connect(ConnectionProperty::getHost(), ConnectionProperty::getUser(), ConnectionProperty::getPassword(), ConnectionProperty::getDatabase());
 		if(!$conn){
 			throw new Exception('could not connect to database');
 		}

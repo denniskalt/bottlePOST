@@ -36,7 +36,7 @@ function mask($input) {
     $input = trim($input);
     $input = strip_tags($input);
     $input = htmlspecialchars($input);
-    $input = mysql_real_escape_string($input);
+    $input = mysqli_real_escape_string($input);
     $masked_string = $input;
 
 

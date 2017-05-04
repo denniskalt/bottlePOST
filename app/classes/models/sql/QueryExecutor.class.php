@@ -23,11 +23,11 @@ class QueryExecutor{
 		$query = $sqlQuery->getQuery();
 		$result = $connection->executeQuery($query);
 		if(!$result){
-			throw new Exception(mysql_error());
+			throw new Exception(mysqli_error());
 		}
 		$i=0;
 		$tab = array();
-		while ($row = mysql_fetch_array($result)){
+		while ($row = mysqli_fetch_array($result)){
 			$tab[$i++] = $row;
 		}
 		mysql_free_result($result);

@@ -23,7 +23,7 @@ class Connection{
 	 * @return wynik zapytania
 	 */
 	public function executeQuery($sql){
-		return mysql_query($sql, $this->connection);
+		return mysqli_query($sql, $this->connection);
 	}
 }
 ?>
