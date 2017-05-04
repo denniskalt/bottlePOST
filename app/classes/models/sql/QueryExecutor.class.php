@@ -23,7 +23,7 @@ class QueryExecutor{
 		$query = $sqlQuery->getQuery();
 		$result = $connection->executeQuery($query);
 		if(!$result){
-			throw new Exception(mysqli_error());
+			throw new Exception(mysqli_error($connection));
 		}
 		$i=0;
 		$tab = array();
@@ -48,7 +48,7 @@ class QueryExecutor{
 		$query = $sqlQuery->getQuery();
 		$result = $connection->executeQuery($query);
 		if(!$result){
-			throw new Exception(mysqli_error());
+			throw new Exception(mysqli_error($connection));
 		}
 		return mysqli_affected_rows();
 	}
@@ -73,7 +73,7 @@ class QueryExecutor{
 		}
 		$result = $connection->executeQuery($sqlQuery->getQuery());
 		if(!$result){
-			throw new Exception(mysqli_error());
+			throw new Exception(mysqli_error($connection));
 		}
 		$row = mysqli_fetch_array($result);
 		return $row[0];
