@@ -32,11 +32,11 @@ Use Case #04: The user tries 3 times to login and has a false password. Then his
     @return string  $masked_string  Maskierte Ausgabe
     @version 1.0
 */
-function mask($input) {
+function mask($mysqli, $input) {
     $input = trim($input);
     $input = strip_tags($input);
     $input = htmlspecialchars($input);
-    $input = mysqli_real_escape_string($input);
+    $input = mysqli_real_escape_string($mysqli, $input);
     $masked_string = $input;
 
 
@@ -535,10 +535,10 @@ function filterEmail($input) {
 function signup($email, $password, $user, $mysqli) {
 
     //Übergabewerte validieren
-    $email = mask($email);
+    $email = mask($mysqli, $email);
     $email = filterEmail($email);
-    $password = mask($password);
-    $user = mask($user);
+    $password = mask($mysqli, $password);
+    $user = mask($mysqli, $user);
 
     /** Prüfung, ob Nutzer bereits vorhanden */
 
@@ -644,8 +644,8 @@ function login($email, $password, $mysqli) {
     /**
         Übergabewerte validieren
     */
-    $email = mask($email);
-    $password = mask($password);
+    $email = mask($mysqli, $email);
+    $password = mask($mysqli, $password);
 
     /**
         Nutzer-Daten aus DB holen
@@ -738,8 +738,8 @@ function changePW($email, $password, $mysqli) {
     /**
         Übergabewerte validieren
     */
-    $email = mask($email);
-    $password = mask($password);
+    $email = mask($mysqli, $email);
+    $password = mask($mysqli, $password);
 
     /**
         Prüfung, ob Nutzer bereits vorhanden
