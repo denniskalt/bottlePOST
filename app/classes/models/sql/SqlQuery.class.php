@@ -26,10 +26,6 @@ class SqlQuery{
 	 */
 	public function setString($value){
         // Login-Angaben für die Datenbank
-        define('HOST', 'localhost');            // Der Host mit dem du dich verbinden willst.
-        define('USER', 'root');             // Der Datenbank-Benutzername.
-        define('PASSWORD', ''); // Das Datenbank-Passwort.
-        define('DATABASE', 'php-praktikum');     // Der Datenbankname.
         $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 		$value = mysqli_real_escape_string($mysqli, $value);
 		$this->params[$this->idx++] = "'".$value."'";
@@ -42,10 +38,6 @@ class SqlQuery{
 	 */
 	public function set($value){
         // Login-Angaben für die Datenbank
-        define('HOST', 'localhost');            // Der Host mit dem du dich verbinden willst.
-        define('USER', 'root');             // Der Datenbank-Benutzername.
-        define('PASSWORD', ''); // Das Datenbank-Passwort.
-        define('DATABASE', 'php-praktikum');     // Der Datenbankname.
         $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 		$value = mysqli_escape_string($mysqli, $value);
 		$this->params[$this->idx++] = "'".$value."'";
