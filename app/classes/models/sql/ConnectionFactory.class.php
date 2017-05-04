@@ -26,7 +26,7 @@ class ConnectionFactory{
 	 * @param connection polaczenie do bazy
 	 */
 	static public function close($connection){
-		mysql_close($connection);
+		mysqli_close($connection);
 	}
 }
 ?>
