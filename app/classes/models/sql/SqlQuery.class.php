@@ -25,13 +25,13 @@ class SqlQuery{
 	 * @param String $value value set
 	 */
 	public function setString($value){
-        $transaction = Transaction::getCurrentTransaction();
-		if(!$transaction){
-			$connection = new Connection();
-		}else{
-			$connection = $transaction->getConnection();
-		}
-		$value = mysqli_real_escape_string($connection, $value);
+        // Login-Angaben für die Datenbank
+        define('HOST', 'localhost');            // Der Host mit dem du dich verbinden willst.
+        define('USER', 'root');             // Der Datenbank-Benutzername.
+        define('PASSWORD', ''); // Das Datenbank-Passwort.
+        define('DATABASE', 'php-praktikum');     // Der Datenbankname.
+        $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+		$value = mysqli_real_escape_string($mysqli, $value);
 		$this->params[$this->idx++] = "'".$value."'";
 	}
 
@@ -41,13 +41,13 @@ class SqlQuery{
 	 * @param String $value value to set
 	 */
 	public function set($value){
-        $transaction = Transaction::getCurrentTransaction();
-		if(!$transaction){
-			$connection = new Connection();
-		}else{
-			$connection = $transaction->getConnection();
-		}
-		$value = mysql_escape_string($connection, $value);
+        // Login-Angaben für die Datenbank
+        define('HOST', 'localhost');            // Der Host mit dem du dich verbinden willst.
+        define('USER', 'root');             // Der Datenbank-Benutzername.
+        define('PASSWORD', ''); // Das Datenbank-Passwort.
+        define('DATABASE', 'php-praktikum');     // Der Datenbankname.
+        $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+		$value = mysqli_escape_string($mysqli, $value);
 		$this->params[$this->idx++] = "'".$value."'";
 	}
 
