@@ -38,29 +38,7 @@ if($status == PHP_SESSION_DISABLED){
     <link href="assets/weather-icons/css/weather-icons.min.css" rel=stylesheet />
 </head>
 <body>
-<?php
-/*
-// Gibt eine Instanz der Directory Klasse an $dirHandle zurück
-$dirHandle = dir("../app");
 
-// Verzeichnis Datei für Datei lesen
-while (($f = $dirHandle->read()) != false) {
-   // Nur ausgeben, wenn nicht . oder ..
-    if ($f != "." && $f != ".."){
-        // Wenn es sich um ein Verzeichnis handelt
-        if (is_dir("files/".$f)){
-            echo "<em>".$f."</em><br />";
-        }
-        else {
-            echo $f."<br />";
-        }
-    }
-}
-
-// Verzeichnis wieder schließen
-$dirHandle->close();
-    */
-?>
     <nav class="navbar navbar-custom">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -71,188 +49,13 @@ $dirHandle->close();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><img src="https://upload.wikimedia.org/wikipedia/de/thumb/9/9f/Twitter_bird_logo_2012.svg/1200px-Twitter_bird_logo_2012.svg.png" alt="logo" /></a>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="logo" /></a>
             <p class="navbar-brand">bottlePOST[ ]</p>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <!--<ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>-->
-          <!--<form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-          </form>-->
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
-
-            <!--<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Anfragen <span class="caret"></span></a>
-              <ul class="dropdown-menu notification wide">
-                <li class="heading">Freundschaftsanfragen</li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Dennis Kalt</h4>
-                                <p class="item-info">4 gemeinsame Follower</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-2.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Lukas Bosse mag deinen Post.</h4>
-                                <p class="item-info">vor 7 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-1.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Maren Bassmann mag deinen Post.</h4>
-                                <p class="item-info">vor 8 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-2.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Lukas Bosse folgt dir nun. Schaue dir sein Profil an.</h4>
-                                <p class="item-info">18.03.2017</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-user-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-              </ul>
-            </li>-->
-            <!--<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nachrichten <span class="caret"></span></a>
-              <ul class="dropdown-menu notification wide">
-                <li class="heading">Nachrichten</li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Dennis Kalt</h4>
-                                <p class="item-subtitle">"Hallo User X, kenne ich Dich von irgendwoher? ..."</p>
-                                <p class="item-info">vor 4 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Dennis Kalt</h4>
-                                <p class="item-subtitle">"Hallo User X, kenne ich Dich von irgendwoher? ..."</p>
-                                <p class="item-info">vor 4 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Dennis Kalt</h4>
-                                <p class="item-subtitle">"Hallo User X, kenne ich Dich von irgendwoher? ..."</p>
-                                <p class="item-info">vor 4 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="notification-wrapper">
-                        <a class="content" href="#">
-                            <div class="notification-image">
-                                <img src="images/user/default-0.jpg" />
-                            </div>
-                            <div class="notification-item">
-                                <h4 class="item-title">Dennis Kalt</h4>
-                                <p class="item-subtitle">"Hallo User X, kenne ich Dich von irgendwoher? ..."</p>
-                                <p class="item-info">vor 4 Stunden</p>
-                            </div>
-                            <div class="notification-topic">
-                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="clear"></div>
-                        </a>
-                    </div>
-                </li>
-              </ul>
-            </li>-->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="label label-pill label-danger count" style="border-radius:10px;"></span>
@@ -263,31 +66,27 @@ $dirHandle->close();
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php if(!empty($this->_['users'][0]->forename) && !empty($this->_['users'][0]->surname)) { echo $this->_['users'][0]->forename.' '.$this->_['users'][0]->surname; } else { echo $this->_['users'][0]->username; }?> <!--<span class="caret"></span>--></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php if(!empty($this->_['users'][0]->forename) && !empty($this->_['users'][0]->surname)) { echo $this->_['users'][0]->forename.' '.$this->_['users'][0]->surname; } else { echo $this->_['users'][0]->username; }?> <!--<span class="caret"></span>--></a>
               <ul class="dropdown-menu small">
                   <li class="heading">Account</li>
-                  <li><a href="#">
+                  <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?view=profile&id=<?php echo $_SESSION['usersid'];?>">
                       <div class="list-topic"><i class="fa fa-user" aria-hidden="true"></i></div>
                       <div class="list-item">Mein Profil</div>
                   </a></li>
-                  <li><a href="#">
+                  <li><a href="#" data-toggle="modal" data-target="#configModal">
                       <div class="list-topic"><i class="fa fa-cogs" aria-hidden="true"></i></div>
                       <div class="list-item">Einstellungen</div>
                   </a></li>
                   <li class="heading">Über <span class="lowercase">bottle</span>POST[ ]</li>
-                  <li><a href="#">
+                  <li><a href="inc/about/aboutus.php" target="Über uns" onClick="javascript:open('', 'Über uns', 'height=400,width=400,resizable=no')">
                       <div class="list-topic"><i class="fa fa-users" aria-hidden="true"></i></div>
                       <div class="list-item">Wer sind wir?</div>
                   </a></li>
-                  <li><a href="#">
-                      <div class="list-topic"><i class="fa fa-commenting" aria-hidden="true"></i></div>
-                      <div class="list-item">Kontakt</div>
-                  </a></li>
-                  <li><a href="#">
+                  <li><a href="inc/about/impressum.php" target="Impressum" onClick="javascript:open('', 'Impressum', 'height=400,width=400,resizable=no')">
                       <div class="list-topic"><i class="fa fa-registered" aria-hidden="true"></i></div>
                       <div class="list-item">Impressum</div>
                   </a></li>
-                  <li><a href="#">
+                  <li><a href="inc/about/datasecurity.php" target="Datenschutz" onClick="javascript:open('', 'Datenschutz', 'height=400,width=400,resizable=no')">
                       <div class="list-topic"><i class="fa fa-registered" aria-hidden="true"></i></div>
                       <div class="list-item">Datenschutz</div>
                   </a></li>
@@ -382,7 +181,7 @@ $dirHandle->close();
                             <img src="images/bg/way.jpg" />
                         </div>
                         <div class="user">
-                            <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>"/>
+                            <img class="img-circle" src="<?php echo $this->_['users'][0]->profilepic; ?>"/>
                         </div>
                         <div class="content">
                             <div class="main">
@@ -417,21 +216,15 @@ $dirHandle->close();
                                 <p class="profession">@<?php echo $this->_['users'][0]->username; ?></p>
                                 <div class="stats-container">
                                     <div class="stats">
-                                        <h4>235</h4>
+                                        <h4><?php echo $this->_['followers']; ?></h4>
                                         <p>
                                             folgen Dir
                                         </p>
                                     </div>
                                     <div class="stats">
-                                        <h4>114</h4>
+                                        <h4><?php echo $this->_['leaders']; ?></h4>
                                         <p>
                                             folgst Du
-                                        </p>
-                                    </div>
-                                    <div class="stats">
-                                        <h4>35</h4>
-                                        <p>
-                                            Muschelpoints
                                         </p>
                                     </div>
                                 </div>
@@ -474,9 +267,9 @@ $dirHandle->close();
                     //$hashpost = new HashtagsPosts();
                     //$hashpost->id = $hashtags[$k];
                     //$res = DAOFactory::getHashtagsDAO()->setHashtag($hash);
-                    echo "<h2>Gefunden:</h2>";
+                    //echo "<h2>Gefunden:</h2>";
                     // id für Hashtag-ID
-                    echo "<h2>".$res[$l]->description."</h2>";
+                    //echo "<h2>".$res[$l]->description."</h2>";
                     $hashtagsid = $res[$l]->id;
                     // Speichern von Beziehung
                     $counter--;
@@ -508,6 +301,12 @@ $dirHandle->close();
     ?>
     <?php $i=0; while($i<count($this->_['posts'])) { ?>
         <div class="col-lg-5 widget col-lg-offset-3">
+              <?php if($this->_['posts'][$i]['usersid'] == $_SESSION['usersid']) {
+
+                    echo '<a href="'.$_SERVER["PHP_SELF"].'?del='.$this->_["posts"][$i]["postid"].'" class="close" aria-label="close">&times;</a>';
+
+                        }
+                    ?>
         <div class="inner">
             <div class="[ panel panel-default ] panel-google-plus">
                 <?php if(isset($this->_['posts'][$i]['hashtags'])) { ?>
@@ -524,7 +323,7 @@ $dirHandle->close();
                     }
                 ?>
                 <div class="panel-heading">
-                    <img class="circle pull-left" src="images/<?php echo $this->_['posts'][$i]['profilepic'];?>" alt="" />
+                    <img class="circle pull-left" src="<?php echo $this->_['posts'][$i]['profilepic'];?>" alt="" />
                     <h3>
                         <a href="index.php?view=profile&id=<?php echo $this->_['posts'][$i]['usersid'];?>">
                             <?php echo $this->_['posts'][$i]['forename'].' '.$this->_['posts'][$i]['surname']; ?>
@@ -536,7 +335,7 @@ $dirHandle->close();
                     <p><?php echo $this->_['posts'][$i]['content']; ?></p>
                 </div>
                 <div id="rating" class="panel-footer">
-                    <button class="like btn btn-default
+                     <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $_SESSION['usersid'];?>&liked=<?php echo $this->_['posts'][$i]['postid'];?>"> <button class="like btn btn-default
                         <?php
                             if(empty($this->_['posts'][$i]['votes'])) {
                             }
@@ -547,9 +346,9 @@ $dirHandle->close();
                             }
                             echo '" id="';
                             echo $this->_['posts'][$i]['postid'];
-                        ?>" type="button">+1</button>
-                    <!--<span class="likes">0</span>-->
-                    <button class="dislike btn btn-default
+                        ?>" type="button">+1</button></a>
+                                            <!--<span class="likes">0</span>-->
+                                           <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $_SESSION['usersid'];?>&disliked=<?php echo $this->_['posts'][$i]['postid'];?>"> <button class="dislike btn btn-default
                         <?php
                             if(empty($this->_['posts'][$i]['votes'])) {
                             }
@@ -560,12 +359,7 @@ $dirHandle->close();
                             }
                             echo '" id="';
                             echo $this->_['posts'][$i]['postid'];
-                        ?>" type="button">-1</button>
-                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>">
-                            <button class="btn btn-default" type="submit">
-                                <i class="fa fa-comments" aria-hidden="true"></i>
-                            </button>
-                        </a>
+                                               ?>" type="button">-1</button></a>
                     <!--<span class="dislikes">0</span>
                 </div>
                 <div class="panel-footer">
@@ -592,7 +386,50 @@ $dirHandle->close();
     </div>
 </div>
 <div class="clear"></div>
+    <!-- Modal (Konfiguration) -->
 
+            <div tabindex="-1" class="modal fade" id="configModal" role="dialog">
+               <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #3884cf; color: white;">
+                            <button class="close" type="button" data-dismiss="modal">×</button>
+                            <h3 class="modal-title">Profileinstellungen ändern</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $_SESSION['usersid'];?>&edit=1" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="benutzername">Benutzername</label>
+                                    <input type="text" class="form-control" name="benutzername" placeholder="Benutzername" value="<?php echo $this->_['username']; ?>" required>
+                                </div>
+                                 <div class="form-group">
+                                     <label for="vorname">Vorname</label>
+                                    <input type="text" class="form-control" name="vorname" placeholder="Vorname" value="<?php echo $this->_['vorname']; ?>"required>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="nachname">Nachname</label>
+                                    <input type="text" class="form-control" name="nachname" placeholder="Nachname" value="<?php echo $this->_['nachname']; ?>" required>
+                                </div>
+                                 <div class="form-group">
+                                     <label for="email">E-Mail Adresse</label>
+                                    <input type="email" class="form-control" name="email" placeholder="E-Mail Adresse" value="<?php echo $this->_['email']; ?>" required>
+                                </div>
+                                 <div class="form-group">
+                                     <label for="geburtsdatum">Geburtsdatum</label>
+                                    <input type="date" class="form-control" name="geburtsdatum"  placeholder="Geburtsdatum" value="<?php echo $this->_['geburtstag']; ?>" required>
+                                </div>
+                                 <div class="form-group">
+                                     <label for="motto">Motto</label>
+                                    <input type="text" class="form-control" name="motto" placeholder="Motto" value="<?php echo $this->_['motto']; ?>" required>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Speichern</button>
+                            </form>
+                            <button class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 

@@ -1,0 +1,114 @@
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;}
+}
+
+body {
+    background-image: url("../images/home_background.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+.contactname {
+    color: white;
+}
+
+.borderBlock {
+    background-color: #337AB7 !important;
+    color: white !important;
+    border-color: #337AB7 !important;
+}
+
+.changeImage {
+    width: 140px;
+    height 140px;
+}
+
+.changeImageUpload {
+    width: 140px !important;
+    height 140px !important;
+}
+
+.friendSearch {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(+25%);
+    -ms-transform: translateY(+25%);
+    transform: translateY(+25%);
+}
+
+.dataListItemStyle
+{
+    width:80px;
+    height:100px;
+    margin: 2px 2px 2px 2px;
+                background-image:url(./images/Liverpool.gif);
+                background-repeat:no-repeat;
+                background-position:top right;
+                font-size:small;
+                font-weight:normal;
+    padding-top:34px;
+    border:solid 2px black;
+    z-index:99999;
+}
+
+.friendBoxLink:hover, .friendBoxLink:active {
+    background-color:darkgray !important;
+}
+.post-footer-option li{
+    float:left;
+    margin-right:50px;
+    padding-bottom:15px;
+}
+
+.post-footer-option li a{
+    color:#AFB4BD;
+    font-weight:500;
+    font-size:1.3rem;
+}
+.thumbnail {
+    margin: 0;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navbar-content
+{
+    width:320px;
+    padding: 15px;
+    padding-bottom:0px;
+}
+.navbar-content:before, .navbar-content:after
+{
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.navbar-nav.navbar-right:last-child {
+    margin-right: 15px !important;
+}
+.navbar-footer
+{
+    background-color:#ddd
+}
+.navbar-footer-content { padding:15px 15px 15px 15px; }
+.dropdown-menu {
+padding: 0px;
+overflow: hidden;
+}

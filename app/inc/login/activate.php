@@ -16,7 +16,7 @@ include_once('functions.php');
         header('Location: '.MEMBERPAGE);
     }
     else {
-        header('Location: ERROR');
+        header('Location: index.php?vew=error&id=1');
     }
 
 ?>

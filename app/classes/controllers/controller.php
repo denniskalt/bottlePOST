@@ -37,7 +37,20 @@ class Controller{
 				$entryid = $this->request['id'];
                 $user = new Users();
 				break;
-			case 'default':
+            case 'profile':
+                include('profileController.php');
+                $view->setTemplate('profile');
+                $entryid = $this->request['id'];
+                $user = new Users();
+                break;
+            case 'error':
+                include('errorController.php');
+                $view->setTemplate('error');
+                $entryid = $this->request['id'];
+                $user = new Users();
+                break;
+
+            case 'default':
 			default:
                 include('defaultController.php');
                 $user = new Users();

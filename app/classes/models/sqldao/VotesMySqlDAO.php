@@ -58,6 +58,15 @@ include_once('config.php');
             return $this->getList($sqlQuery);
         }
 
+        public function insertVote($vote) {
+            $sql = 'INSERT INTO votes (usersId, postsId, vote) VALUES (?,?,?)';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($vote->usersid);
+            $sqlQuery->set($vote->postsid);
+            $sqlQuery->set($vote->vote);
+            return $this->executeInsert($sqlQuery);
+        }
+
         /**
          * Update record in table 'votes'
          * @param UsersMySql user

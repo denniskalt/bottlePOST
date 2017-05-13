@@ -71,7 +71,7 @@ $dirHandle->close();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><img src="https://upload.wikimedia.org/wikipedia/de/thumb/9/9f/Twitter_bird_logo_2012.svg/1200px-Twitter_bird_logo_2012.svg.png" alt="logo" /></a>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="logo" /></a>
             <p class="navbar-brand">bottlePOST[ ]</p>
         </div>
 

@@ -6,6 +6,23 @@
     $view->setTemplate('default');
     $view->assign('site_title', 'NEWSFEED');
 
+
+  /**
+   * User-Widget
+   */
+
+  $user = DAOFactory::getUsersDAO()->getUserById($usersId);
+  $view->assign('profil', $user[0]->profilepic);
+  $view->assign('username', $user[0]->username);
+  $view->assign('email', $user[0]->email);
+  $view->assign('erstelltam', $user[0]->regDate);
+  $view->assign('vorname', $user[0]->forename);
+  $view->assign('nachname', $user[0]->surname);
+  $view->assign('name', $user[0]->forename . $user[0]->surname);
+  $view->assign('lastlogin', $user[0]->regDate);
+  $view->assign('geburtstag', $user[0]->birthDate);
+  $view->assign('motto', $user[0]->motto);
+
     /**
 	 * Methode zum Konvertieren der Temperatur von Kelvin zu Celsius.
 	 *
@@ -29,6 +46,59 @@
 	 */
     function findWavetags($txt) {
         preg_match_all('/~(\\w+)/', $txt);
+    }
+
+  /**
+   * Follower-Widget
+   */
+
+  $followers = DAOFactory::getFollowersDAO()->getIdByUser($usersId);
+  $view->assign('followers', count($followers));
+
+  $leaders = DAOFactory::getFollowersDAO()->getLeadersByUser($usersId);
+  $view->assign('leaders', count($leaders));
+
+
+    /**
+	 * Post-Widget
+	 */
+
+    if(isset($_GET['liked'])) {
+
+        $voting = new Votes();
+        $voting->usersid = $_GET['id'];
+        $voting->postsid = $_GET['liked'];
+        $voting->vote = '1';
+        if($vote = DAOFactory::getVotesDAO()->getVotesByPost($_GET['liked'])) {
+            $voteIT = DAOFactory::getVotesDAO()->update($voting);
+        } else {
+            $voteIT = DAOFactory::getVotesDAO()->insertVote($voting);
+        }
+
+        /** Notification -> Like **/
+
+        $note = new Notification();
+        $note->type = 2;
+        $note->usersId = $_SESSION['usersid'];
+        $note->commentsId = 0;
+        $note->statusId = 0;
+        $note->postsId = $_GET['liked'];
+        $note->recieverId = $_GET['id'];
+        $notify = DAOFactory::getNotificationDAO()->setNotification($note);
+
+    }
+
+    if(isset($_GET['disliked'])) {
+        $voting = new Votes();
+        $voting = new Votes();
+        $voting->usersid = $_GET['id'];
+        $voting->postsid = $_GET['disliked'];
+        $voting->vote = '-1';
+        if($vote = DAOFactory::getVotesDAO()->getVotesByPost($_GET['disliked'])) {
+            $voteIT = DAOFactory::getVotesDAO()->update($voting);
+        } else {
+            $voteIT = DAOFactory::getVotesDAO()->insertVote($voting);
+        }
     }
 
     /**
@@ -161,8 +231,15 @@
 	 * Post-Widget
 	 */
 
+    // Delete Post
+
+    if(isset($_GET['del'])) {
+        $delPost = DAOFactory::getPostsDAO()->deletePostById($_GET['del']);
+        $delHashPost = DAOFactory::getHashtagsPostsDAO()->deleteHashtagsByPostID($_GET['del']);
+    }
+
     // Posts
-    $res = DAOFactory::getPostsDAO()->getPosts();
+    $res = DAOFactory::getPostsDAO()->getMyLeadersPosts($usersId);
     $res = array_slice($res, 0, 5);
     for($i=0; $i<count($res); $i++) {
         $post[$i]['postid'] = $res[$i]->id;
@@ -211,6 +288,18 @@
                 break;
         }
 
+
+        if(isset($_GET['edit'])) {
+          $newUser = $user;
+          $newUser[0]->username = $_POST['benutzername'];
+          $newUser[0]->forename = $_POST['vorname'];
+          $newUser[0]->surname = $_POST['nachname'];
+          $newUser[0]->birthDate = $_POST['geburtsdatum'];
+          $newUser[0]->email = $_POST['email'];
+          $newUser[0]->motto = $_POST['motto'];
+          $updateUser = DAOFactory::getUsersDAO()->update($newUser[0]);
+          header("Location: index.php?view=profile&id=".$updateUser);
+        }
 
         // User-Daten
         $user = DAOFactory::getUsersDAO()->getUserById($res[$i]->usersid);

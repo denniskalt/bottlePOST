@@ -1,0 +1,238 @@
+.header_main {
+    background-color: #00008b;
+    color: white;
+}
+/**http://alex-hache.de/en/images/bg_aha.jpg**/
+html, body {
+    background-image: url('../images/background.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.headblock {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.contentBlock {
+    background-color: rgba(58,55,57,0.6);
+    color: white;
+    border: none;
+}
+
+.textHeadBlock {
+    opacity: 1.0;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.borderBlock {
+    background-color: #337AB7 !important;
+    color: white !important;
+    border-color: #337AB7 !important;
+}
+
+.backToMenuBtn {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    right: 10px;
+    bottom: 10px;
+}
+
+.radioImage {
+    height: 50px;
+    width: 50px;
+}
+
+.menuIcons {
+    height: 25px;
+    width: 25px;
+}
+
+#InfoBox2 {
+    position:absolute;
+    visibility:visible;
+    left:-1000px;
+    top:-2000px;
+    z-index:+2;
+    padding:0px 0px 0px 0px;
+    margin:0px;
+    color:#5F5F5F;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px; border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4);
+}
+
+/* Password strength */
+/* Bootstrap hacks for CSP */
+.progress-bar[data-value="Ihr Passwort ist zu 0% sicher!"] { width: 0% }
+.progress-bar[data-value="Ihr Passwort ist zu 1% sicher!"] { width: 1% }
+.progress-bar[data-value="Ihr Passwort ist zu 2% sicher!"] { width: 2% }
+.progress-bar[data-value="Ihr Passwort ist zu 3% sicher!"] { width: 3% }
+.progress-bar[data-value="Ihr Passwort ist zu 4% sicher!"] { width: 4% }
+.progress-bar[data-value="Ihr Passwort ist zu 5% sicher!"] { width: 5% }
+.progress-bar[data-value="Ihr Passwort ist zu 6% sicher!"] { width: 6% }
+.progress-bar[data-value="Ihr Passwort ist zu 7% sicher!"] { width: 7% }
+.progress-bar[data-value="Ihr Passwort ist zu 8% sicher!"] { width: 8% }
+.progress-bar[data-value="Ihr Passwort ist zu 9% sicher!"] { width: 9% }
+.progress-bar[data-value="Ihr Passwort ist zu 10% sicher!"] { width: 10% }
+.progress-bar[data-value="Ihr Passwort ist zu 11% sicher!"] { width: 11% }
+.progress-bar[data-value="Ihr Passwort ist zu 12% sicher!"] { width: 12% }
+.progress-bar[data-value="Ihr Passwort ist zu 13% sicher!"] { width: 13% }
+.progress-bar[data-value="Ihr Passwort ist zu 14% sicher!"] { width: 14% }
+.progress-bar[data-value="Ihr Passwort ist zu 15% sicher!"] { width: 15% }
+.progress-bar[data-value="Ihr Passwort ist zu 16% sicher!"] { width: 16% }
+.progress-bar[data-value="Ihr Passwort ist zu 17% sicher!"] { width: 17% }
+.progress-bar[data-value="Ihr Passwort ist zu 18% sicher!"] { width: 18% }
+.progress-bar[data-value="Ihr Passwort ist zu 19% sicher!"] { width: 19% }
+.progress-bar[data-value="Ihr Passwort ist zu 20% sicher!"] { width: 20% }
+.progress-bar[data-value="Ihr Passwort ist zu 21% sicher!"] { width: 21% }
+.progress-bar[data-value="Ihr Passwort ist zu 22% sicher!"] { width: 22% }
+.progress-bar[data-value="Ihr Passwort ist zu 23% sicher!"] { width: 23% }
+.progress-bar[data-value="Ihr Passwort ist zu 24% sicher!"] { width: 24% }
+.progress-bar[data-value="Ihr Passwort ist zu 25% sicher!"] { width: 25% }
+.progress-bar[data-value="Ihr Passwort ist zu 26% sicher!"] { width: 26% }
+.progress-bar[data-value="Ihr Passwort ist zu 27% sicher!"] { width: 27% }
+.progress-bar[data-value="Ihr Passwort ist zu 28% sicher!"] { width: 28% }
+.progress-bar[data-value="Ihr Passwort ist zu 29% sicher!"] { width: 29% }
+.progress-bar[data-value="Ihr Passwort ist zu 30% sicher!"] { width: 30% }
+.progress-bar[data-value="Ihr Passwort ist zu 31% sicher!"] { width: 31% }
+.progress-bar[data-value="Ihr Passwort ist zu 32% sicher!"] { width: 32% }
+.progress-bar[data-value="Ihr Passwort ist zu 33% sicher!"] { width: 33% }
+.progress-bar[data-value="Ihr Passwort ist zu 34% sicher!"] { width: 34% }
+.progress-bar[data-value="Ihr Passwort ist zu 35% sicher!"] { width: 35% }
+.progress-bar[data-value="Ihr Passwort ist zu 36% sicher!"] { width: 36% }
+.progress-bar[data-value="Ihr Passwort ist zu 37% sicher!"] { width: 37% }
+.progress-bar[data-value="Ihr Passwort ist zu 38% sicher!"] { width: 38% }
+.progress-bar[data-value="Ihr Passwort ist zu 39% sicher!"] { width: 39% }
+.progress-bar[data-value="Ihr Passwort ist zu 40% sicher!"] { width: 40% }
+.progress-bar[data-value="Ihr Passwort ist zu 41% sicher!"] { width: 41% }
+.progress-bar[data-value="Ihr Passwort ist zu 42% sicher!"] { width: 42% }
+.progress-bar[data-value="Ihr Passwort ist zu 43% sicher!"] { width: 43% }
+.progress-bar[data-value="Ihr Passwort ist zu 44% sicher!"] { width: 44% }
+.progress-bar[data-value="Ihr Passwort ist zu 45% sicher!"] { width: 45% }
+.progress-bar[data-value="Ihr Passwort ist zu 46% sicher!"] { width: 46% }
+.progress-bar[data-value="Ihr Passwort ist zu 47% sicher!"] { width: 47% }
+.progress-bar[data-value="Ihr Passwort ist zu 48% sicher!"] { width: 48% }
+.progress-bar[data-value="Ihr Passwort ist zu 49% sicher!"] { width: 49% }
+.progress-bar[data-value="Ihr Passwort ist zu 50% sicher!"] { width: 50% }
+.progress-bar[data-value="Ihr Passwort ist zu 51% sicher!"] { width: 51% }
+.progress-bar[data-value="Ihr Passwort ist zu 52% sicher!"] { width: 52% }
+.progress-bar[data-value="Ihr Passwort ist zu 53% sicher!"] { width: 53% }
+.progress-bar[data-value="Ihr Passwort ist zu 54% sicher!"] { width: 54% }
+.progress-bar[data-value="Ihr Passwort ist zu 55% sicher!"] { width: 55% }
+.progress-bar[data-value="Ihr Passwort ist zu 56% sicher!"] { width: 56% }
+.progress-bar[data-value="Ihr Passwort ist zu 57% sicher!"] { width: 57% }
+.progress-bar[data-value="Ihr Passwort ist zu 58% sicher!"] { width: 58% }
+.progress-bar[data-value="Ihr Passwort ist zu 59% sicher!"] { width: 59% }
+.progress-bar[data-value="Ihr Passwort ist zu 60% sicher!"] { width: 60% }
+.progress-bar[data-value="Ihr Passwort ist zu 61% sicher!"] { width: 61% }
+.progress-bar[data-value="Ihr Passwort ist zu 62% sicher!"] { width: 62% }
+.progress-bar[data-value="Ihr Passwort ist zu 63% sicher!"] { width: 63% }
+.progress-bar[data-value="Ihr Passwort ist zu 64% sicher!"] { width: 64% }
+.progress-bar[data-value="Ihr Passwort ist zu 65% sicher!"] { width: 65% }
+.progress-bar[data-value="Ihr Passwort ist zu 66% sicher!"] { width: 66% }
+.progress-bar[data-value="Ihr Passwort ist zu 67% sicher!"] { width: 67% }
+.progress-bar[data-value="Ihr Passwort ist zu 68% sicher!"] { width: 68% }
+.progress-bar[data-value="Ihr Passwort ist zu 69% sicher!"] { width: 69% }
+.progress-bar[data-value="Ihr Passwort ist zu 70% sicher!"] { width: 70% }
+.progress-bar[data-value="Ihr Passwort ist zu 71% sicher!"] { width: 71% }
+.progress-bar[data-value="Ihr Passwort ist zu 72% sicher!"] { width: 72% }
+.progress-bar[data-value="Ihr Passwort ist zu 73% sicher!"] { width: 73% }
+.progress-bar[data-value="Ihr Passwort ist zu 74% sicher!"] { width: 74% }
+.progress-bar[data-value="Ihr Passwort ist zu 75% sicher!"] { width: 75% }
+.progress-bar[data-value="Ihr Passwort ist zu 76% sicher!"] { width: 76% }
+.progress-bar[data-value="Ihr Passwort ist zu 77% sicher!"] { width: 77% }
+.progress-bar[data-value="Ihr Passwort ist zu 78% sicher!"] { width: 78% }
+.progress-bar[data-value="Ihr Passwort ist zu 79% sicher!"] { width: 79% }
+.progress-bar[data-value="Ihr Passwort ist zu 80% sicher!"] { width: 80% }
+.progress-bar[data-value="Ihr Passwort ist zu 81% sicher!"] { width: 81% }
+.progress-bar[data-value="Ihr Passwort ist zu 82% sicher!"] { width: 82% }
+.progress-bar[data-value="Ihr Passwort ist zu 83% sicher!"] { width: 83% }
+.progress-bar[data-value="Ihr Passwort ist zu 84% sicher!"] { width: 84% }
+.progress-bar[data-value="Ihr Passwort ist zu 85% sicher!"] { width: 85% }
+.progress-bar[data-value="Ihr Passwort ist zu 86% sicher!"] { width: 86% }
+.progress-bar[data-value="Ihr Passwort ist zu 87% sicher!"] { width: 87% }
+.progress-bar[data-value="Ihr Passwort ist zu 88% sicher!"] { width: 88% }
+.progress-bar[data-value="Ihr Passwort ist zu 89% sicher!"] { width: 89% }
+.progress-bar[data-value="Ihr Passwort ist zu 90% sicher!"] { width: 90% }
+.progress-bar[data-value="Ihr Passwort ist zu 91% sicher!"] { width: 91% }
+.progress-bar[data-value="Ihr Passwort ist zu 92% sicher!"] { width: 92% }
+.progress-bar[data-value="Ihr Passwort ist zu 93% sicher!"] { width: 93% }
+.progress-bar[data-value="Ihr Passwort ist zu 94% sicher!"] { width: 94% }
+.progress-bar[data-value="Ihr Passwort ist zu 95% sicher!"] { width: 95% }
+.progress-bar[data-value="Ihr Passwort ist zu 96% sicher!"] { width: 96% }
+.progress-bar[data-value="Ihr Passwort ist zu 97% sicher!"] { width: 97% }
+.progress-bar[data-value="Ihr Passwort ist zu 98% sicher!"] { width: 98% }
+.progress-bar[data-value="Ihr Passwort ist zu 99% sicher!"] { width: 99% }
+.progress-bar[data-value="Ihr Passwort ist zu 100% sicher!"] { width: 100% }
+
+.progress-bar-danger {
+    background-color: #D62227;
+}
+
+.progress {
+    border-radius: 10px;
+    background: rgba(255,255,255,.1);
+    margin-bottom: 5px;
+}
+
+#complexity {
+    padding: 0;
+    margin: 0;
+    font-size: 21px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    text-transform: none;
+}
+
+.progress .span {
+    font-size: 21px;
+    font-weight: 400;
+    color: #000000;
+    font-weight: bold;
+}
+
+.alert {
+  display: none;
+}
+
+.error {
+  color: #e74c3c;
+}

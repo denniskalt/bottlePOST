@@ -14,9 +14,21 @@
             $comments->postsid = $postsid;
             $comments->comment = $_POST['comment_cont'];
             $commentid = DAOFactory::getCommentsDAO()->setComment($comments);
+
+            $post = DAOFactory::getPostsDAO()->getPostById($postsid)[0]->usersid;
+
+          /** Notification -> Like **/
+
+        $note = new Notification();
+        $note->type = 1;
+        $note->usersId = $_SESSION['usersid'];
+        $note->commentsId = $commentid;
+        $note->statusId = 0;
+        $note->postsId = $postsid;
+        $note->recieverId = $post;
+        $notify = DAOFactory::getNotificationDAO()->setNotification($note);
+
     }
-
-
 
     /**
      * Post-Inhalte
@@ -96,8 +108,7 @@
     for($k=0; $k<count($comments); $k++) {
         // User-Daten
         $commentuser = DAOFactory::getUsersDAO()->getUserById($comments[$k]->usersid);
-        $post['comments'][$k]['user']['forename'] =
-        $commentuser[0]->forename;
+        $post['comments'][$k]['user']['forename'] = $commentuser[0]->forename;
         $post['comments'][$k]['user']['surname'] = $commentuser[0]->surname;
         $post['comments'][$k]['user']['profilepic'] = $commentuser[0]->profilepic;
         $post['comments'][$k]['user']['id'] = $comments[$k]->usersid;

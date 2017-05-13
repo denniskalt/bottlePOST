@@ -17,6 +17,11 @@
 	require_once('dto/Status.php');
 	require_once('sqldao/StatusMySqlDAO.php');
 
+    /* Uploads */
+    require_once('dao/UploadsDAO.php');
+    require_once('dto/Uploads.php');
+    require_once('sqldao/UploadsMySqlDAO.php');
+
     /* Cities */
     require_once('dao/CitiesDAO.php');
 	require_once('dto/Cities.php');
@@ -26,6 +31,16 @@
     require_once('dao/CommentsDAO.php');
 	require_once('dto/Comments.php');
 	require_once('sqldao/CommentsMySqlDAO.php');
+
+    /* Followers */
+    require_once('dao/FollowersDAO.php');
+	require_once('dto/Followers.php');
+	require_once('sqldao/FollowersMySqlDAO.php');
+
+    /* Notifications */
+    require_once('dao/NotificationDAO.php');
+	require_once('dto/Notification.php');
+	require_once('sqldao/NotificationsMySqlDAO.php');
 
     /* Posts */
     require_once('dao/PostsDAO.php');

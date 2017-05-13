@@ -1,12 +1,13 @@
 <?php
+session_start();
 if(isset($_POST["view"])) {
     include("config.php");
     if($_POST["view"] != '') {
-        $update_query = "UPDATE notifications SET status=1 WHERE status=0";
+        $update_query = "UPDATE notifications SET status=1 WHERE status=0 AND recieverID = '". $_SESSION['usersid']."'";
         mysqli_query($mysqli, $update_query);
     }
     /*$query = "SELECT * FROM notifications ORDER BY idNotifications DESC LIMIT 5";*/
-    $query = "SELECT users.username as username, users.title as title, users.forename as vorname, users.surname as nachname, users.profilepic as pp, notifications.time as time, notificationtypes.description as type, notifications.commentsId as commentsid FROM notifications INNER JOIN users ON notifications.usersId=users.idUsers INNER JOIN notificationtypes ON notificationtypes.idNotificationtypes=notifications.notificationtypesId ORDER BY notifications.time DESC LIMIT 5;";
+    $query = "SELECT users.username as username, users.title as title, users.forename as vorname, users.surname as nachname, users.profilepic as pp, notifications.time as time, notificationtypes.description as type, notifications.commentsId as commentsid FROM notifications INNER JOIN users ON notifications.usersId=users.idUsers INNER JOIN notificationtypes ON notificationtypes.idNotificationtypes=notifications.notificationtypesId WHERE notifications.recieverID = '". $_SESSION['usersid']."' ORDER BY notifications.time DESC LIMIT 5;";
     $result = mysqli_query($mysqli, $query);
     $output = '<li class="heading">Benachrichtigungen</li>';
 
@@ -26,7 +27,7 @@ if(isset($_POST["view"])) {
                             <div class="notification-wrapper">
                                 <a class="content" href="#">
                                     <div class="notification-image">
-                                        <img src="images/'.$row["pp"].'" />
+                                        <img src="'.$row["pp"].'" />
                                     </div>
                                     <div class="notification-item">
                                         <h4 class="item-title">';
@@ -97,7 +98,7 @@ if(isset($_POST["view"])) {
                             <div class="notification-wrapper">
                                 <a class="content" href="#">
                                     <div class="notification-image">
-                                        <img src="images/'.$row["pp"].'" />
+                                        <img src="'.$row["pp"].'" />
                                     </div>
                                     <div class="notification-item">
                                         <h4 class="item-title">';
@@ -161,7 +162,7 @@ if(isset($_POST["view"])) {
                             <div class="notification-wrapper">
                                 <a class="content" href="#">
                                     <div class="notification-image">
-                                        <img src="images/'.$row["pp"].'" />
+                                        <img src="'.$row["pp"].'" />
                                     </div>
                                     <div class="notification-item">
                                         <h4 class="item-title">';
@@ -268,7 +269,7 @@ if(isset($_POST["view"])) {
                         </li>';
     }
 
-    $query_1 = "SELECT * FROM notifications WHERE status=0";
+    $query_1 = "SELECT * FROM notifications WHERE status=0 AND recieverID = '". $_SESSION['usersid']."'";
     $result_1 = mysqli_query($mysqli, $query_1);
     $count = mysqli_num_rows($result_1);
     $data = array(

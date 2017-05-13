@@ -188,6 +188,19 @@ include_once('config.php');
             return $this->getList($sqlQuery);
         }
 
+        /*
+         * Get imagetype
+         * @param $id primary key
+         * @return imagetype
+         */
+
+        public function getImageType($id) {
+            $sql = 'SELECT imagetype FROM users WHERE idUsers = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($id);
+            return $this->getList($sqlQuery);
+        }
+
         /**
          * Get date of last login
          * @param $id primary key
@@ -211,19 +224,46 @@ include_once('config.php');
             return $this->getList($sqlQuery);
         }
 
+
+            /**
+         * Update record in table 'users'
+         * @param UsersMySql user
+         * @return affected rows
+         */
+        public function updateProfilepic($url, $id){
+            $sql = 'UPDATE users SET profilepic = ? WHERE idUsers = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($url);
+            $sqlQuery->setNumber($id);
+            return $this->executeUpdate($sqlQuery);
+        }
+
+        public function updateImageType($type, $id) {
+            $sql = 'UPDATE users SET imagetype = ? WHERE idUsers = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($type);
+            $sqlQuery->setNumber($id);
+            return $this->executeUpdate($sqlQuery);
+        }
+
         /**
          * Update record in table 'users'
          * @param UsersMySql user
          * @return affected rows
          */
         public function update($user){
-            $sql = 'UPDATE users SET username = ?, email = ? WHERE idUsers = ?';
+            $sql = 'UPDATE users SET username = ?, email = ?, forename = ?, surname = ?, birthDate = ?, motto = ? WHERE idUsers = ?';
             $sqlQuery = new SqlQuery($sql);
 
             $sqlQuery->set($user->username);
             $sqlQuery->set($user->email);
+            $sqlQuery->set($user->forename);
+            $sqlQuery->set($user->surname);
+            $sqlQuery->set($user->birthDate);
+            $sqlQuery->set($user->motto);
 
-            $sqlQuery->setNumber($user->idUsers);
+
+            $sqlQuery->setNumber($user->id);
             return $this->executeUpdate($sqlQuery);
         }
 
@@ -306,6 +346,7 @@ include_once('config.php');
          * @return UsersMySql
          */
         protected function readRow($row){
+
             $user = new Users();
 
             if(isset($row['idUsers'])) { $user->id = $row['idUsers']; }
@@ -321,6 +362,13 @@ include_once('config.php');
             if(isset($row['citiesId'])) { $user->city = $row['citiesId']; }
             if(isset($row['usersTypesId'])) { $user->usersTypesId = $row['usersTypesId']; }
             if(isset($row['lastLogin'])) { $user->lastLogin = $row['lastLogin']; }
+            if(isset($row['comments'])) { $user->comments = $row['comments']; }
+            if(isset($row['posts'])) { $user->posts = $row['posts']; }
+            if(isset($row['likes'])) { $user->likes = $row['likes']; }
+            if(isset($row['followers'])) { $user->followers = $row['followers']; }
+            if(isset($row['imagetype'])) { $user->imageType = $row['imagetype']; }
+            if(isset($row['birthDate'])) { $user->birthDate = $row['birthDate']; }
+            if(isset($row['motto'])) { $user->motto = $row['motto']; }
 
             return $user;
         }

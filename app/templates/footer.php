@@ -13,13 +13,15 @@
             <div id="tab-wrapper" class="col-lg-4 col-sm-6 col-md-6 col-xs-12 col-lg-offset-1 col-sm-offset-2 col-md-offset-1 card">
                 <div class="info">
                     <div id="title-name" class="title">Sie sind nicht berechtigt, diese Seite zu besuchen.</div>
-                    <div id="desc-firmname" class="desc">Bitte <a href="http://localhost/bottlepost/index.php">loggen</a> Sie sich ein.</small></div>
+                    <div id="desc-firmname" class="desc">Bitte <a href="http://localhost/bottlepost/index.php">loggen</a> Sie sich ein.</div>
                 </div>
             </div>
         </div>
     </div>
     <?php } ?>
  <div class='notifications bottom-right'></div>
+<!-- JQuery / AJAX -->
+
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -29,6 +31,10 @@
     saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $username ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
 </script>
 <script src="inc/notifications/load-notifications.js" type="application/javascript"></script>
+
+<script src="assets/js/fileinput.js" type="text/javascript"></script>
+<script src="assets/js/gallery.js" type="text/javascript"></script>
+
 <!--<script type="text/javascript">
 
 var xmlHttpObject = false;

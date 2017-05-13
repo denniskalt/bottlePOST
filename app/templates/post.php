@@ -47,14 +47,13 @@ if($status == PHP_SESSION_DISABLED){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><img src="https://upload.wikimedia.org/wikipedia/de/thumb/9/9f/Twitter_bird_logo_2012.svg/1200px-Twitter_bird_logo_2012.svg.png" alt="logo" /></a>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="logo" /></a>
             <p class="navbar-brand">bottlePOST[ ]</p>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="label label-pill label-danger count" style="border-radius:10px;"></span>
@@ -65,7 +64,7 @@ if($status == PHP_SESSION_DISABLED){
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php echo $this->_['users'][0]->forename.' '.$this->_['users'][0]->surname;?> <!--<span class="caret"></span>--></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile" src="<?php echo $this->_['users'][0]->profilepic; ?>" /> <?php echo $this->_['users'][0]->forename.' '.$this->_['users'][0]->surname;?> <!--<span class="caret"></span>--></a>
               <ul class="dropdown-menu small">
                   <li class="heading">Account</li>
                   <li><a href="#">
@@ -112,22 +111,7 @@ if($status == PHP_SESSION_DISABLED){
 
         </div>
     </div>
-    <!--<div class="row">
-        <div class="col-lg-8 widget col-lg-offset-2 widget widget-hashtag">
-            <div class="inner">
-             <div class="card-container manual-flip">
-                <div class="card">
-                    <div class="front">
-                        <div class="cover full">
-                            <img src="images/bg/way.jpg" />
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>-->
+
     <div class="row">
         <div class="col-lg-8 widget col-lg-offset-2">
         <div class="inner">
@@ -146,7 +130,7 @@ if($status == PHP_SESSION_DISABLED){
                     }
                 ?>
                 <div class="panel-heading">
-                    <img class="circle pull-left" src="images/<?php echo $this->_['posts']['profilepic'];?>" alt="" />
+                    <img class="circle pull-left" src="<?php echo $this->_['posts']['profilepic'];?>" alt="" />
                     <h3>
                         <a href="index.php?view=profile&id=<?php echo $this->_['posts']['usersid'];?>">
                             <?php echo $this->_['posts']['forename'].' '.$this->_['posts']['surname']; ?>
@@ -191,7 +175,7 @@ if($status == PHP_SESSION_DISABLED){
                     <div class="input-placeholder long">Kommentiere...</div>
                 </div>
                 <div class="panel-google-plus-comment">
-                    <img class="img-circle" src="images/<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
+                    <img class="img-circle" src="<?php echo $this->_['users'][0]->profilepic; ?>" alt="" />
                     <div class="panel-google-plus-textarea">
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $_GET['id'];?>" name="comment" id="comment">
                             <textarea rows="3" class="form-control" name="comment_cont" form="comment" maxlength="160"></textarea>
@@ -213,7 +197,7 @@ if($status == PHP_SESSION_DISABLED){
             <div class="inner">
                 <div class="[ panel panel-default ] panel-google-plus">
                     <div class="panel-heading">
-                        <img class="circle pull-left" src="images/<?php echo $this->_['posts']['comments'][$k]['user']['profilepic'];?>" alt="" />
+                        <img class="circle pull-left" src="<?php echo $this->_['posts']['comments'][$k]['user']['profilepic'];?>" alt="" />
                         <h3>
                             <a href="index.php?view=profile&id=<?php echo $this->_['posts']['usersid'];?>">
                                 <?php echo $this->_['posts']['comments'][$k]['user']['forename'].' '.$this->_['posts']['comments'][$k]['user']['surname']; ?>

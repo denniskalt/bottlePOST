@@ -23,7 +23,7 @@ class QueryExecutor{
 		$query = $sqlQuery->getQuery();
 		$result = $connection->executeQuery($query);
 		if(!$result){
-			throw new Exception(mysqli_error($connection));
+			throw new Exception(($connection->getError()));
 		}
 		$i=0;
 		$tab = array();
@@ -48,14 +48,13 @@ class QueryExecutor{
 		$query = $sqlQuery->getQuery();
 		$result = $connection->executeQuery($query);
 		if(!$result){
-			throw new Exception(mysqli_error($connection));
+			throw new Exception(($connection->getError()));
 		}
-		return mysqli_affected_rows();
+        return $connection;
 	}
 
 	public static function executeInsert($sqlQuery){
-		QueryExecutor::executeUpdate($sqlQuery);
-		return mysqli_insert_id();
+		return QueryExecutor::executeUpdate($sqlQuery)->getInsertID();
 	}
 
 	/**

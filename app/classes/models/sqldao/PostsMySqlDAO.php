@@ -10,14 +10,13 @@ include_once('config.php');
 
     class PostsMySqlDAO  {
 
-        /**
+          /**
          * Set post
          * @return affected rows
          */
         public function setPost($posts){
-            $sql = 'INSERT INTO posts (content, usersid) VALUES (?, ?)';
+            $sql = 'INSERT INTO posts (content, usersId) VALUES (?, ?)';
             $sqlQuery = new SqlQuery($sql);
-
             $sqlQuery->set($posts->content);
             $sqlQuery->set($posts->usersid);
             return $this->executeInsert($sqlQuery);
@@ -31,6 +30,31 @@ include_once('config.php');
             $sql = 'SELECT * FROM posts ORDER BY idPosts DESC';
 		    $sqlQuery = new SqlQuery($sql);
 		    return $this->getList($sqlQuery);
+        }
+
+        /**
+         * Get my Posts
+         * @return Posts
+         */
+
+        public function getMyPosts($id) {
+            $sql = 'SELECT * FROM posts WHERE usersId = ? ORDER BY idPosts DESC';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($id);
+            return $this->getList($sqlQuery);
+        }
+
+        /**
+         * Get posts of my leaders
+         * @param $userid primary key by table 'users'
+         * @return posts
+         */
+
+          public function getMyLeadersPosts($usersid) {
+            $sql = 'SELECT * FROM posts WHERE usersId IN (SELECT leaderID FROM followers WHERE followerID = ?) ORDER BY idPosts DESC';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($usersid);
+            return $this->getList($sqlQuery);
         }
 
         /**
@@ -65,11 +89,9 @@ include_once('config.php');
         public function update($posts){
             $sql = 'UPDATE posts SET content = ? WHERE idPosts = ?';
             $sqlQuery = new SqlQuery($sql);
-
             $sqlQuery->set($posts->content);
-
             $sqlQuery->setNumber($posts->id);
-            return $posts;//$this->executeUpdate($sqlQuery);
+            return $this->executeUpdate($sqlQuery);
         }
 
 	   /**

@@ -109,8 +109,12 @@ include_once('config.php');
                 foreach ($matches[1] as $match) {
                     $keyword[] = $match;
                 }
-                $keywords = $keyword;
-            }
+                    if(isset($keyword)) {
+                        $keywords = $keyword;
+                    } else {
+                        $keywords = array();
+                    }
+                    }
             return $keywords;
         }
 

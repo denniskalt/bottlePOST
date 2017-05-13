@@ -54,6 +54,19 @@ include_once('config.php');
         }
 
         /**
+         *  Delete Hastag by post id
+         *  @param $postid as primary key
+         *  @return affected rows
+         */
+
+        public function deleteHashtagsByPostID($postId) {
+            $sql = 'DELETE FROM hashtagsPosts WHERE postsId = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->set($postId);
+            return $this->executeUpdate($sqlQuery);
+        }
+
+        /**
          * Read row
          *
          * @return UsersMySql

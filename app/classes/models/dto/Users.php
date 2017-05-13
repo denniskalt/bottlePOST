@@ -20,6 +20,12 @@
         var $city;
         var $userstype;
         var $lastLogin;
+        var $comments;
+        var $likes;
+        var $posts;
+        var $followers;
+        var $imageType;
+        var $motto;
     }
 
 ?>

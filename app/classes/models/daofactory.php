@@ -14,6 +14,18 @@ class DAOFactory{
 		return new UsersMySqlDAO();
 	}
 
+    public static function getFollowersDAO() {
+        return new FollowersMySqlDAO();
+    }
+
+    public static function getUploadsDAO() {
+        return new UploadsMySqlDAO();
+    }
+
+    public static function getNotificationDAO() {
+        return new NotificationsMySqlDAO();
+    }
+
     public static function getStatusDAO(){
 		return new StatusMySqlDAO();
 	}

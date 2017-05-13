@@ -8,10 +8,7 @@
      */
     interface UsersDAO {
 
-        /**
-         * Get all Users
-         * @return Users with idUsers, username, email
-         */
+
         public function getUsers();
 
         /**
@@ -91,6 +88,14 @@
          */
         public function getSurname($id);
 
+        /*
+         * Get imagetype
+         * @param $id primary key
+         * @return imagetype
+         */
+
+        public function getImageType($id);
+
         /**
          * Get birthdate
          * @param $id primary key
@@ -118,6 +123,7 @@
          * @return Users with lastLogin
          */
         public function getLastLogin($id);
+
 
         /**
          * Get all users ordered by field

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 03. Mai 2017 um 06:59
+-- Erstellungszeit: 13. Mai 2017 um 23:00
 -- Server-Version: 10.1.19-MariaDB
 -- PHP-Version: 5.5.38
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `php-praktikum`
 --
-CREATE DATABASE IF NOT EXISTS `php-praktikum` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `php-praktikum` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `php-praktikum`;
 
 -- --------------------------------------------------------
@@ -74224,14 +74224,15 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` varchar(240) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idComments`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `comments`
 --
 
 INSERT INTO `comments` (`idComments`, `usersId`, `postsId`, `comment`, `time`) VALUES
-(1, 4, 1, 'Mein erster Kommentar. ', '2017-04-26 17:04:23');
+(5, 4, 163, 'Auch Kommentare kann man zu einem Post abgeben. Sowohl zu eigenen als auch zu anderen kann man so seinen Senf dazugeben.', '2017-05-13 20:43:14'),
+(8, 4, 163, 'Das kann eine ziemlich hilfreiche Funktion darstellen :)', '2017-05-13 20:49:15');
 
 -- --------------------------------------------------------
 
@@ -74511,6 +74512,29 @@ INSERT INTO `countries` (`idCountries`, `description`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `followers`
+--
+
+DROP TABLE IF EXISTS `followers`;
+CREATE TABLE IF NOT EXISTS `followers` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `leaderID` int(11) NOT NULL,
+  `followerID` int(11) NOT NULL,
+  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `followers`
+--
+
+INSERT INTO `followers` (`ID`, `leaderID`, `followerID`, `confirmed`) VALUES
+(15, 4, 4, 0),
+(17, 11, 11, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `hashtags`
 --
 
@@ -74519,7 +74543,7 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   `idHashtags` int(11) NOT NULL AUTO_INCREMENT,
   `bezeichnung` varchar(50) NOT NULL,
   PRIMARY KEY (`idHashtags`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `hashtags`
@@ -74538,7 +74562,21 @@ INSERT INTO `hashtags` (`idHashtags`, `bezeichnung`) VALUES
 (23, 'ILoveYou'),
 (24, 'bottlePOST'),
 (25, 'Neuigkeiten'),
-(26, 'Post');
+(26, 'Post'),
+(27, 'Leute'),
+(28, 'WaveTagHallo'),
+(29, 'Testwaving'),
+(30, 'Lol'),
+(31, 'etwas'),
+(32, 'testetwas'),
+(33, 'd'),
+(34, 'tagg'),
+(35, 'jolo'),
+(36, 'jolo'),
+(37, 'lolololol'),
+(38, 'partyparty'),
+(39, 'wasgehtab'),
+(40, 'lol');
 
 -- --------------------------------------------------------
 
@@ -74558,14 +74596,8 @@ CREATE TABLE IF NOT EXISTS `hashtagsposts` (
 --
 
 INSERT INTO `hashtagsposts` (`hashtagsId`, `postsId`) VALUES
-(9, 91),
-(9, 92),
-(22, 88),
-(23, 89),
-(24, 91),
-(25, 91),
-(26, 92),
-(26, 93);
+(9, 164),
+(26, 164);
 
 -- --------------------------------------------------------
 
@@ -74595,21 +74627,25 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `commentsId` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `postsId` int(11) NOT NULL,
+  `recieverID` int(11) NOT NULL,
   PRIMARY KEY (`idNotifications`),
   KEY `IX_notificationsUser` (`usersId`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `notifications`
 --
 
-INSERT INTO `notifications` (`idNotifications`, `notificationtypesId`, `time`, `usersId`, `commentsId`, `status`, `postsId`) VALUES
-(8, 1, '2017-04-03 23:11:32', 4, 1, 1, 0),
-(9, 2, '2017-04-20 23:11:32', 4, 0, 1, 0),
-(12, 3, '2017-04-21 00:37:45', 5, 0, 1, 0),
-(13, 1, '2017-04-21 00:18:57', 4, 1, 1, 0),
-(15, 3, '2017-04-24 15:38:07', 4, 0, 1, 0);
+INSERT INTO `notifications` (`idNotifications`, `notificationtypesId`, `time`, `usersId`, `commentsId`, `status`, `postsId`, `recieverID`) VALUES
+(35, 3, '2017-05-13 20:39:41', 4, 0, 1, 0, 4),
+(38, 2, '2017-05-13 20:42:35', 4, 0, 1, 163, 4),
+(39, 1, '2017-05-13 20:48:03', 4, 5, 1, 163, 4),
+(40, 1, '2017-05-13 20:48:03', 4, 6, 1, 163, 4),
+(41, 1, '2017-05-13 20:48:03', 4, 7, 1, 163, 4),
+(42, 2, '2017-05-13 20:48:03', 4, 0, 1, 163, 4),
+(43, 1, '2017-05-13 20:49:40', 4, 8, 1, 163, 4),
+(44, 3, '2017-05-13 20:59:15', 11, 0, 1, 0, 11);
 
 -- --------------------------------------------------------
 
@@ -74668,19 +74704,15 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `usersId` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idPosts`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `posts`
 --
 
 INSERT INTO `posts` (`idPosts`, `content`, `usersId`, `date`) VALUES
-(88, 'Das sind neue ~Wavesl und alte ~Wavetags.', 4, '2017-04-30 09:36:38'),
-(89, 'Ich liebe Dich :* ~ILoveYou', 6, '2017-04-30 15:52:34'),
-(90, 'Ein Post ohne Wavetag.', 6, '2017-04-30 15:57:02'),
-(91, 'Willkommen bei ~bottlePOST[]! Hier findest Du alle ~Neuigkeiten in Deiner Umgebung. Mit den ~Wavetags kannst Du Deine Nachrichten kategorisieren.', 4, '2017-04-30 16:58:12'),
-(92, 'Das ist ein ~Post. Es hat viele ~Wavetags.', 4, '2017-05-02 07:43:12'),
-(93, 'Das ist ein zweiter ~Post.', 6, '2017-05-02 09:05:04');
+(163, 'Herzlich Willkommen bei bottlePOST[ ]!\r\nIhr Micro-Blogging-Dienst aus dem PHP-Praktikum bei Herrn Klaßen. Erfahre hier, wie man es nutzt.', 4, '2017-05-13 20:38:31'),
+(164, 'Mein erster ~Post mit zwei ~Wavetags :D', 11, '2017-05-13 20:58:31');
 
 -- --------------------------------------------------------
 
@@ -74706,6 +74738,28 @@ INSERT INTO `status` (`idStatus`, `beschreibung`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `uploads`
+--
+
+DROP TABLE IF EXISTS `uploads`;
+CREATE TABLE IF NOT EXISTS `uploads` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `src` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `uploads`
+--
+
+INSERT INTO `uploads` (`ID`, `userID`, `title`, `src`) VALUES
+(68, 11, 'Mein Bike', 'images/uploadsBulls LT 27.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `users`
 --
 
@@ -74718,7 +74772,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `salt` char(60) NOT NULL,
   `regDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(3) NOT NULL,
-  `profilepic` varchar(90) NOT NULL,
+  `profilepic` varchar(90) NOT NULL DEFAULT 'images/user/profile-placeholder.png',
   `title` varchar(12) NOT NULL,
   `forename` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
@@ -74726,19 +74780,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `citiesId` char(10) NOT NULL,
   `usersTypesId` int(11) NOT NULL,
   `lastLogin` date NOT NULL,
+  `imagetype` int(11) NOT NULL DEFAULT '0',
+  `motto` varchar(120) NOT NULL,
   PRIMARY KEY (`idUsers`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`idUsers`, `username`, `email`, `password`, `salt`, `regDate`, `status`, `profilepic`, `title`, `forename`, `surname`, `birthDate`, `citiesId`, `usersTypesId`, `lastLogin`) VALUES
-(4, 'tester', 'test@test.de', '$2y$07$JDJ5JDA3dGVzNzF2IV85R.6m7FgG0mDbjccIDo2CS1e377abI0P/W', '$2y$07tes71v!_9DjZJmPn', '2017-04-11 20:40:54', 2, 'user/default-0.jpg', 'Herr', 'Max', 'Mustermann', '1996-07-10', '2911271', 0, '0000-00-00'),
-(5, 'dennis', 'dennis@test.de', '$2y$07$JDJ5JDA3ZGVuKcJmdVpuN.19XB/ukF0zzKtxhU0nqC006H1JqoMIu', '$2y$07den)ÂfuZn4AOz@n6', '2017-04-15 11:51:16', 2, 'user/default-1.jpg', 'Frau', 'Julia', 'Nauer', '0000-00-00', '', 4, '0000-00-00'),
-(6, 'test', 't@t.de', '$2y$07$JDJ5JDA3dEB0KU4vWnRBdurF4Mh0gnjmH59qbdyEjjgsGVitWnsqi', '$2y$07t@t)N/ZtAwj7LwSi', '2017-04-24 09:14:56', 2, 'user/default-1.jpg', 'Frau', 'Julia', 'Nauer', '0000-00-00', '2911271', 0, '0000-00-00'),
-(9, 'maxmoritz', 'testen@t.de', '$2y$07$JDJ5JDA3dGVzcTJTYTlMdOiJlNjRdy.2/1LRBpEHJNobji7XSdgTq', '$2y$07tesq2Sa9Lu)qmlX-', '2017-04-26 15:50:17', 2, 'user/default-1.jpg', 'Herr', 'Lukas', 'Bosse', '0000-00-00', '2911271', 0, '0000-00-00'),
-(10, 'emil', 'e@e.de', '$2y$07$JDJ5JDA3ZUBlbHFxdSlxIuyFRJP60Yr7TPia4E1tHD4gOu8AVxkni', '$2y$07e@elqqu)q#G2sLZw', '2017-05-03 04:56:33', 2, '', '', '', '', '0000-00-00', '2911271', 0, '0000-00-00');
+INSERT INTO `users` (`idUsers`, `username`, `email`, `password`, `salt`, `regDate`, `status`, `profilepic`, `title`, `forename`, `surname`, `birthDate`, `citiesId`, `usersTypesId`, `lastLogin`, `imagetype`, `motto`) VALUES
+(4, 'tester', 'test@test.de', '$2y$07$JDJ5JDA3dGVzNzF2IV85R.6m7FgG0mDbjccIDo2CS1e377abI0P/W', '$2y$07tes71v!_9DjZJmPn', '2017-04-11 20:40:54', 2, 'images/user/profile-placeholder.jpg', 'Herr', 'Max', 'Mustermann', '1996-07-10', '2911271', 0, '0000-00-00', 0, ''),
+(11, 'denniskalt', 'denniskalt@hotmail.com', '$2y$07$JDJ5JDA3ZGVuendxeHhXe.8LoPvFfJE//3aF0s.lmwDHf8A1sjLi6', '$2y$07denzwqxxWxiAS#14', '2017-05-13 20:54:05', 2, 'images/user/profile-placeholder.jpg', '', 'Dennis', 'Kalt', '0000-00-00', '2911271', 0, '0000-00-00', 0, 'Mein Motto');
 
 -- --------------------------------------------------------
 
@@ -74780,8 +74833,7 @@ CREATE TABLE IF NOT EXISTS `votes` (
 --
 
 INSERT INTO `votes` (`usersId`, `postsId`, `vote`) VALUES
-(4, 90, -1),
-(4, 91, 1);
+(4, 163, 1);
 
 --
 -- Constraints der exportierten Tabellen

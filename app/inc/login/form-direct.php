@@ -27,7 +27,7 @@ if (isset($_POST['email'])) {
         // Login fehlgeschlagen
         else {
             // Fehler auf Login-Seite
-            header('Location: ERROR');
+            header('Location: index.php?vew=error&id=2');
             exit;
         }
     }
@@ -45,7 +45,7 @@ if (isset($_POST['email'])) {
         // Registrierung fehlgeschlagen
         else {
             // Fehler auf Signup-Seite
-            header('Location: ERROR');
+            header('Location: index.php?vew=error&id=3');
             exit;
         }
     }
@@ -62,20 +62,20 @@ if (isset($_POST['email'])) {
         // Registrierung fehlgeschlagen
         else {
             // Fehler bei PW-Reset
-            header('Location: ERROR');
+            header('Location: index.php?vew=error&id=4');
             exit;
         }
     }
 
 // Weder der Login-, noch der Signup-Button wurde gedrückt.
     else {
-        header('Location: ERROR');
+        header('Location: index.php?vew=error&id=5');
         exit;
     }
 }
 
 else {
     // Die korrekten POST-Variablen wurden nicht zu dieser Seite geschickt.
-    header('Location: ERROR');
+    header('Location: index.php?vew=error&id=6');
 }
 ?>
