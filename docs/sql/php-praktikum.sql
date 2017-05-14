@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 13. Mai 2017 um 23:00
+-- Erstellungszeit: 14. Mai 2017 um 16:12
 -- Server-Version: 10.1.19-MariaDB
 -- PHP-Version: 5.5.38
 
@@ -74224,7 +74224,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` varchar(240) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idComments`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `comments`
@@ -74232,7 +74232,17 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 INSERT INTO `comments` (`idComments`, `usersId`, `postsId`, `comment`, `time`) VALUES
 (5, 4, 163, 'Auch Kommentare kann man zu einem Post abgeben. Sowohl zu eigenen als auch zu anderen kann man so seinen Senf dazugeben.', '2017-05-13 20:43:14'),
-(8, 4, 163, 'Das kann eine ziemlich hilfreiche Funktion darstellen :)', '2017-05-13 20:49:15');
+(8, 4, 163, 'Das kann eine ziemlich hilfreiche Funktion darstellen :)', '2017-05-13 20:49:15'),
+(9, 4, 163, 'Kommentar', '2017-05-14 13:00:12'),
+(10, 4, 163, 'Kommentar', '2017-05-14 13:00:48'),
+(11, 4, 163, 'Kommentar', '2017-05-14 13:05:36'),
+(12, 4, 163, 'Kommentar', '2017-05-14 13:09:18'),
+(13, 4, 163, 'Kommentar', '2017-05-14 13:09:33'),
+(14, 4, 163, 'Kommentar', '2017-05-14 13:09:52'),
+(15, 4, 163, 'Kommentar', '2017-05-14 13:10:08'),
+(16, 4, 163, 'Kommentar', '2017-05-14 13:14:52'),
+(17, 4, 163, 'Grün', '2017-05-14 13:15:01'),
+(18, 4, 163, 'Comment', '2017-05-14 13:15:09');
 
 -- --------------------------------------------------------
 
@@ -74522,7 +74532,7 @@ CREATE TABLE IF NOT EXISTS `followers` (
   `followerID` int(11) NOT NULL,
   `confirmed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `followers`
@@ -74530,7 +74540,8 @@ CREATE TABLE IF NOT EXISTS `followers` (
 
 INSERT INTO `followers` (`ID`, `leaderID`, `followerID`, `confirmed`) VALUES
 (15, 4, 4, 0),
-(17, 11, 11, 0);
+(19, 11, 11, 0),
+(24, 4, 11, 0);
 
 -- --------------------------------------------------------
 
@@ -74631,7 +74642,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`idNotifications`),
   KEY `IX_notificationsUser` (`usersId`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `notifications`
@@ -74645,7 +74656,23 @@ INSERT INTO `notifications` (`idNotifications`, `notificationtypesId`, `time`, `
 (41, 1, '2017-05-13 20:48:03', 4, 7, 1, 163, 4),
 (42, 2, '2017-05-13 20:48:03', 4, 0, 1, 163, 4),
 (43, 1, '2017-05-13 20:49:40', 4, 8, 1, 163, 4),
-(44, 3, '2017-05-13 20:59:15', 11, 0, 1, 0, 11);
+(44, 3, '2017-05-13 20:59:15', 11, 0, 1, 0, 11),
+(45, 3, '2017-05-14 09:17:59', 11, 0, 1, 0, 4),
+(46, 1, '2017-05-14 13:00:56', 4, 9, 1, 163, 4),
+(47, 1, '2017-05-14 13:15:50', 4, 11, 1, 163, 4),
+(48, 1, '2017-05-14 13:15:50', 4, 12, 1, 163, 4),
+(49, 1, '2017-05-14 13:15:50', 4, 13, 1, 163, 4),
+(50, 1, '2017-05-14 13:15:50', 4, 14, 1, 163, 4),
+(51, 1, '2017-05-14 13:15:50', 4, 15, 1, 163, 4),
+(52, 1, '2017-05-14 13:15:50', 4, 16, 1, 163, 4),
+(53, 1, '2017-05-14 13:15:50', 4, 17, 1, 163, 4),
+(54, 1, '2017-05-14 13:15:50', 4, 18, 1, 163, 4),
+(55, 3, '2017-05-14 13:22:23', 11, 0, 1, 0, 11),
+(56, 3, '2017-05-14 14:07:41', 11, 0, 1, 0, 4),
+(57, 3, '2017-05-14 14:07:41', 11, 0, 1, 0, 4),
+(58, 3, '2017-05-14 14:07:41', 11, 0, 1, 0, 4),
+(59, 3, '2017-05-14 14:07:41', 11, 0, 1, 0, 4),
+(60, 3, '2017-05-14 14:07:41', 11, 0, 1, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -74748,14 +74775,15 @@ CREATE TABLE IF NOT EXISTS `uploads` (
   `title` varchar(255) NOT NULL,
   `src` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `uploads`
 --
 
 INSERT INTO `uploads` (`ID`, `userID`, `title`, `src`) VALUES
-(68, 11, 'Mein Bike', 'images/uploadsBulls LT 27.jpg');
+(68, 11, 'Mein Bike', 'images/uploadsBulls LT 27.jpg'),
+(69, 4, 'Dicke', 'images/uploadsIMG-20160529-WA0066.jpg');
 
 -- --------------------------------------------------------
 
@@ -74791,7 +74819,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`idUsers`, `username`, `email`, `password`, `salt`, `regDate`, `status`, `profilepic`, `title`, `forename`, `surname`, `birthDate`, `citiesId`, `usersTypesId`, `lastLogin`, `imagetype`, `motto`) VALUES
 (4, 'tester', 'test@test.de', '$2y$07$JDJ5JDA3dGVzNzF2IV85R.6m7FgG0mDbjccIDo2CS1e377abI0P/W', '$2y$07tes71v!_9DjZJmPn', '2017-04-11 20:40:54', 2, 'images/user/profile-placeholder.jpg', 'Herr', 'Max', 'Mustermann', '1996-07-10', '2911271', 0, '0000-00-00', 0, ''),
-(11, 'denniskalt', 'denniskalt@hotmail.com', '$2y$07$JDJ5JDA3ZGVuendxeHhXe.8LoPvFfJE//3aF0s.lmwDHf8A1sjLi6', '$2y$07denzwqxxWxiAS#14', '2017-05-13 20:54:05', 2, 'images/user/profile-placeholder.jpg', '', 'Dennis', 'Kalt', '0000-00-00', '2911271', 0, '0000-00-00', 0, 'Mein Motto');
+(11, 'denniskalt', 'denniskalt@hotmail.com', '$2y$07$JDJ5JDA3ZGVuendxeHhXe.8LoPvFfJE//3aF0s.lmwDHf8A1sjLi6', '$2y$07denzwqxxWxiAS#14', '2017-05-13 20:54:05', 2, 'images/user/IMG-20160529-WA0066.jpg', '', 'Dennis', 'Kalt', '0000-00-00', '2911271', 0, '0000-00-00', 2, 'Mein Motto');
 
 -- --------------------------------------------------------
 
