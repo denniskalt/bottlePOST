@@ -27,7 +27,7 @@ function loadLocalStorage() {
             var vorname = Storage[3];
             var nachname = Storage[4];
             if(profilepic!="") {
-                $("#avatar").attr("src", 'app/images/'+profilepic);
+                $("#avatar").attr("src", 'app/'+profilepic);
             }
             if(vorname!="" && nachname!="") {
                 document.getElementById("title-name").innerHTML = 'Willkommen zurück, '+vorname + ' ' + nachname+'!';

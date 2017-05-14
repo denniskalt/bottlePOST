@@ -27,17 +27,17 @@
 <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="inc/localstorage.js" type="application/javascript"></script>
 <script src="inc/like-dislike.js"></script>
-<?php echo $email; ?>
 <script type="text/javascript">
     <?php
      $usersid = $_SESSION['usersid'];
     $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-    $ergebnis = mysqli_query($mysqli, "SELECT email, username, forename, surname FROM users WHERE idUsers =".$usersid);
+    $ergebnis = mysqli_query($mysqli, "SELECT email, username, forename, surname, profilepic FROM users WHERE idUsers =".$usersid);
     $row = mysqli_fetch_object($ergebnis);
     $email = $row->email;
     $username = $row->username;
     $vorname = $row->forename;
-    $nachname = $row->surname; ?>
+    $nachname = $row->surname;
+    $profilepic = $row->profilepic ?>
     saveLocalStorage('<?php echo $email ?>', '<?php echo $profilepic ?>', '<?php echo $username ?>', '<?php echo $vorname ?>', '<?php echo $nachname ?>');
 </script>
 <script src="inc/notifications/load-notifications.js" type="application/javascript"></script>
