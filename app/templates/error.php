@@ -69,6 +69,21 @@ if($status == PHP_SESSION_DISABLED){
 
         <div class="container">
             <div class="col-lg-12">
-               <h1> <?php echo $this->_['meldung']; ?> </h1>
+                <div class="col-lg-5 widget col-lg-offset-3">
+                    <div class="inner">
+            <div class="[ panel panel-default ] panel-google-plus">
+               <div class="panel-heading" style="text-align: center;">
+                    <h3>
+                        <?php echo $this->_['meldung'];?>
+                    </h3>
+                   <h5>Es ist ein Fehler aufgetreten.</h5>
+
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+        </div>
             </div>
         </div>
