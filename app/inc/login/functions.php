@@ -676,7 +676,7 @@ function login($email, $password, $mysqli) {
                 // Wenn Nutzer vorhanden, Überprüfung ob Konto durch zu viele Login-Versuche blockiert
                 if(checkbrute(§usersid, $mysqli) == true) {
                     // Konto blockiert
-                    header('Location: index.php?vew=error&id=7');
+                    header('Location: index.php?view=error&id=7');
                 }
                 else {
                     // Überprüft, ob das Passwort in der Datenbank mit dem vom Benutzer eingegebenen Passwort übereinstimmt
