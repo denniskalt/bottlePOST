@@ -34,9 +34,9 @@
      * Post-Inhalte
      */
     $res = DAOFactory::getPostsDAO()->getPostById($postsid);
+    $post = array();
     $post['id']=$res[0]->id;
     $post['content']=$res[0]->content;
-
     //Datum
     $time = $res[0]->date;
     $time = strtotime($time);
@@ -69,6 +69,7 @@
             else {
                 $output = 'vor '.$diff.' Stunde';
             }
+            $output =
             $post['date'] = $output;
             break;
         // über 24 Stunden

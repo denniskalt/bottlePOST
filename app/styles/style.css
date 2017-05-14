@@ -1222,3 +1222,7 @@ span.characters-remaining {
     text-align: center;
     margin-left: 35%;
 }
+
+.modal-body.profilepic .fileinput-upload-button {
+    display: none;
+}

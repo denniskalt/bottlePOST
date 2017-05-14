@@ -167,10 +167,9 @@ if($status == PHP_SESSION_DISABLED){
                             echo '<a href="index.php?view=profile&id=' . $_GET['id'] . '&follow='. $_GET['id'].'">';
                             echo '<button type="button" class="btn btn-success">Folgen</button></a>';
                         }
-                    echo '<button data-toggle="modal" data-target="#messengerModal" type="button" class="btn btn-info">Nachricht senden</button>
-                    <br>';
+                    echo '<br>';
                     }
-                    if($_GET['id'] = $_SESSION['usersid']) {
+                    if($_GET['id'] === $_SESSION['usersid']) {
                         if(!empty($this->_['foreignfriendship'])) {
                             echo '<a href="index.php?view=profile&id=' . $_GET['id'] . '&disfollow='. $_GET['id'].'">';
                             echo '<button type="button" class="btn btn-success">Entfolgen</button></a>';
@@ -178,8 +177,7 @@ if($status == PHP_SESSION_DISABLED){
                             echo '<a href="index.php?view=profile&id=' . $_GET['id'] . '&follow='. $_GET['id'].'">';
                             echo '<button type="button" class="btn btn-success">Folgen</button></a>';
                         }
-                    echo '<button data-toggle="modal" data-target="#messengerModal" type="button" class="btn btn-info">Nachricht senden</button>
-                    <br>';
+                    echo '<br>';
                     }?>
                 </div>
                 <div class="col-sm-2">
@@ -423,7 +421,7 @@ if($status == PHP_SESSION_DISABLED){
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">Profilbild wählen</h4>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body profilepic">
                                     <p>Bitte wählen Sie Sich ein Profilbild aus oder laden Sie ein Bild hoch.</p>
 
                                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>?view=profile&id=<?php echo $_SESSION['usersid'];?>" method="post" enctype="multipart/form-data">

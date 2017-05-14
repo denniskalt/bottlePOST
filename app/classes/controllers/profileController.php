@@ -9,7 +9,7 @@
   if($usersId != $id) {
       $state = DAOFactory::getUsersDAO()->getUserById($id);
       if(empty($state)) {
-          header("Location: index.php?vew=error&id=9");
+          header("Location: index.php?view=error&id=9");
       }
   }
 
@@ -156,7 +156,7 @@
 
     if(isset($_POST['submit_profilimage']) && isset($_POST['optradio'])) {
 
-        $imageURL = "inc/upload/" . basename($_FILES["url"]["name"]);
+        $imageURL = "images/user/" . basename($_FILES["url"]["name"]);
         $type = $_POST['optradio'];
         $imageType = 0;
 
@@ -171,6 +171,7 @@
             $imageType = 2;
             if($check !== false) {
                 $uploadOk = 1;
+
             } else {
                 $uploadOk = 0;
             }
@@ -219,6 +220,10 @@
             $followID = DAOFactory::getFollowersDAO()->getFriendshipByUsers($usersId, $id);
             $disfollow = DAOFactory::getFollowersDAO()->deleteFollowerById($followID[0]->id);
             header("Location: index.php?view=profile&id=" . $_GET['id']);
+        }
+
+        if(isset($_GET['follow'])) {
+            header("Location: index.php?view=profile&id=".$_GET['id']);
         }
 
     /**

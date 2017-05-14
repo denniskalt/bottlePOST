@@ -55,7 +55,34 @@ if($status == PHP_SESSION_DISABLED){
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" id="contactlist">
+                                <li class="heading">Kontaktsuche</li>
+                                <?php
+                                    if(isset($this->_['contacts'])) {
+                                        $i=0;
+                                        while($i<count($this->_['contacts'])) {
+                                            echo "<li>";
+                                            echo "<a href='index.php?view=profile&id=".$this->_['contacts'][$i]->id."'>";
+                                            echo '<div class="list-topic">';
+                                            if($this->_['contacts'][$i]->id == $_SESSION['usersid']) {
+                                                echo '<i class="fa fa-id-card-o" aria-hidden="true"></i></div>';
+                                                echo '<div class="list-item">Du</div>';
+                                            } else {
+                                                echo '<i class="fa fa-user" aria-hidden="true"></i></div>';
+                                                echo '<div class="list-item">'. $this->_['contacts'][$i]->username .'</div>';
+                                            }
+                                            echo "</a></li>";
+                                            $i++;
+                                        }
+                                    }
+                                ?>
+                            </ul>
+                        </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="label label-pill label-danger count" style="border-radius:10px;"></span>
@@ -348,7 +375,7 @@ if($status == PHP_SESSION_DISABLED){
                             echo $this->_['posts'][$i]['postid'];
                         ?>" type="button">+1</button></a>
                                             <!--<span class="likes">0</span>-->
-                                           <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $_SESSION['usersid'];?>&disliked=<?php echo $this->_['posts'][$i]['postid'];?>"> <button class="dislike btn btn-default
+                                           <a href="<?php echo $_SERVER['PHP_SELF']; ?>?view=profile&id=<?php echo $_GET['id'];?>&disliked=<?php echo $this->_['posts'][$i]['postid'];?>"> <button class="dislike btn btn-default
                         <?php
                             if(empty($this->_['posts'][$i]['votes'])) {
                             }
@@ -360,11 +387,11 @@ if($status == PHP_SESSION_DISABLED){
                             echo '" id="';
                             echo $this->_['posts'][$i]['postid'];
                                                ?>" type="button">-1</button></a>
-                    <!--<span class="dislikes">0</span>
-                </div>
-                <div class="panel-footer">
-                    <button type="button" class="[ btn btn-default ]">+1</button>
-                    <button type="button" class="[ btn btn-default ]">-1</button>-->
+                                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?view=post&id=<?php echo $this->_['posts'][$i]['postid'];?>">
+                                                <button class="btn btn-default" type="submit">
+                                <i class="fa fa-comments" aria-hidden="true"></i>
+                            </button>
+                                            </a>
                     <div class="input-placeholder">Kommentiere...</div>
                 </div>
                 <div class="panel-google-plus-comment">

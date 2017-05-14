@@ -58,6 +58,12 @@
   $leaders = DAOFactory::getFollowersDAO()->getLeadersByUser($usersId);
   $view->assign('leaders', count($leaders));
 
+    /**
+   * Contact-Widget
+   */
+
+  $contacts = DAOFactory::getUsersDAO()->getUsers();
+  $view->assign('contacts', $contacts);
 
     /**
 	 * Post-Widget
